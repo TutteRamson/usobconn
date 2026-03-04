@@ -1,4 +1,5 @@
 deploy.sh
+run.sh
 
 # Python
 __pycache__/
