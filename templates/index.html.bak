@@ -180,8 +180,8 @@
             animation: fiFadeIn 0.8s ease both;
             letter-spacing: -0.01em;
         }
-        .fi-feed-name.plaid { color: #5dade2; }
-        .fi-feed-name.finicity { color: #3dab7a; }
+        .fi-feed-name.plaid { color: #7c8cf8; }
+        .fi-feed-name.finicity { color: #48d4a0; }
         .fi-feed-name.mx { color: #e6a867; }
         .fi-feed-name.unknown { color: var(--text-dim); }
         .fi-feed-pipe {
@@ -210,58 +210,6 @@
             padding: 20px;
             text-align: center;
         }
-
-        .stat-card.clickable {
-            cursor: pointer;
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
-        .stat-card.clickable:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
-        }
-        .stat-card .stat-label-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        .stat-card .stat-info-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .issues-modal-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-            margin-top: 12px;
-        }
-        .issues-modal-table th {
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-dim);
-            padding: 6px 10px;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-        .issues-modal-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-        }
-        .issues-modal-table tr:last-child td { border-bottom: none; }
-        .issues-modal-table tr:hover td { background: var(--surface2); }
 
         .stat-card .stat-value {
             font-size: 2rem;
@@ -406,8 +354,8 @@
 
         thead th {
             text-align: left;
-            padding: 6px 10px;
-            font-size: 0.72rem;
+            padding: 12px 16px;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -428,19 +376,18 @@
         tbody tr:hover { background: var(--surface2); }
 
         td {
-            padding: 4px 10px;
-            font-size: 0.84rem;
+            padding: 12px 16px;
+            font-size: 0.9rem;
         }
 
         td.rank {
             color: var(--text-dim);
             font-weight: 600;
-            width: 44px;
+            width: 60px;
         }
 
         td.inst-name {
             font-weight: 600;
-            font-size: 0.82rem;
         }
         .inst-name-wrap {
             display: flex;
@@ -448,45 +395,32 @@
             gap: 8px;
         }
         .fi-logo {
-            width: 24px;
-            height: 24px;
-            border-radius: 5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             object-fit: contain;
             flex-shrink: 0;
             background: #fff;
         }
-        .fi-logo-placeholder {
-            width: 24px;
-            height: 24px;
-            border-radius: 5px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #fff;
-            background: var(--accent);
-        }
 
         .provider-badge {
             display: inline-block;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 12px;
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 600;
         }
 
-        .provider-badge.plaid { background: #1a4a6633; color: #5dade2; }
-        .provider-badge.finicity { background: #1a3d2a55; color: #3dab7a; }
+        .provider-badge.plaid { background: #2d3a8c33; color: #7c8cf8; }
+        .provider-badge.finicity { background: #0b6e4f33; color: #48d4a0; }
         .provider-badge.mx { background: #8b5e3433; color: #e6a867; }
         .provider-badge.unknown { background: var(--surface2); color: var(--text-dim); }
 
         .status-badge {
             display: inline-block;
-            padding: 2px 8px;
+            padding: 3px 10px;
             border-radius: 12px;
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 600;
         }
 
@@ -494,29 +428,20 @@
         .status-badge.issues { background: #fdcb6e33; color: var(--yellow); }
         .status-badge.unavailable { background: #e1705533; color: var(--red); }
 
-        td.metric-cell {
-            width: 90px;
-            padding: 6px 8px;
-        }
-        .metric-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
         .mini-bar {
-            display: block;
-            width: 52px;
-            height: 8px;
+            display: inline-block;
+            width: 60px;
+            height: 6px;
             background: var(--surface2);
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
-            flex-shrink: 0;
+            vertical-align: middle;
+            margin-right: 6px;
         }
 
         .mini-bar-fill {
-            display: block;
             height: 100%;
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.3s;
         }
 
@@ -525,18 +450,23 @@
         .mini-bar-fill.low { background: var(--red); }
 
         .metric-text {
-            font-size: 0.72rem;
+            font-size: 0.82rem;
             color: var(--text-dim);
-            min-width: 34px;
-            text-align: right;
         }
 
         /* Expandable detail rows */
         tbody tr.expandable { cursor: pointer; }
         tbody tr.expandable:hover { background: var(--surface2); }
-
-        tbody tr.expandable.expanded td:first-child {
-            box-shadow: inset 3px 0 0 var(--accent);
+        tbody tr.expandable td:first-child::before {
+            content: '▸';
+            display: inline-block;
+            margin-right: 6px;
+            transition: transform 0.2s;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+        }
+        tbody tr.expandable.expanded td:first-child::before {
+            transform: rotate(90deg);
         }
 
         tr.detail-row { background: var(--surface) !important; }
@@ -888,7 +818,7 @@
         }
         #pixel-map-canvas {
             width: 100%;
-            border-radius: 0;
+            border-radius: 6px;
             display: block;
             image-rendering: pixelated;
         }
@@ -909,13 +839,11 @@
 
         /* Pixel map controls */
         .pmap-controls {
-            margin-bottom: 14px;
-        }
-        .pmap-controls-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
+            margin-bottom: 14px;
         }
         .pmap-controls label {
             font-size: 0.8rem;
@@ -947,37 +875,6 @@
             color: var(--accent);
             font-weight: 600;
         }
-        /* Provider Summary Scorecards */
-        .prov-summary { display: none; gap: 12px; margin: 14px 0 6px; }
-        .prov-summary.active { display: flex; flex-wrap: wrap; }
-        .prov-card {
-            flex: 1 1 0; min-width: 200px; max-width: 320px;
-            background: var(--surface2); border: 1px solid var(--border);
-            border-radius: 10px; overflow: hidden;
-        }
-        .prov-card-hdr {
-            padding: 7px 12px; font-weight: 700; font-size: 0.85rem;
-            color: #fff; letter-spacing: 0.3px;
-        }
-        .prov-card-body { padding: 8px 12px 10px; }
-        .prov-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 2px 0; font-size: 0.78rem; color: var(--text-dim);
-        }
-        .prov-row-val { font-weight: 700; font-size: 0.82rem; }
-        .prov-row-val.pos { color: #00b894; }
-        .prov-row-val.neg { color: #e74c3c; }
-        .prov-row-val.neutral { color: var(--text-dim); }
-        .prov-net-row {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-top: 6px; padding-top: 6px;
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem; font-weight: 700;
-        }
-        .prov-net-val { font-size: 1rem; }
-        .prov-net-val.pos { color: #00b894; }
-        .prov-net-val.neg { color: #e74c3c; }
-        .prov-net-val.zero { color: var(--text-dim); }
         /* Change log panel */
         .pmap-changelog {
             background: var(--surface2);
@@ -996,43 +893,15 @@
         }
         .pmap-summary { margin-top: 12px; }
         .pmap-summary-title {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text);
             margin-bottom: 10px;
         }
-        .pmap-total-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--accent);
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 700;
-            padding: 3px 14px;
-            border-radius: 20px;
-            letter-spacing: 0.02em;
-            line-height: 1.4;
-        }
-        .pmap-total-badge .pmap-total-label {
-            font-size: 0.78rem;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-        .pmap-summary-title .pmap-description {
-            font-size: 0.78rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            font-style: italic;
-        }
         .pmap-summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 8px;
-            margin-top: 14px;
             margin-bottom: 12px;
         }
         .pmap-stat-card {
@@ -1049,7 +918,6 @@
         .pmap-stat-val.green { color: #00b894; }
         .pmap-stat-val.red { color: #e74c3c; }
         .pmap-stat-val.amber { color: #fdcb6e; }
-        .pmap-stat-val.blue { color: #ff69b4; }
         .pmap-stat-val.accent { color: var(--accent); }
         .pmap-stat-label {
             font-size: 0.72rem;
@@ -1070,39 +938,22 @@
             width: 0%;
             transition: width 0.3s ease;
         }
-        .pmap-filter-row {
+        .pmap-flash-legend {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            gap: 12px;
             margin-top: 8px;
-        }
-        .pmap-filter-bar {
-            display: flex;
-            gap: 8px;
             flex-wrap: wrap;
-            align-items: center;
         }
-        .pmap-filter-btn {
-            display: inline-flex;
+        .pmap-flash-legend-item {
+            display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.72rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1.5px solid var(--border);
-            background: transparent;
+            gap: 4px;
+            font-size: 0.7rem;
             color: var(--text-dim);
-            cursor: pointer;
-            transition: background .15s, border-color .15s, color .15s;
         }
-        .pmap-filter-btn.active {
-            background: var(--card-bg);
-            border-color: var(--accent);
-            color: var(--text);
-        }
-        .pmap-filter-btn .pmap-filter-swatch {
-            width: 9px;
-            height: 9px;
+        .pmap-flash-legend-swatch {
+            width: 10px;
+            height: 10px;
             border-radius: 2px;
             display: inline-block;
         }
@@ -1122,33 +973,26 @@
             padding: 10px 12px;
             min-height: 60px;
             max-height: 320px;
-            overflow: auto;
-            scrollbar-width: thin;          /* Firefox */
-            scrollbar-color: var(--border) transparent;
+            overflow-y: auto;
         }
-        .pmap-detail-section::-webkit-scrollbar { width: 4px; height: 4px; }
-        .pmap-detail-section::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-        .pmap-detail-section::-webkit-scrollbar-track { background: transparent; }
         .pmap-detail-section h5 {
             font-size: 0.78rem;
-            margin: -10px -12px 8px;
-            padding: 10px 12px 6px;
+            margin: 0 0 8px;
             font-weight: 600;
+            padding-bottom: 6px;
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: -10px;
-            background: var(--surface);
-            z-index: 1;
         }
         .pmap-detail-section h5.green { color: #00b894; }
         .pmap-detail-section h5.red { color: #e74c3c; }
         .pmap-detail-section h5.amber { color: #fdcb6e; }
-        .pmap-detail-section h5.blue { color: #ff69b4; }
+        .pmap-detail-section h5.blue { color: #74b9ff; }
         .pmap-detail-item {
             font-size: 0.73rem;
             color: var(--text-dim);
             line-height: 1.7;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .pmap-prov-tag {
             font-size: 0.7rem;
@@ -1333,8 +1177,8 @@
             margin-bottom: 6px;
         }
 
-        .history-prov-name.plaid { color: #5dade2; }
-        .history-prov-name.finicity { color: #3dab7a; }
+        .history-prov-name.plaid { color: #7c8cf8; }
+        .history-prov-name.finicity { color: #48d4a0; }
         .history-prov-name.mx { color: #e6a867; }
 
         .history-metrics {
@@ -1389,60 +1233,118 @@
             margin-bottom: 16px;
         }
 
-        .sc-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .sc-date-select {
-            appearance: none;
-            -webkit-appearance: none;
-            background: var(--surface2);
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 7px 32px 7px 12px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.15s, box-shadow 0.15s;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-        }
-
-        .sc-date-select:hover {
-            border-color: var(--accent);
-        }
-
-        .sc-date-select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
-        }
-
-        .sc-date-select option {
-            background: var(--surface2);
-            color: var(--text);
-        }
-
         .chart-canvas-wrapper {
             position: relative;
             height: 320px;
         }
 
+        /* Score Changes Section */
+        .score-changes-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .score-changes-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .score-changes-section .chart-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .sc-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .sc-summary-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            text-align: center;
+        }
+        .sc-summary-card .sc-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+        .sc-summary-card .sc-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+        .sc-val.green { color: var(--green); }
+        .sc-val.red { color: #e74c3c; }
+        .sc-val.accent { color: var(--accent-light); }
+        .sc-movers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+        }
+        @media (max-width: 600px) {
+            .sc-movers { grid-template-columns: 1fr; }
+        }
+        .sc-movers-col h4 {
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+        .sc-mover {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            background: var(--bg);
+            margin-bottom: 4px;
+        }
+        .sc-mover .sc-mover-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 70%;
+        }
+        .sc-mover .sc-mover-delta {
+            font-weight: 700;
+            flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
+        }
+        .sc-mover-delta.up { color: var(--green); }
+        .sc-mover-delta.down { color: #e74c3c; }
+        .sc-date-select {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        .sc-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
         .chart-metric-tabs {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             margin-bottom: 14px;
         }
 
         .chart-metric-tab {
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 6px;
             font-size: 0.82rem;
             font-weight: 600;
@@ -1469,6 +1371,260 @@
             padding-bottom: 52px;
         }
 
+        /* Provider Changes (per-session) */
+        .prov-changes-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .prov-changes-section h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .prov-changes-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 14px;
+        }
+        .prov-change-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 8px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .prov-change-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--bg);
+            border-radius: 8px;
+            font-size: 0.82rem;
+        }
+        .prov-change-name {
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
+        .prov-change-arrow {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .prov-change-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .prov-change-badge.plaid { background: #2d3a8c33; color: #7c8cf8; }
+        .prov-change-badge.finicity { background: #0b6e4f33; color: #48d4a0; }
+        .prov-change-badge.mx { background: #8b5e3433; color: #e6a867; }
+        .prov-change-badge.unknown { background: var(--surface2); color: var(--text-dim); }
+        .prov-changes-none {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            padding: 12px 0;
+        }
+
+        /* Session Diff Comparison */
+        .session-diff-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .session-diff-section h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .diff-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 14px;
+        }
+        .diff-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .diff-controls select {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            min-width: 200px;
+        }
+        .diff-controls label {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+        .diff-controls .btn {
+            padding: 7px 18px;
+            font-size: 0.85rem;
+        }
+        .diff-summary {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .diff-summary-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            text-align: center;
+            min-width: 120px;
+        }
+        .diff-summary-card .ds-prov {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .diff-summary-card .ds-prov.plaid { color: #7c8cf8; }
+        .diff-summary-card .ds-prov.finicity { color: #48d4a0; }
+        .diff-summary-card .ds-prov.mx { color: #e6a867; }
+        .diff-summary-card .ds-prov.unknown { color: var(--text-dim); }
+        .ds-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 0.82rem;
+        }
+        .ds-gained { color: var(--green); font-weight: 600; }
+        .ds-lost { color: #e74c3c; font-weight: 600; }
+        .ds-net {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+        .ds-net.positive { color: var(--green); }
+        .ds-net.negative { color: #e74c3c; }
+        .ds-net.neutral { color: var(--text-dim); }
+        .diff-flow {
+            margin-bottom: 16px;
+        }
+        .diff-flow-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--surface2);
+            font-size: 0.82rem;
+        }
+        .diff-flow-row:last-child { border-bottom: none; }
+        .diff-flow-bar {
+            flex: 1;
+            height: 22px;
+            background: var(--surface2);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+        }
+        .diff-flow-gained {
+            height: 100%;
+            background: var(--green);
+            transition: width 0.5s;
+        }
+        .diff-flow-lost {
+            height: 100%;
+            background: #e74c3c;
+            transition: width 0.5s;
+        }
+        .diff-flow-label {
+            min-width: 70px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .diff-flow-label.plaid { color: #7c8cf8; }
+        .diff-flow-label.finicity { color: #48d4a0; }
+        .diff-flow-label.mx { color: #e6a867; }
+        .diff-flow-label.unknown { color: var(--text-dim); }
+        .diff-flow-val {
+            min-width: 90px;
+            text-align: right;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            flex-shrink: 0;
+        }
+        .diff-change-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 6px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .diff-empty {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* FI Compare (added/removed) */
+        .fi-compare-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        @media (max-width: 640px) {
+            .fi-compare-cols { grid-template-columns: 1fr; }
+        }
+        .fi-compare-col h4 {
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+        .fi-compare-col h4.added { color: var(--green); }
+        .fi-compare-col h4.removed { color: #e74c3c; }
+        .fi-compare-list {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .fi-compare-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 10px;
+            background: var(--bg);
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+        .fi-compare-item .fc-name {
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .fi-compare-item .fc-prov {
+            flex-shrink: 0;
+        }
+        .fi-compare-summary {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+        }
+        .fi-compare-summary .fcs-added { color: var(--green); font-weight: 700; }
+        .fi-compare-summary .fcs-removed { color: #e74c3c; font-weight: 700; }
+        .fi-compare-summary .fcs-net { font-weight: 700; }
+
         @media (max-width: 768px) {
             .chart-section { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1480,13 +1636,13 @@
 
         /* Info Modal */
         .info-btn {
-            width: 26px;
-            height: 26px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 1px solid var(--border);
             background: var(--surface2);
             color: var(--accent-light);
-            font-size: 0.82rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
@@ -1520,16 +1676,13 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 28px 32px;
-            max-width: 900px;
+            max-width: 700px;
             width: 92%;
             max-height: 85vh;
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
             box-shadow: 0 16px 48px rgba(0,0,0,0.5);
             position: relative;
         }
-        .fi-modal::-webkit-scrollbar { display: none; }
         .fi-modal-close {
             position: absolute;
             top: 14px;
@@ -1589,12 +1742,9 @@
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
             box-shadow: 0 16px 48px rgba(0,0,0,0.5);
             position: relative;
         }
-        .modal::-webkit-scrollbar { display: none; }
         .modal-close {
             position: absolute;
             top: 14px;
@@ -1646,13 +1796,6 @@
             border-top: 1px solid var(--border);
         }
 
-        /* Export button */
-        .btn-export {
-            background: var(--surface2); color: var(--text); border: 1px solid var(--border);
-            border-radius: 8px; padding: 8px 16px; font-size: 0.85rem; cursor: pointer;
-            font-weight: 600; transition: background 0.15s;
-        }
-        .btn-export:hover { background: var(--border); }
 
     </style>
 </head>
@@ -1662,7 +1805,6 @@
             <h1>Monarch Connection Tracker <span>Financial Institution Status Monitor</span></h1>
             <div style="display:flex;align-items:center;gap:10px;">
                 <span id="next-retrieval-badge" style="display:none;font-size:0.78rem;color:var(--text-dim);white-space:nowrap;"></span>
-                <button class="btn btn-export" id="export-btn" onclick="exportSummary()" title="Export summary report" style="display:none;">&#x1F4CB; Export</button>
                 <button class="info-btn" onclick="document.getElementById('info-modal').classList.add('active')" title="How scoring works">i</button>
                 <button class="btn btn-primary" id="retrieve-btn" onclick="startRetrieval()">
                     &#x2913; Retrieve Data
@@ -1730,17 +1872,12 @@
                 <h3>Provider Map</h3>
                 <p class="map-subtitle">Each block is one institution, colored by its primary data provider — sorted by rank</p>
                 <div class="pmap-controls">
-                    <div class="pmap-controls-row">
-                        <label>From:</label>
-                        <select id="pmap-from-select" class="sc-date-select"></select>
-                        <label>To:</label>
-                        <select id="pmap-to-select" class="sc-date-select"></select>
-                        <button class="pmap-btn" id="pmap-highlight-btn" onclick="startHighlightChanges()" title="Compare changes between selected sessions">Compare</button>
-                        <button class="pmap-btn" id="pmap-stop-btn" onclick="stopHighlightChanges()" style="display:none;">Stop</button>
-                        <span class="pmap-step-indicator" id="pmap-step-indicator"></span>
-                    </div>
+                    <label>Session:</label>
+                    <select id="pmap-session-select" class="sc-date-select" onchange="loadPixelMapSession(this.value)"></select>
+                    <button class="pmap-btn" id="pmap-highlight-btn" onclick="startHighlightChanges()" title="Animate changes from selected session to latest">Highlight Changes to Now</button>
+                    <button class="pmap-btn" id="pmap-stop-btn" onclick="stopHighlightChanges()" style="display:none;">Stop</button>
+                    <span class="pmap-step-indicator" id="pmap-step-indicator"></span>
                 </div>
-                <div class="prov-summary" id="pmap-provider-summary"></div>
                 <div class="pixel-map-legend" id="pixel-map-legend"></div>
                 <canvas id="pixel-map-canvas"></canvas>
                 <div class="pmap-changelog" id="pmap-changelog"></div>
@@ -1818,6 +1955,70 @@
             </div>
         </div>
 
+        <!-- Score Changes Section -->
+        <div class="score-changes-section" id="score-changes-section" style="display:none;">
+            <div class="sc-header-row">
+                <div>
+                    <h3>Score Changes Between Retrievals</h3>
+                    <p class="chart-subtitle">How many FI weighted scores changed and by how much (comparing consecutive retrievals)</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);">Decile:</label>
+                        <select class="sc-date-select" id="sc-decile-select" onchange="loadScoreChanges(this.value)">
+                            <option value="">All</option>
+                            <option value="0">Top 10%</option>
+                            <option value="1">10–20%</option>
+                            <option value="2">20–30%</option>
+                            <option value="3">30–40%</option>
+                            <option value="4">40–50%</option>
+                            <option value="5">50–60%</option>
+                            <option value="6">60–70%</option>
+                            <option value="7">70–80%</option>
+                            <option value="8">80–90%</option>
+                            <option value="9">Bottom 10%</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;color:var(--text-dim);">Detail for:</label>
+                        <select class="sc-date-select" id="sc-date-select" onchange="renderScDetail(+this.value)"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-canvas-wrapper">
+                <canvas id="sc-chart"></canvas>
+            </div>
+            <div id="sc-detail"></div>
+        </div>
+
+        <!-- Provider Changes (current session vs previous) -->
+        <div class="prov-changes-section" id="prov-changes-section" style="display:none;">
+            <h3>Provider Changes</h3>
+            <p class="prov-changes-subtitle" id="prov-changes-subtitle">Institutions whose primary provider changed from the previous retrieval</p>
+            <div id="prov-changes-content"></div>
+        </div>
+
+        <!-- Session Diff Comparison -->
+        <div class="session-diff-section" id="session-diff-section" style="display:none;">
+            <h3>Compare Provider Changes Across Sessions</h3>
+            <p class="diff-subtitle">Select two retrieval sessions to see which providers gained or lost institutions</p>
+            <div class="diff-controls">
+                <label>Session A:</label>
+                <select id="diff-select-a"></select>
+                <label>Session B:</label>
+                <select id="diff-select-b"></select>
+                <button class="btn btn-primary" onclick="runSessionDiff()">Compare</button>
+            </div>
+            <div id="diff-results"></div>
+        </div>
+
+        <!-- Compare Supported FIs -->
+        <div class="session-diff-section" id="fi-compare-section" style="display:none;">
+            <h3>Compare Supported Financial Institutions</h3>
+            <p class="diff-subtitle">Institutions added or removed between the two sessions selected above</p>
+            <div id="fi-compare-results"></div>
+        </div>
+
         <!-- Session Selector -->
         <div class="session-bar" id="session-bar" style="display: none;">
             <label>Retrieval Session:</label>
@@ -1844,6 +2045,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th onclick="sortTable('rank')">#</th>
                                 <th onclick="sortTable('institution_name')">Institution</th>
                                 <th onclick="sortTable('data_provider')">Provider</th>
                                 <th onclick="sortTable('success_pct')">Success</th>
@@ -1866,22 +2068,6 @@
         <div class="fi-modal" onclick="event.stopPropagation()">
             <button class="fi-modal-close" onclick="closeFiModal()">&times;</button>
             <div id="fi-modal-content"></div>
-        </div>
-    </div>
-
-    <!-- Issues Reported Modal -->
-    <div class="fi-modal-overlay" id="issues-modal-overlay" onclick="closeIssuesModal(event)">
-        <div class="fi-modal" onclick="event.stopPropagation()">
-            <button class="fi-modal-close" onclick="closeIssuesModal()">&times;</button>
-            <div id="issues-modal-content"></div>
-        </div>
-    </div>
-
-    <!-- Unavailable Modal -->
-    <div class="fi-modal-overlay" id="unavail-modal-overlay" onclick="closeUnavailableModal(event)">
-        <div class="fi-modal" onclick="event.stopPropagation()">
-            <button class="fi-modal-close" onclick="closeUnavailableModal()">&times;</button>
-            <div id="unavail-modal-content"></div>
         </div>
     </div>
 
@@ -1960,6 +2146,7 @@
                     loadSession(valid[0].id);
                 }
                 maybeShowHistory();
+                populateDiffSelectors(valid);
                 populatePixelMapSessions(valid);
             } catch (e) {
                 console.error('Failed to load sessions:', e);
@@ -1989,15 +2176,15 @@
                 document.getElementById('empty-state').style.display = 'none';
                 document.getElementById('data-view').style.display = '';
                 document.getElementById('live-stats').classList.add('active');
-                document.getElementById('export-btn').style.display = '';
 
                 renderStats(statsData);
                 renderCharts(statsData);
                 renderPixelMap();
                 // Sync pixel map session dropdown
-                const pmapToSel = document.getElementById('pmap-to-select');
-                if (pmapToSel) pmapToSel.value = sessionId;
+                const pmapSel = document.getElementById('pmap-session-select');
+                if (pmapSel) pmapSel.value = sessionId;
                 renderDecileChart();
+                loadProviderChanges(sessionId);
                 renderTable();
 
                 const dt = new Date(connData.session.started_at);
@@ -2027,13 +2214,13 @@
                     <div class="stat-value">${stats.status_distribution?.['OK'] || 0}</div>
                     <div class="stat-label">Healthy Connections</div>
                 </div>
-                <div class="stat-card clickable" onclick="showIssuesModal()">
+                <div class="stat-card">
                     <div class="stat-value">${stats.status_distribution?.['Issues reported'] || 0}</div>
-                    <div class="stat-label-row"><span class="stat-label">Issues Reported</span><span class="stat-info-icon">i</span></div>
+                    <div class="stat-label">Issues Reported</div>
                 </div>
-                <div class="stat-card clickable" onclick="showUnavailableModal()">
+                <div class="stat-card">
                     <div class="stat-value">${stats.status_distribution?.['Unavailable'] || 0}</div>
-                    <div class="stat-label-row"><span class="stat-label">Unavailable</span><span class="stat-info-icon">i</span></div>
+                    <div class="stat-label">Unavailable</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">${stats.avg_success_pct != null ? stats.avg_success_pct.toFixed(2) + '%' : 'N/A'}</div>
@@ -2046,11 +2233,11 @@
             const section = document.getElementById('charts-section');
             const MIN_PROVIDER_FIS = 10;
             const provColors = {
-                'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B',
+                'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B',
                 'Unknown': '#555'
             };
             const statusColors = {
-                'OK': '#00b894', 'Issues reported': '#F79E1B', 'Unavailable': '#EB001B'
+                'OK': '#00c48c', 'Issues reported': '#F79E1B', 'Unavailable': '#EB001B'
             };
 
             const total = stats.total_institutions || 1;
@@ -2156,7 +2343,7 @@
             section.style.display = '';
 
             const provColors = {
-                'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'
+                'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B', 'Unknown': '#555'
             };
 
             // Sort by rank (already sorted typically)
@@ -2229,21 +2416,23 @@
 
         function populatePixelMapSessions(sessions) {
             pmapSessions = sessions.filter(s => s.total_institutions > 0 && s.status === 'completed');
-            const fromSel = document.getElementById('pmap-from-select');
-            const toSel = document.getElementById('pmap-to-select');
-            const opts = pmapSessions.map(s => {
+            const sel = document.getElementById('pmap-session-select');
+            sel.innerHTML = pmapSessions.map(s => {
                 const dt = new Date(s.started_at);
-                return `<option value="${s.id}">${dt.toLocaleDateString()} ${dt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} — ${s.total_institutions} FIs</option>`;
+                return `<option value="${s.id}">${dt.toLocaleDateString()} ${dt.toLocaleTimeString()} — ${s.total_institutions} FIs</option>`;
             }).join('');
-            fromSel.innerHTML = opts;
-            toSel.innerHTML = opts;
-            // Default: from = second most recent (or oldest), to = most recent
-            if (pmapSessions.length >= 2) {
-                fromSel.value = pmapSessions[1].id;
-                toSel.value = pmapSessions[0].id;
-            } else if (pmapSessions.length === 1) {
-                fromSel.value = pmapSessions[0].id;
-                toSel.value = pmapSessions[0].id;
+            // Default to current session
+            if (currentSessionId) sel.value = currentSessionId;
+        }
+
+        async function loadPixelMapSession(sessionId) {
+            try {
+                const res = await fetch(`${BASE}/api/sessions/${sessionId}/connections`);
+                const data = await res.json();
+                const conns = data.connections || [];
+                renderPixelMapFromData(conns);
+            } catch (e) {
+                console.error('Failed to load pixel map session:', e);
             }
         }
 
@@ -2255,7 +2444,7 @@
             if (!data || data.length === 0) return;
 
             const provColors = {
-                'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'
+                'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B', 'Unknown': '#555'
             };
 
             const sorted = [...data].sort((a, b) => (a.rank || 0) - (b.rank || 0));
@@ -2326,28 +2515,8 @@
             removed: '#e74c3c',
             switch:  '#fdcb6e',
             degraded:'#e17055',
-            improved:'#ff69b4',
+            improved:'#74b9ff',
         };
-
-        // Global state for change filters
-        let pmapChangeTypeMap = {};
-        let pmapTotals = null;
-        let pmapActiveFilters = new Set(['added','removed','switch','degraded','improved']);
-        let pmapActiveProviders = new Set(['Plaid','Finicity','MX','Unknown']);
-        let pmapActiveDeciles = new Set([1,2,3,4,5,6,7,8,9,10]);
-        let pmapFromId = null, pmapToId = null;
-
-        // Returns the decile (1-10) for an FI name based on its rank position in the sorted pixel map data
-        function getDecileForName(name) {
-            const canvas = document.getElementById('pixel-map-canvas');
-            const sorted = canvas && canvas._pmapSorted;
-            if (!sorted || sorted.length === 0) return null;
-            const n = sorted.length;
-            const bucketSize = Math.ceil(n / 10);
-            const idx = sorted.findIndex(c => c.institution_name === name);
-            if (idx < 0) return null;
-            return Math.min(10, Math.floor(idx / bucketSize) + 1);
-        }
 
         async function startHighlightChanges() {
             if (pmapAnimating) return;
@@ -2355,9 +2524,9 @@
             pmapAnimationAbort = false;
             stopPulse();
 
-            const fromId = document.getElementById('pmap-from-select').value;
-            const toId = document.getElementById('pmap-to-select').value;
-            if (!fromId || !toId || String(fromId) === String(toId)) {
+            const fromId = document.getElementById('pmap-session-select').value;
+            const latestId = pmapSessions.length > 0 ? pmapSessions[0].id : null;
+            if (!latestId || String(fromId) === String(latestId)) {
                 pmapAnimating = false;
                 return;
             }
@@ -2377,7 +2546,7 @@
             const changeTypeMap = {};
 
             try {
-                const res = await fetch(`${BASE}/api/sessions/range-diff?from=${fromId}&to=${toId}`);
+                const res = await fetch(`${BASE}/api/sessions/range-diff?from=${fromId}&to=${latestId}`);
                 const steps = await res.json();
 
                 if (!steps || steps.length === 0) {
@@ -2405,62 +2574,22 @@
 
                     step.added.forEach(c => { totals.addedDetails.push(c); changeTypeMap[c.name] = 'added'; });
                     step.removed.forEach(c => { totals.removedDetails.push(c); changeTypeMap[c.name] = 'removed'; });
-                    step.provider_switches.forEach(c => { totals.switchDetails.push(c); });
+                    step.provider_switches.forEach(c => { totals.switchDetails.push(c); changeTypeMap[c.name] = 'switch'; });
                     step.degraded.forEach(c => { totals.degradedDetails.push(c); changeTypeMap[c.name] = 'degraded'; });
                     step.improved.forEach(c => { totals.improvedDetails.push(c); changeTypeMap[c.name] = 'improved'; });
 
                     await new Promise(r => setTimeout(r, 15));
                 }
 
-                // Deduplicate: keep only the net final state per FI
-                const dedup = (arr, type) => {
-                    const seen = new Map();
-                    for (let i = arr.length - 1; i >= 0; i--) {
-                        const name = arr[i].name;
-                        if (!seen.has(name) && changeTypeMap[name] === type) seen.set(name, arr[i]);
-                    }
-                    return [...seen.values()].reverse();
-                };
-                // Switches are independent of degraded/improved, dedup by name only
-                const dedupByName = (arr) => {
-                    const seen = new Map();
-                    for (let i = arr.length - 1; i >= 0; i--) {
-                        if (!seen.has(arr[i].name)) seen.set(arr[i].name, arr[i]);
-                    }
-                    return [...seen.values()].reverse();
-                };
-                totals.addedDetails = dedup(totals.addedDetails, 'added');
-                totals.removedDetails = dedup(totals.removedDetails, 'removed');
-                totals.switchDetails = dedupByName(totals.switchDetails);
-                totals.degradedDetails = dedup(totals.degradedDetails, 'degraded');
-                totals.improvedDetails = dedup(totals.improvedDetails, 'improved');
-                // Add switches into changeTypeMap for pixel map highlighting
-                // (only if not already categorized as added/removed/degraded/improved)
-                totals.switchDetails.forEach(c => {
-                    if (!changeTypeMap[c.name]) changeTypeMap[c.name] = 'switch';
-                });
-                totals.added = totals.addedDetails.length;
-                totals.removed = totals.removedDetails.length;
-                totals.switches = totals.switchDetails.length;
-                totals.degraded = totals.degradedDetails.length;
-                totals.improved = totals.improvedDetails.length;
-
                 progressEl.textContent = 'Rendering map\u2026';
-                const sessRes = await fetch(`${BASE}/api/sessions/${toId}/connections`);
+                const sessRes = await fetch(`${BASE}/api/sessions/${latestId}/connections`);
                 const sessData = await sessRes.json();
                 renderPixelMapFromData(sessData.connections || []);
+                document.getElementById('pmap-session-select').value = latestId;
 
                 indicator.textContent = '';
-                pmapChangeTypeMap = changeTypeMap;
-                pmapTotals = totals;
-                pmapFromId = fromId;
-                pmapToId = toId;
-                pmapActiveFilters = new Set(['added','removed','switch','degraded','improved']);
-                pmapActiveProviders = new Set(['Plaid','Finicity','MX','Unknown']);
-                pmapActiveDeciles = new Set([1,2,3,4,5,6,7,8,9,10]);
                 flashPixelMapBlocksByType(changeTypeMap);
-                renderProviderSummary(totals);
-                renderChangeSummary(changelog, totals, fromId, toId);
+                renderChangeSummary(changelog, totals, fromId, latestId);
                 setTimeout(() => startPulse(changeTypeMap), 1400);
             } catch (e) {
                 console.error('Highlight changes failed:', e);
@@ -2475,8 +2604,6 @@
         function stopHighlightChanges() {
             pmapAnimationAbort = true;
             stopPulse();
-            const ps = document.getElementById('pmap-provider-summary');
-            if (ps) { ps.innerHTML = ''; ps.classList.remove('active'); }
         }
 
         function flashPixelMapBlocksByType(changeTypeMap) {
@@ -2487,15 +2614,11 @@
             if (!sorted) return;
 
             const ctx = canvas.getContext('2d');
-            const provColors = {'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'};
-            const n = sorted.length;
-            const bucketSize = Math.ceil(n / 10);
+            const provColors = {'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B', 'Unknown': '#555'};
             const entries = [];
             for (let i = 0; i < sorted.length; i++) {
                 const type = changeTypeMap[sorted[i].institution_name];
-                const prov = sorted[i].data_provider || 'Unknown';
-                const decile = Math.min(10, Math.floor(i / bucketSize) + 1);
-                if (type && pmapActiveFilters.has(type) && pmapActiveProviders.has(prov) && pmapActiveDeciles.has(decile)) entries.push({ i, provColor: provColors[prov] || '#555' });
+                if (type) entries.push({ i, color: CHANGE_COLORS[type] || '#fff', provColor: provColors[sorted[i].data_provider || 'Unknown'] || '#555' });
             }
             if (entries.length === 0) return;
 
@@ -2507,12 +2630,12 @@
                     const row_idx = Math.floor(e.i / cols);
                     const x = col_idx * blockSize;
                     const y = row_idx * blockSize;
-                    ctx.fillStyle = (flashCount % 2 === 0) ? '#fff' : e.provColor;
+                    ctx.fillStyle = (flashCount % 2 === 0) ? e.color : e.provColor;
                     ctx.fillRect(x, y, blockSize - 0.5, blockSize - 0.5);
                 }
                 flashCount++;
                 if (flashCount >= totalFlashes) clearInterval(interval);
-            }, 180);
+            }, 200);
         }
 
         function startPulse(changeTypeMap) {
@@ -2523,15 +2646,11 @@
             const cols = canvas._pmapCols;
             if (!sorted) return;
 
-            const provColors = {'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'};
-            const n = sorted.length;
-            const bucketSize = Math.ceil(n / 10);
+            const provColors = {'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B', 'Unknown': '#555'};
             const entries = [];
             for (let i = 0; i < sorted.length; i++) {
                 const type = changeTypeMap[sorted[i].institution_name];
-                const prov = sorted[i].data_provider || 'Unknown';
-                const decile = Math.min(10, Math.floor(i / bucketSize) + 1);
-                if (type && pmapActiveFilters.has(type) && pmapActiveProviders.has(prov) && pmapActiveDeciles.has(decile)) entries.push({ i, provColor: provColors[prov] || '#555' });
+                if (type) entries.push({ i, color: CHANGE_COLORS[type] || '#fff', provColor: provColors[sorted[i].data_provider || 'Unknown'] || '#555' });
             }
             if (entries.length === 0) return;
 
@@ -2544,11 +2663,11 @@
                     const row_idx = Math.floor(e.i / cols);
                     const x = col_idx * blockSize;
                     const y = row_idx * blockSize;
-                    ctx.fillStyle = (phase === 0) ? '#fff' : e.provColor;
+                    ctx.fillStyle = (phase === 0) ? e.color : e.provColor;
                     ctx.fillRect(x, y, blockSize - 0.5, blockSize - 0.5);
                 }
                 tick++;
-            }, 700);
+            }, 600);
         }
 
         function stopPulse() {
@@ -2558,303 +2677,37 @@
             }
         }
 
-        function togglePmapFilter(key) {
-            const allKeys = ['added','removed','switch','degraded','improved'];
-            if (key === 'all') {
-                const allActive = allKeys.every(k => pmapActiveFilters.has(k));
-                if (allActive) {
-                    pmapActiveFilters.clear();
-                } else {
-                    allKeys.forEach(k => pmapActiveFilters.add(k));
-                }
-            } else {
-                if (pmapActiveFilters.has(key)) {
-                    pmapActiveFilters.delete(key);
-                } else {
-                    pmapActiveFilters.add(key);
-                }
-            }
-            refreshPmapFilters();
-        }
-
-        function togglePmapProvFilter(key) {
-            const provKeys = ['Plaid','Finicity','MX','Unknown'];
-            if (key === 'all') {
-                const allActive = provKeys.every(k => pmapActiveProviders.has(k));
-                if (allActive) {
-                    pmapActiveProviders.clear();
-                } else {
-                    provKeys.forEach(k => pmapActiveProviders.add(k));
-                }
-            } else {
-                if (pmapActiveProviders.has(key)) {
-                    pmapActiveProviders.delete(key);
-                } else {
-                    pmapActiveProviders.add(key);
-                }
-            }
-            refreshPmapFilters();
-        }
-
-        function togglePmapDecileFilter(key) {
-            const decileKeys = [1,2,3,4,5,6,7,8,9,10];
-            if (key === 'all') {
-                const allActive = decileKeys.every(k => pmapActiveDeciles.has(k));
-                if (allActive) {
-                    pmapActiveDeciles.clear();
-                } else {
-                    decileKeys.forEach(k => pmapActiveDeciles.add(k));
-                }
-            } else {
-                const k = Number(key);
-                if (pmapActiveDeciles.has(k)) {
-                    pmapActiveDeciles.delete(k);
-                } else {
-                    pmapActiveDeciles.add(k);
-                }
-            }
-            refreshPmapFilters();
-        }
-
-        function applyFilterGrayout() {
-            const canvas = document.getElementById('pixel-map-canvas');
-            const sorted = canvas._pmapSorted;
-            const blockSize = canvas._pmapBlockSize;
-            const cols = canvas._pmapCols;
-            if (!sorted) return;
-            const allDeciles = [1,2,3,4,5,6,7,8,9,10].every(k => pmapActiveDeciles.has(k));
-            const allProvs = ['Plaid','Finicity','MX','Unknown'].every(k => pmapActiveProviders.has(k));
-            if (allDeciles && allProvs) return;
-            const provColors = {'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'};
-            const n = sorted.length;
-            const bucketSize = Math.ceil(n / 10);
-            const ctx = canvas.getContext('2d');
-            // Fill entire canvas with gray, then redraw only active blocks
-            ctx.fillStyle = '#2a2d3a';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < n; i++) {
-                const decile = Math.min(10, Math.floor(i / bucketSize) + 1);
-                const prov = sorted[i].data_provider || 'Unknown';
-                if (pmapActiveDeciles.has(decile) && pmapActiveProviders.has(prov)) {
-                    const col_idx = i % cols;
-                    const row_idx = Math.floor(i / cols);
-                    ctx.fillStyle = provColors[prov] || '#555';
-                    ctx.fillRect(col_idx * blockSize, row_idx * blockSize, blockSize - 0.5, blockSize - 0.5);
-                }
-            }
-        }
-
-        function refreshPmapFilters() {
-            // Re-render the map to reset all blocks, then flash/pulse only active filters
-            stopPulse();
-            const canvas = document.getElementById('pixel-map-canvas');
-            if (canvas._pmapSorted) {
-                renderPixelMapFromData(canvas._pmapSorted);
-                applyFilterGrayout();
-                flashPixelMapBlocksByType(pmapChangeTypeMap);
-                setTimeout(() => startPulse(pmapChangeTypeMap), 1400);
-            }
-            // Re-render detail columns to show only filtered types
-            if (pmapTotals) {
-                const changelog = document.getElementById('pmap-changelog');
-                renderChangeSummary(changelog, pmapTotals, pmapFromId, pmapToId);
-            }
-        }
-
         function renderChangeSummary(container, totals, fromId, toId) {
-            const pc = {'Plaid':'#5dade2','Finicity':'#2d8659','MX':'#F79E1B'};
-            // Helper: count items that pass provider + decile filters
-            const countFiltered = (details, provField) => {
-                let n = 0;
-                details.forEach(item => {
-                    if (provField === 'both') {
-                        if (!pmapActiveProviders.has(item.from_provider || 'Unknown') && !pmapActiveProviders.has(item.to_provider || 'Unknown')) return;
-                    } else {
-                        if (!pmapActiveProviders.has(item[provField || 'provider'] || 'Unknown')) return;
-                    }
-                    const _dec = getDecileForName(item.name);
-                    if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
-                    n++;
-                });
-                return n;
-            };
-            // Deduplicate switch details for counting (same logic as rendering)
-            const switchSeen = new Set();
-            const switchUnique = [];
-            for (let i = totals.switchDetails.length - 1; i >= 0; i--) {
-                if (!switchSeen.has(totals.switchDetails[i].name)) {
-                    switchSeen.add(totals.switchDetails[i].name);
-                    switchUnique.unshift(totals.switchDetails[i]);
-                }
-            }
-            // Deduplicate degraded/improved for counting
-            const degradedMap = new Map();
-            totals.degradedDetails.forEach(d => {
-                const existing = degradedMap.get(d.name);
-                if (!existing || (d.delta != null && d.delta < (existing.delta || 0))) degradedMap.set(d.name, d);
-                else if (!existing) degradedMap.set(d.name, d);
-            });
-            const degradedUnique = [...degradedMap.values()];
-            const improvedMap = new Map();
-            totals.improvedDetails.forEach(d => {
-                const existing = improvedMap.get(d.name);
-                if (!existing || (d.delta != null && d.delta > (existing.delta || 0))) improvedMap.set(d.name, d);
-                else if (!existing) improvedMap.set(d.name, d);
-            });
-            const improvedUnique = [...improvedMap.values()];
-
-            const fAdded = countFiltered(totals.addedDetails);
-            const fRemoved = countFiltered(totals.removedDetails);
-            const fSwitches = countFiltered(switchUnique, 'both');
-            const fDegraded = countFiltered(degradedUnique);
-            const fImproved = countFiltered(improvedUnique);
-            const totalChanges = fAdded + fRemoved + fSwitches + fDegraded + fImproved;
+            const pc = {'Plaid':'#5dade2','Finicity':'#00c48c','MX':'#F79E1B'};
+            const totalChanges = totals.added + totals.removed + totals.switches;
 
             let html = '<div class="pmap-summary">';
-            html += '<div class="pmap-summary-title"><span>Changes Summary</span>';
-            html += `<span class="pmap-total-badge">${totalChanges}<span class="pmap-total-label">FIs changed</span></span>`;
-            html += '<span class="pmap-description" id="pmap-desc"></span></div>';
+            html += '<div class="pmap-summary-title">Changes Summary</div>';
 
-            // Change Filter toggle buttons
-            html += '<div class="pmap-filter-row">';
-            html += '<div class="pmap-filter-bar" id="pmap-filter-bar">';
-            const allKeys = ['added','removed','switch','degraded','improved'];
-            const allActive = allKeys.every(k => pmapActiveFilters.has(k));
-            html += `<button class="pmap-filter-btn ${allActive ? 'active' : ''}" data-filter="all" onclick="togglePmapFilter('all')">All</button>`;
-            const filterDefs = [
-                { key: 'added', label: 'Added', color: '#00b894' },
-                { key: 'removed', label: 'Removed', color: '#e74c3c' },
-                { key: 'switch', label: 'Switched', color: '#fdcb6e' },
-                { key: 'degraded', label: 'Degraded', color: '#e17055' },
-                { key: 'improved', label: 'Improved', color: '#ff69b4' },
-            ];
-            filterDefs.forEach(f => {
-                const isActive = pmapActiveFilters.has(f.key);
-                html += `<button class="pmap-filter-btn ${isActive ? 'active' : ''}" data-filter="${f.key}" onclick="togglePmapFilter('${f.key}')">`;
-                html += `<span class="pmap-filter-swatch" style="background:${f.color}"></span>${f.label}`;
-                html += '</button>';
-            });
-            html += '</div></div>';
-            // Provider Filter toggle buttons (own row)
-            html += '<div class="pmap-filter-row">';
-            html += '<div class="pmap-filter-bar" id="pmap-prov-filter-bar">';
-            const provKeys = ['Plaid','Finicity','MX','Unknown'];
-            const provAllActive = provKeys.every(k => pmapActiveProviders.has(k));
-            html += `<button class="pmap-filter-btn pmap-prov-filter-btn ${provAllActive ? 'active' : ''}" data-provfilter="all" onclick="togglePmapProvFilter('all')">All</button>`;
-            const provFilterDefs = [
-                { key: 'Plaid', label: 'Plaid', color: '#5dade2' },
-                { key: 'Finicity', label: 'Finicity', color: '#2d8659' },
-                { key: 'MX', label: 'MX', color: '#F79E1B' },
-                { key: 'Unknown', label: 'Unknown', color: '#555' },
-            ];
-            provFilterDefs.forEach(f => {
-                const isActive = pmapActiveProviders.has(f.key);
-                html += `<button class="pmap-filter-btn pmap-prov-filter-btn ${isActive ? 'active' : ''}" data-provfilter="${f.key}" onclick="togglePmapProvFilter('${f.key}')">`;
-                html += `<span class="pmap-filter-swatch" style="background:${f.color}"></span>${f.label}`;
-                html += '</button>';
-            });
-            html += '</div></div>';
-            // Volume Decile Filter toggle buttons (own row)
-            html += '<div class="pmap-filter-row">';
-            html += '<div class="pmap-filter-bar" id="pmap-decile-filter-bar">';
-            const decileKeys = [1,2,3,4,5,6,7,8,9,10];
-            const decileAllActive = decileKeys.every(k => pmapActiveDeciles.has(k));
-            html += `<button class="pmap-filter-btn ${decileAllActive ? 'active' : ''}" data-decilefilter="all" onclick="togglePmapDecileFilter('all')">All</button>`;
-            decileKeys.forEach(d => {
-                const isActive = pmapActiveDeciles.has(d);
-                const label = d === 1 ? 'Top 10%' : d === 10 ? 'Bottom 10%' : `${(d-1)*10+1}-${d*10}%`;
-                html += `<button class="pmap-filter-btn ${isActive ? 'active' : ''}" data-decilefilter="${d}" onclick="togglePmapDecileFilter(${d})">${label}</button>`;
-            });
-            html += '</div></div>';
-
-            // Stat cards (filtered counts)
+            // Stat cards
             html += '<div class="pmap-summary-grid">';
-            html += `<div class="pmap-stat-card"><div class="pmap-stat-val green">${fAdded}</div><div class="pmap-stat-label">FIs Added</div></div>`;
-            html += `<div class="pmap-stat-card"><div class="pmap-stat-val red">${fRemoved}</div><div class="pmap-stat-label">FIs Removed</div></div>`;
-            html += `<div class="pmap-stat-card"><div class="pmap-stat-val amber">${fSwitches}</div><div class="pmap-stat-label">Provider Switched</div></div>`;
-            html += `<div class="pmap-stat-card"><div class="pmap-stat-val red">${fDegraded}</div><div class="pmap-stat-label">Degraded</div></div>`;
-            html += `<div class="pmap-stat-card"><div class="pmap-stat-val blue">${fImproved}</div><div class="pmap-stat-label">Improved</div></div>`;
+            html += `<div class="pmap-stat-card"><div class="pmap-stat-val green">${totals.added}</div><div class="pmap-stat-label">FIs Added</div></div>`;
+            html += `<div class="pmap-stat-card"><div class="pmap-stat-val red">${totals.removed}</div><div class="pmap-stat-label">FIs Removed</div></div>`;
+            html += `<div class="pmap-stat-card"><div class="pmap-stat-val amber">${totals.switches}</div><div class="pmap-stat-label">Provider Switches</div></div>`;
+            html += `<div class="pmap-stat-card"><div class="pmap-stat-val red">${totals.degraded}</div><div class="pmap-stat-label">Degraded</div></div>`;
+            html += `<div class="pmap-stat-card"><div class="pmap-stat-val green">${totals.improved}</div><div class="pmap-stat-label">Improved</div></div>`;
             html += '</div>';
 
-            // Build dynamic English description with dates
-            const fromSess = pmapSessions.find(s => String(s.id) === String(fromId));
-            const toSess = pmapSessions.find(s => String(s.id) === String(toId));
-            const fmtDate = (s) => {
-                if (!s) return '?';
-                const dt = new Date(s.started_at);
-                return dt.toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'}) + ' ' + dt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-            };
-            const activeChangeNames = [];
-            if (pmapActiveFilters.has('added')) activeChangeNames.push('added');
-            if (pmapActiveFilters.has('removed')) activeChangeNames.push('removed');
-            if (pmapActiveFilters.has('switch')) activeChangeNames.push('switched');
-            if (pmapActiveFilters.has('degraded')) activeChangeNames.push('degraded');
-            if (pmapActiveFilters.has('improved')) activeChangeNames.push('improved');
-            const allChanges = activeChangeNames.length === 5;
-            const noChanges = activeChangeNames.length === 0;
-            const provNames = [...pmapActiveProviders];
-            const allProvs = provNames.length === 4;
-            const noProvs = provNames.length === 0;
-            const activeDecilesList = [...pmapActiveDeciles].sort((a,b) => a - b);
-            const allDeciles = activeDecilesList.length === 10;
-            const noDeciles = activeDecilesList.length === 0;
-            let desc;
-            if (noChanges || noProvs || noDeciles) {
-                desc = 'No changes shown \u2014 adjust filters to view changes.';
-            } else {
-                const changePart = allChanges ? 'all change types' : activeChangeNames.join(', ').replace(/, ([^,]*)$/, ' and $1');
-                const provPart = allProvs ? 'all providers' : provNames.join(', ').replace(/, ([^,]*)$/, ' and $1');
-                let decilePart;
-                if (allDeciles) {
-                    decilePart = 'all volume deciles';
-                } else {
-                    const decileLabels = activeDecilesList.map(d => d === 1 ? 'top 10%' : d === 10 ? 'bottom 10%' : ((d-1)*10+1) + '\u2013' + (d*10) + '%');
-                    decilePart = 'the ' + decileLabels.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' volume deciles';
-                }
-                desc = changePart.charAt(0).toUpperCase() + changePart.slice(1) + ' across ' + provPart + ' in ' + decilePart + ', from ' + fmtDate(fromSess) + ' to ' + fmtDate(toSess) + '.';
-            }
-
-            // Detail columns: only show active filters
-            const activeCols = ['added','removed','switch','degraded','improved'].filter(k => pmapActiveFilters.has(k));
-            const colCount = activeCols.length || 1;
-            html += `<div class="pmap-detail-columns" style="grid-template-columns:repeat(${colCount},1fr)">`;
-
-            // Added FIs column
-            if (pmapActiveFilters.has('added')) {
-            html += '<div class="pmap-detail-section">';
-            html += `<h5 class="green">Added (${fAdded})</h5>`;
-            if (totals.addedDetails.length > 0) {
-                totals.addedDetails.forEach(a => {
-                    if (!pmapActiveProviders.has(a.provider || 'Unknown')) return;
-                    const _dec = getDecileForName(a.name); if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
-                    html += `<div class="pmap-detail-item" title="${esc(a.name)}">${esc(a.name)} <span class="pmap-prov-tag" style="color:${pc[a.provider]||'#8b8fa3'}">${esc(a.provider||'Unknown')}</span></div>`;
-                });
-            } else {
-                html += '<div class="pmap-detail-item">None</div>';
-            }
+            // Flash color legend
+            html += '<div class="pmap-flash-legend">';
+            html += '<span class="pmap-flash-legend-item"><span class="pmap-flash-legend-swatch" style="background:#00b894"></span>Added</span>';
+            html += '<span class="pmap-flash-legend-item"><span class="pmap-flash-legend-swatch" style="background:#e74c3c"></span>Removed</span>';
+            html += '<span class="pmap-flash-legend-item"><span class="pmap-flash-legend-swatch" style="background:#fdcb6e"></span>Switch</span>';
+            html += '<span class="pmap-flash-legend-item"><span class="pmap-flash-legend-swatch" style="background:#e17055"></span>Degraded</span>';
+            html += '<span class="pmap-flash-legend-item"><span class="pmap-flash-legend-swatch" style="background:#74b9ff"></span>Improved</span>';
             html += '</div>';
-            }
 
-            // Removed FIs column
-            if (pmapActiveFilters.has('removed')) {
-            html += '<div class="pmap-detail-section">';
-            html += `<h5 class="red">Removed (${fRemoved})</h5>`;
-            if (totals.removedDetails.length > 0) {
-                totals.removedDetails.forEach(r => {
-                    if (!pmapActiveProviders.has(r.provider || 'Unknown')) return;
-                    const _dec = getDecileForName(r.name); if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
-                    html += `<div class="pmap-detail-item" title="${esc(r.name)}">${esc(r.name)} <span class="pmap-prov-tag" style="color:${pc[r.provider]||'#8b8fa3'}">${esc(r.provider||'Unknown')}</span></div>`;
-                });
-            } else {
-                html += '<div class="pmap-detail-item">None</div>';
-            }
-            html += '</div>';
-            }
+            // Detail columns: Switches | Added | Removed | Degraded | Improved
+            html += '<div class="pmap-detail-columns">';
 
-            // Provider Switched column
-            if (pmapActiveFilters.has('switch')) {
+            // Provider Switches column
             html += '<div class="pmap-detail-section">';
-            html += `<h5 class="amber">Switched (${fSwitches})</h5>`;
+            html += `<h5 class="amber">Switches (${totals.switches})</h5>`;
             if (totals.switchDetails.length > 0) {
                 const seen = new Set();
                 const unique = [];
@@ -2864,21 +2717,44 @@
                         unique.unshift(totals.switchDetails[i]);
                     }
                 }
-                unique.forEach(s => {
-                    if (!pmapActiveProviders.has(s.from_provider || 'Unknown') && !pmapActiveProviders.has(s.to_provider || 'Unknown')) return;
-                    const _dec = getDecileForName(s.name); if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
+                unique.slice(0, 12).forEach(s => {
                     html += `<div class="pmap-detail-item" title="${esc(s.name)}">${esc(s.name)} <span class="pmap-prov-tag" style="color:${pc[s.from_provider]||'#8b8fa3'}">${esc(s.from_provider)}</span> \u2192 <span class="pmap-prov-tag" style="color:${pc[s.to_provider]||'#8b8fa3'}">${esc(s.to_provider)}</span></div>`;
                 });
+                if (unique.length > 12) html += `<div class="pmap-detail-item" style="color:var(--text-dim)">\u2026and ${unique.length - 12} more</div>`;
             } else {
                 html += '<div class="pmap-detail-item">None</div>';
             }
             html += '</div>';
+
+            // Added FIs column
+            html += '<div class="pmap-detail-section">';
+            html += `<h5 class="green">Added (${totals.added})</h5>`;
+            if (totals.addedDetails.length > 0) {
+                totals.addedDetails.slice(0, 12).forEach(a => {
+                    html += `<div class="pmap-detail-item" title="${esc(a.name)}">${esc(a.name)} <span class="pmap-prov-tag" style="color:${pc[a.provider]||'#8b8fa3'}">${esc(a.provider||'Unknown')}</span></div>`;
+                });
+                if (totals.addedDetails.length > 12) html += `<div class="pmap-detail-item" style="color:var(--text-dim)">\u2026and ${totals.addedDetails.length - 12} more</div>`;
+            } else {
+                html += '<div class="pmap-detail-item">None</div>';
             }
+            html += '</div>';
+
+            // Removed FIs column
+            html += '<div class="pmap-detail-section">';
+            html += `<h5 class="red">Removed (${totals.removed})</h5>`;
+            if (totals.removedDetails.length > 0) {
+                totals.removedDetails.slice(0, 12).forEach(r => {
+                    html += `<div class="pmap-detail-item" title="${esc(r.name)}">${esc(r.name)} <span class="pmap-prov-tag" style="color:${pc[r.provider]||'#8b8fa3'}">${esc(r.provider||'Unknown')}</span></div>`;
+                });
+                if (totals.removedDetails.length > 12) html += `<div class="pmap-detail-item" style="color:var(--text-dim)">\u2026and ${totals.removedDetails.length - 12} more</div>`;
+            } else {
+                html += '<div class="pmap-detail-item">None</div>';
+            }
+            html += '</div>';
 
             // Degraded FIs column
-            if (pmapActiveFilters.has('degraded')) {
             html += '<div class="pmap-detail-section">';
-            html += `<h5 class="red">Degraded (${fDegraded})</h5>`;
+            html += `<h5 class="red">Degraded (${totals.degraded})</h5>`;
             if (totals.degradedDetails.length > 0) {
                 const dMap = new Map();
                 totals.degradedDetails.forEach(d => {
@@ -2887,23 +2763,19 @@
                     else if (!existing) dMap.set(d.name, d);
                 });
                 const dUnique = [...dMap.values()];
-                dUnique.forEach(d => {
+                dUnique.slice(0, 12).forEach(d => {
                     const detail = d.status_change ? d.status_change : `${d.delta > 0 ? '+' : ''}${d.delta}%`;
-                    const prov = d.provider || 'Unknown';
-                    if (!pmapActiveProviders.has(prov)) return;
-                    const _dec = getDecileForName(d.name); if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
-                    html += `<div class="pmap-detail-item" title="${esc(d.name)}">\u25bc ${esc(d.name)} <span class="pmap-prov-tag" style="color:${pc[prov]||'#8b8fa3'}">${esc(prov)}</span> <span style="color:#e74c3c;font-weight:600;font-size:0.7rem">${detail}</span></div>`;
+                    html += `<div class="pmap-detail-item" title="${esc(d.name)}">\u25bc ${esc(d.name)} <span style="color:#e74c3c;font-weight:600;font-size:0.7rem">${detail}</span></div>`;
                 });
+                if (dUnique.length > 12) html += `<div class="pmap-detail-item" style="color:var(--text-dim)">\u2026and ${dUnique.length - 12} more</div>`;
             } else {
                 html += '<div class="pmap-detail-item">None</div>';
             }
             html += '</div>';
-            }
 
             // Improved FIs column
-            if (pmapActiveFilters.has('improved')) {
             html += '<div class="pmap-detail-section">';
-            html += `<h5 class="blue">Improved (${fImproved})</h5>`;
+            html += `<h5 class="blue">Improved (${totals.improved})</h5>`;
             if (totals.improvedDetails.length > 0) {
                 const iMap = new Map();
                 totals.improvedDetails.forEach(d => {
@@ -2912,285 +2784,19 @@
                     else if (!existing) iMap.set(d.name, d);
                 });
                 const iUnique = [...iMap.values()];
-                iUnique.forEach(d => {
-                    const prov = d.provider || 'Unknown';
-                    if (!pmapActiveProviders.has(prov)) return;
-                    const _dec = getDecileForName(d.name); if (_dec !== null && !pmapActiveDeciles.has(_dec)) return;
-                    html += `<div class="pmap-detail-item" title="${esc(d.name)}">\u25b2 ${esc(d.name)} <span class="pmap-prov-tag" style="color:${pc[prov]||'#8b8fa3'}">${esc(prov)}</span> <span style="color:#ff69b4;font-weight:600;font-size:0.7rem">+${d.delta}%</span></div>`;
+                iUnique.slice(0, 12).forEach(d => {
+                    html += `<div class="pmap-detail-item" title="${esc(d.name)}">\u25b2 ${esc(d.name)} <span style="color:#74b9ff;font-weight:600;font-size:0.7rem">+${d.delta}%</span></div>`;
                 });
+                if (iUnique.length > 12) html += `<div class="pmap-detail-item" style="color:var(--text-dim)">\u2026and ${iUnique.length - 12} more</div>`;
             } else {
                 html += '<div class="pmap-detail-item">None</div>';
             }
             html += '</div>';
-            }
 
             html += '</div>'; // close pmap-detail-columns
 
             html += '</div>';
             container.innerHTML = html;
-            const descEl = document.getElementById('pmap-desc');
-            if (descEl) descEl.textContent = desc;
-        }
-
-        function exportSummary() {
-            const pc = {'Plaid':'#5dade2','Finicity':'#2d8659','MX':'#F79E1B'};
-            // Gather all <style> content from this page
-            let styles = '';
-            document.querySelectorAll('style').forEach(s => { styles += s.outerHTML; });
-
-            // Session info
-            const sessSel = document.getElementById('session-select');
-            const sessText = sessSel ? sessSel.options[sessSel.selectedIndex]?.text : '';
-            const now = new Date().toLocaleString();
-
-            // Build body content
-            let body = '<div style="max-width:1100px;margin:0 auto;padding:24px 20px">';
-
-            // Header
-            body += '<div style="text-align:center;margin-bottom:24px">';
-            body += '<h1 style="margin:0 0 4px;font-size:1.4rem;color:var(--text)">Monarch Connection Tracker \u2014 Summary Report</h1>';
-            body += `<p style="margin:0;color:var(--text-dim);font-size:0.85rem">Session: ${esc(sessText)} &nbsp;|&nbsp; Exported: ${esc(now)}</p>`;
-            body += '</div>';
-
-            // Stats cards
-            const statsCards = document.getElementById('stats-cards');
-            if (statsCards && statsCards.innerHTML.trim()) {
-                body += '<div class="stats-grid">' + statsCards.innerHTML + '</div>';
-            }
-
-            // Charts (bar charts are HTML, just clone)
-            const chartsSection = document.getElementById('charts-section');
-            if (chartsSection && chartsSection.innerHTML.trim()) {
-                body += '<div class="chart-section" style="margin-top:18px">' + chartsSection.innerHTML + '</div>';
-            }
-
-            // Provider Map section
-            const pmapSection = document.getElementById('pixel-map-section');
-            if (pmapSection && pmapSection.style.display !== 'none') {
-                body += '<div style="margin-top:24px">';
-                body += '<h3 style="color:var(--text);margin:0 0 6px">Provider Map</h3>';
-                body += '<p class="map-subtitle">Each block is one institution, colored by its primary data provider \u2014 sorted by rank</p>';
-
-                // Legend
-                const legend = document.getElementById('pixel-map-legend');
-                if (legend) body += '<div class="pixel-map-legend" style="margin-bottom:8px">' + legend.innerHTML + '</div>';
-
-                // Canvas as image
-                const canvas = document.getElementById('pixel-map-canvas');
-                if (canvas && canvas.width > 0) {
-                    try {
-                        body += `<img src="${canvas.toDataURL('image/png')}" style="max-width:100%;height:auto;border-radius:6px;display:block" />`;
-                    } catch(e) {}
-                }
-
-                // Change summary (the changelog panel) — stats grid + "See Appendix"
-                const changelog = document.getElementById('pmap-changelog');
-                if (changelog && changelog.classList.contains('active')) {
-                    const summaryGrid = changelog.querySelector('.pmap-summary-grid');
-                    const summaryTitle = changelog.querySelector('.pmap-summary-title');
-                    body += '<div class="pmap-changelog active" style="margin-top:14px"><div class="pmap-summary">';
-                    if (summaryTitle) body += summaryTitle.outerHTML;
-                    // Prominent diff timeframe
-                    if (pmapFromId && pmapToId) {
-                        const _fromS = pmapSessions.find(s => String(s.id) === String(pmapFromId));
-                        const _toS = pmapSessions.find(s => String(s.id) === String(pmapToId));
-                        const _fmt = (s) => { if(!s) return '?'; const d=new Date(s.started_at); return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); };
-                        body += `<div style="text-align:center;margin:10px 0 14px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.95rem">`;
-                        body += `<span style="color:var(--text-dim)">Diff Period:</span> <strong style="color:var(--text)">${esc(_fmt(_fromS))}</strong>`;
-                        body += ` <span style="color:var(--accent);font-weight:700;margin:0 8px">\u2192</span> `;
-                        body += `<strong style="color:var(--text)">${esc(_fmt(_toS))}</strong></div>`;
-                    }
-                    if (summaryGrid) body += summaryGrid.outerHTML;
-                    body += '<p style="text-align:center;color:var(--text-dim);font-size:0.85rem;margin:14px 0 4px;font-style:italic">Full lists for each category are in the Appendix below.</p>';
-                    body += '</div></div>';
-                }
-
-                // Provider diff summary cards (below changes summary)
-                const provSummary = document.getElementById('pmap-provider-summary');
-                if (provSummary && provSummary.classList.contains('active')) {
-                    body += '<div class="prov-summary active" style="margin:14px 0">' + provSummary.innerHTML + '</div>';
-                }
-
-                body += '</div>';
-            }
-
-            // Decile bars
-            const decileBars = document.getElementById('decile-bars');
-            const decileSection = document.getElementById('decile-section');
-            if (decileSection && decileSection.style.display !== 'none' && decileBars && decileBars.innerHTML.trim()) {
-                body += '<div style="margin-top:24px;page-break-before:always">';
-                body += '<h3 style="color:var(--text);margin:0 0 6px">Provider Share by Volume Decile</h3>';
-                body += '<p class="decile-subtitle">Institutions sorted by rank (highest volume first), split into 10 equal buckets</p>';
-                const decLeg = document.getElementById('decile-legend');
-                if (decLeg) body += '<div class="pixel-map-legend" style="margin-bottom:8px">' + decLeg.innerHTML + '</div>';
-                body += decileBars.innerHTML;
-                body += '</div>';
-            }
-
-            // Share chart
-            const shareCanvas = document.getElementById('share-chart');
-            const shareSec = document.getElementById('share-chart-section');
-            if (shareSec && shareSec.style.display !== 'none' && shareCanvas && shareCanvas.width > 0) {
-                try {
-                    body += '<div style="margin-top:24px;page-break-before:always">';
-                    body += '<h3 style="color:var(--text);margin:0 0 6px">Provider Share Over Time</h3>';
-                    body += `<img src="${shareCanvas.toDataURL('image/png')}" style="max-width:100%;height:auto;display:block" />`;
-                    body += '</div>';
-                } catch(e) {}
-            }
-
-            // Perf chart
-            const perfCanvas = document.getElementById('perf-chart');
-            const perfSec = document.getElementById('perf-chart-section');
-            if (perfSec && perfSec.style.display !== 'none' && perfCanvas && perfCanvas.width > 0) {
-                try {
-                    body += '<div style="margin-top:24px">';
-                    body += '<h3 style="color:var(--text);margin:0 0 6px">Provider Performance Over Time</h3>';
-                    body += `<img src="${perfCanvas.toDataURL('image/png')}" style="max-width:100%;height:auto;display:block" />`;
-                    body += '</div>';
-                } catch(e) {}
-            }
-
-            // Appendix: full FI lists per change category
-            if (pmapTotals) {
-                const t = pmapTotals;
-                body += '<div style="page-break-before:always;margin-top:24px">';
-                body += '<h2 style="font-size:1.1rem;margin:0 0 6px;color:var(--text)">Appendix \u2014 Full Change Details</h2>';
-                const fromSess = pmapSessions.find(s => String(s.id) === String(pmapFromId));
-                const toSess = pmapSessions.find(s => String(s.id) === String(pmapToId));
-                const fmtD = (s) => { if(!s) return '?'; const d=new Date(s.started_at); return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); };
-                body += `<p style="font-size:0.82rem;color:var(--text-dim);margin:0 0 14px">Comparing ${esc(fmtD(fromSess))} \u2192 ${esc(fmtD(toSess))}</p>`;
-
-                const appendixSection = (title, color, items, renderItem) => {
-                    if (!items.length) return '';
-                    let s = `<h3 style="color:${color};font-size:1rem;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)">${title} (${items.length})</h3>`;
-                    s += '<div style="columns:3;column-gap:24px;font-size:0.78rem;line-height:1.7">';
-                    items.forEach(item => { s += `<div style="break-inside:avoid;padding:1px 0">${renderItem(item)}</div>`; });
-                    s += '</div>';
-                    return s;
-                };
-
-                body += appendixSection('Added', '#00b894', t.addedDetails, a =>
-                    `${esc(a.name)} <span style="font-weight:600;font-size:0.7rem;margin-left:4px;color:${pc[a.provider]||'#8b8fa3'}">${esc(a.provider||'Unknown')}</span>`);
-                body += appendixSection('Removed', '#e74c3c', t.removedDetails, r =>
-                    `${esc(r.name)} <span style="font-weight:600;font-size:0.7rem;margin-left:4px;color:${pc[r.provider]||'#8b8fa3'}">${esc(r.provider||'Unknown')}</span>`);
-                const swSeen = new Set(); const swUniq = [];
-                for (let i = t.switchDetails.length - 1; i >= 0; i--) {
-                    if (!swSeen.has(t.switchDetails[i].name)) { swSeen.add(t.switchDetails[i].name); swUniq.unshift(t.switchDetails[i]); }
-                }
-                body += appendixSection('Provider Switched', '#fdcb6e', swUniq, s =>
-                    `${esc(s.name)} <span style="font-weight:600;font-size:0.7rem;margin-left:4px;color:${pc[s.from_provider]||'#8b8fa3'}">${esc(s.from_provider)}</span> \u2192 <span style="font-weight:600;font-size:0.7rem;color:${pc[s.to_provider]||'#8b8fa3'}">${esc(s.to_provider)}</span>`);
-                const degMap = new Map(); t.degradedDetails.forEach(d => { if(!degMap.has(d.name)) degMap.set(d.name,d); });
-                body += appendixSection('Degraded', '#e17055', [...degMap.values()], d => {
-                    const detail = d.status_change ? d.status_change : (d.delta != null ? (d.delta > 0 ? '+' : '') + d.delta + '%' : '');
-                    return `\u25BC ${esc(d.name)} <span style="font-weight:600;font-size:0.7rem;margin-left:4px;color:${pc[d.provider]||'#8b8fa3'}">${esc(d.provider||'Unknown')}</span> <span style="color:#e74c3c;font-size:0.72rem">${detail}</span>`;
-                });
-                const impMap = new Map(); t.improvedDetails.forEach(d => { if(!impMap.has(d.name)) impMap.set(d.name,d); });
-                body += appendixSection('Improved', '#ff69b4', [...impMap.values()], d => {
-                    const detail = d.delta != null ? '+' + d.delta + '%' : '';
-                    return `\u25B2 ${esc(d.name)} <span style="font-weight:600;font-size:0.7rem;margin-left:4px;color:${pc[d.provider]||'#8b8fa3'}">${esc(d.provider||'Unknown')}</span> <span style="color:#ff69b4;font-size:0.72rem">${detail}</span>`;
-                });
-
-                body += '</div>';
-            }
-
-            body += '</div>'; // close wrapper
-
-            // Open new window with same styles
-            const w = window.open('', '_blank');
-            if (!w) { alert('Pop-up blocked. Please allow pop-ups for this site.'); return; }
-            w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Monarch Report</title>');
-            w.document.write(styles);
-            w.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>');
-            // Print-specific overrides for the export window
-            w.document.write('<style>');
-            w.document.write('@media print { body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } .export-toolbar { display:none !important; } }');
-            w.document.write('.pmap-detail-section { max-height: none !important; overflow: visible !important; }');
-            w.document.write('.pmap-filter-row { display: none !important; }');
-            w.document.write('.pmap-description { display: none !important; }');
-            w.document.write('.export-toolbar { position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;gap:10px;align-items:center; }');
-            w.document.write('.export-toolbar button { background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:0.85rem;cursor:pointer;font-weight:600; }');
-            w.document.write('.export-toolbar button:hover { background:var(--border); }');
-            w.document.write('.export-toolbar span { color:var(--text-dim);font-size:0.8rem;margin-left:auto; }');
-            w.document.write('</style>');
-            w.document.write('</head><body>');
-            w.document.write('<div class="export-toolbar">');
-            w.document.write('<button onclick="savePNG()">&#x1F4F7; Save as PNG</button>');
-            w.document.write('<button onclick="window.print()">&#x1F5A8; Save as PDF</button>');
-            w.document.write('<span>Tip: PNG captures the full report as one image</span>');
-            w.document.write('</div>');
-            w.document.write('<div id="export-body">');
-            w.document.write(body);
-            w.document.write('</div>');
-            w.document.write('<script>');
-            w.document.write('function savePNG(){');
-            w.document.write('  var tb=document.querySelector(".export-toolbar");tb.style.display="none";');
-            w.document.write('  var bg=getComputedStyle(document.body).backgroundColor||"#0d1117";');
-            w.document.write('  html2canvas(document.getElementById("export-body"),{backgroundColor:bg,scale:2,useCORS:true}).then(function(c){');
-            w.document.write('    tb.style.display="";');
-            w.document.write('    var a=document.createElement("a");a.download="monarch-report.png";a.href=c.toDataURL("image/png");a.click();');
-            w.document.write('  }).catch(function(e){tb.style.display="";alert("PNG export failed: "+e.message);});');
-            w.document.write('}');
-            w.document.write('<\/script>');
-            w.document.write('</body></html>');
-            w.document.close();
-        }
-
-        function renderProviderSummary(totals) {
-            const container = document.getElementById('pmap-provider-summary');
-            if (!container) return;
-            const providers = ['Plaid', 'Finicity', 'MX'];
-            const colors = { Plaid: '#5dade2', Finicity: '#2d8659', MX: '#F79E1B' };
-            const stats = {};
-            providers.forEach(p => { stats[p] = { added: 0, removed: 0, swIn: 0, swOut: 0, improved: 0, degraded: 0 }; });
-
-            // Deduplicate switch details by name (last occurrence wins)
-            const swSeen = new Set();
-            const swUniq = [];
-            for (let i = totals.switchDetails.length - 1; i >= 0; i--) {
-                if (!swSeen.has(totals.switchDetails[i].name)) {
-                    swSeen.add(totals.switchDetails[i].name);
-                    swUniq.unshift(totals.switchDetails[i]);
-                }
-            }
-            // Deduplicate degraded/improved by name
-            const degMap = new Map();
-            totals.degradedDetails.forEach(d => { if (!degMap.has(d.name)) degMap.set(d.name, d); });
-            const impMap = new Map();
-            totals.improvedDetails.forEach(d => { if (!impMap.has(d.name)) impMap.set(d.name, d); });
-
-            totals.addedDetails.forEach(a => { const p = a.provider; if (stats[p]) stats[p].added++; });
-            totals.removedDetails.forEach(r => { const p = r.provider; if (stats[p]) stats[p].removed++; });
-            swUniq.forEach(s => {
-                if (stats[s.from_provider]) stats[s.from_provider].swOut++;
-                if (stats[s.to_provider]) stats[s.to_provider].swIn++;
-            });
-            [...degMap.values()].forEach(d => { const p = d.provider; if (stats[p]) stats[p].degraded++; });
-            [...impMap.values()].forEach(d => { const p = d.provider; if (stats[p]) stats[p].improved++; });
-
-            let html = '';
-            providers.forEach(prov => {
-                const s = stats[prov];
-                const net = s.added - s.removed + s.swIn - s.swOut;
-                const quality = s.improved - s.degraded;
-                const cls = net > 0 ? 'pos' : net < 0 ? 'neg' : 'zero';
-                const qcls = quality > 0 ? 'pos' : quality < 0 ? 'neg' : 'zero';
-                const sign = v => v > 0 ? '+' + v : String(v);
-                html += `<div class="prov-card">`;
-                html += `<div class="prov-card-hdr" style="background:${colors[prov]}">${prov}</div>`;
-                html += '<div class="prov-card-body">';
-                html += `<div class="prov-row"><span>Added</span><span class="prov-row-val ${s.added ? 'pos' : 'neutral'}">${s.added ? '+' + s.added : '0'}</span></div>`;
-                html += `<div class="prov-row"><span>Removed</span><span class="prov-row-val ${s.removed ? 'neg' : 'neutral'}">${s.removed ? '-' + s.removed : '0'}</span></div>`;
-                html += `<div class="prov-row"><span>Switched In</span><span class="prov-row-val ${s.swIn ? 'pos' : 'neutral'}">${s.swIn ? '+' + s.swIn : '0'}</span></div>`;
-                html += `<div class="prov-row"><span>Switched Out</span><span class="prov-row-val ${s.swOut ? 'neg' : 'neutral'}">${s.swOut ? '-' + s.swOut : '0'}</span></div>`;
-                html += `<div class="prov-row"><span>Improved</span><span class="prov-row-val ${s.improved ? 'pos' : 'neutral'}">${s.improved ? '\u25B2' + s.improved : '0'}</span></div>`;
-                html += `<div class="prov-row"><span>Degraded</span><span class="prov-row-val ${s.degraded ? 'neg' : 'neutral'}">${s.degraded ? '\u25BC' + s.degraded : '0'}</span></div>`;
-                html += `<div class="prov-net-row"><span>Net FIs</span><span class="prov-net-val ${cls}">${sign(net)}</span></div>`;
-                html += `<div class="prov-net-row" style="border-top:none;margin-top:2px;padding-top:0"><span>Quality</span><span class="prov-net-val ${qcls}">${sign(quality)}</span></div>`;
-                html += '</div></div>';
-            });
-            container.innerHTML = html;
-            container.classList.add('active');
         }
 
         function renderDecileChart() {
@@ -3203,7 +2809,7 @@
             section.style.display = '';
 
             const provColors = {
-                'Plaid': '#5dade2', 'Finicity': '#2d8659', 'MX': '#F79E1B', 'Unknown': '#555'
+                'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B', 'Unknown': '#555'
             };
 
             const sorted = [...data].sort((a, b) => (a.rank || 0) - (b.rank || 0));
@@ -3268,6 +2874,219 @@
             barsEl.innerHTML = html;
         }
 
+        // --- Provider Changes (per session vs previous) ---
+        async function loadProviderChanges(sessionId) {
+            const section = document.getElementById('prov-changes-section');
+            const content = document.getElementById('prov-changes-content');
+            const subtitle = document.getElementById('prov-changes-subtitle');
+            try {
+                const res = await fetch(`${BASE}/api/sessions/${sessionId}/provider-changes`);
+                const data = await res.json();
+                if (!data.prev_session_id) {
+                    section.style.display = 'none';
+                    return;
+                }
+                section.style.display = '';
+                const prevDt = data.prev_date ? new Date(data.prev_date).toLocaleDateString() : '?';
+                const curDt = data.cur_date ? new Date(data.cur_date).toLocaleDateString() : '?';
+                subtitle.textContent = `${data.changes.length} institution${data.changes.length !== 1 ? 's' : ''} changed primary provider between ${prevDt} and ${curDt}`;
+
+                if (data.changes.length === 0) {
+                    content.innerHTML = '<div class="prov-changes-none">No provider changes detected — all institutions kept the same primary provider.</div>';
+                    return;
+                }
+
+                content.innerHTML = '<div class="prov-change-list">' + data.changes.map(ch => {
+                    const prevCls = (ch.prev_provider || 'Unknown').toLowerCase();
+                    const newCls = (ch.new_provider || 'Unknown').toLowerCase();
+                    return `<div class="prov-change-item">
+                        <span class="prov-change-name" title="${esc(ch.institution_name)}">${esc(ch.institution_name)}</span>
+                        <span class="prov-change-badge ${prevCls}">${esc(ch.prev_provider || 'Unknown')}</span>
+                        <span class="prov-change-arrow">→</span>
+                        <span class="prov-change-badge ${newCls}">${esc(ch.new_provider || 'Unknown')}</span>
+                    </div>`;
+                }).join('') + '</div>';
+            } catch (e) {
+                console.error('Failed to load provider changes:', e);
+                section.style.display = 'none';
+            }
+        }
+
+        // --- Session Diff ---
+        function populateDiffSelectors(sessions) {
+            const valid = sessions.filter(s => s.total_institutions > 0 && s.status === 'completed');
+            if (valid.length < 2) {
+                document.getElementById('session-diff-section').style.display = 'none';
+                return;
+            }
+            document.getElementById('session-diff-section').style.display = '';
+            const aSelect = document.getElementById('diff-select-a');
+            const bSelect = document.getElementById('diff-select-b');
+            const opts = valid.map(s => {
+                const dt = new Date(s.started_at);
+                return `<option value="${s.id}">${dt.toLocaleDateString()} ${dt.toLocaleTimeString()} — ${s.total_institutions} FIs</option>`;
+            }).join('');
+            aSelect.innerHTML = opts;
+            bSelect.innerHTML = opts;
+            // Default: A = second most recent, B = most recent
+            if (valid.length >= 2) {
+                aSelect.value = valid[1].id;
+                bSelect.value = valid[0].id;
+            }
+        }
+
+        async function runSessionDiff() {
+            const a = document.getElementById('diff-select-a').value;
+            const b = document.getElementById('diff-select-b').value;
+            const results = document.getElementById('diff-results');
+            if (a === b) {
+                results.innerHTML = '<div class="diff-empty">Please select two different sessions.</div>';
+                return;
+            }
+            results.innerHTML = '<div class="diff-empty">Loading comparison…</div>';
+            try {
+                const res = await fetch(`${BASE}/api/sessions/diff?a=${a}&b=${b}`);
+                const data = await res.json();
+                renderDiffResults(data);
+            } catch (e) {
+                console.error('Failed to load diff:', e);
+                results.innerHTML = '<div class="diff-empty">Failed to load comparison.</div>';
+            }
+        }
+
+        function renderDiffResults(data) {
+            const results = document.getElementById('diff-results');
+            if (data.total_changes === 0) {
+                results.innerHTML = '<div class="diff-empty">No provider changes between these sessions.</div>';
+                return;
+            }
+
+            const provColors = {
+                'Plaid': '#5dade2', 'Finicity': '#00c48c', 'MX': '#F79E1B',
+                'Unknown': '#555', 'New': '#888', 'Removed': '#444'
+            };
+
+            // Summary cards
+            const summary = data.summary || {};
+            const maxVal = Math.max(1, ...Object.values(summary).map(s => Math.max(s.gained, s.lost)));
+            const provs = Object.keys(summary).filter(p => p !== 'New' && p !== 'Removed').sort((a, b) => {
+                const na = summary[a].gained - summary[a].lost;
+                const nb = summary[b].gained - summary[b].lost;
+                return nb - na;
+            });
+
+            // Flow chart (gained vs lost bar per provider)
+            let flowHtml = '<div class="diff-flow">';
+            for (const prov of provs) {
+                const s = summary[prov];
+                const net = s.gained - s.lost;
+                const cls = prov.toLowerCase();
+                const gainW = (s.gained / maxVal * 100).toFixed(1);
+                const lostW = (s.lost / maxVal * 100).toFixed(1);
+                flowHtml += `<div class="diff-flow-row">
+                    <div class="diff-flow-label ${cls}">${esc(prov)}</div>
+                    <div class="diff-flow-bar">
+                        <div class="diff-flow-gained" style="width:${gainW}%" title="+${s.gained} gained"></div>
+                        <div class="diff-flow-lost" style="width:${lostW}%" title="-${s.lost} lost"></div>
+                    </div>
+                    <div class="diff-flow-val">+${s.gained} / -${s.lost} = <strong class="${net > 0 ? 'ds-gained' : net < 0 ? 'ds-lost' : ''}">${net > 0 ? '+' : ''}${net}</strong></div>
+                </div>`;
+            }
+            flowHtml += '</div>';
+
+            // Summary cards
+            let cardsHtml = '<div class="diff-summary">';
+            for (const prov of provs) {
+                const s = summary[prov];
+                const net = s.gained - s.lost;
+                const cls = prov.toLowerCase();
+                const netCls = net > 0 ? 'positive' : net < 0 ? 'negative' : 'neutral';
+                cardsHtml += `<div class="diff-summary-card">
+                    <div class="ds-prov ${cls}">${esc(prov)}</div>
+                    <div class="ds-row">
+                        <span class="ds-gained">+${s.gained}</span>
+                        <span class="ds-lost">-${s.lost}</span>
+                    </div>
+                    <div class="ds-net ${netCls}">Net: ${net > 0 ? '+' : ''}${net}</div>
+                </div>`;
+            }
+            cardsHtml += '</div>';
+
+            // Individual changes list
+            let listHtml = `<details style="margin-top:12px;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-dim);font-weight:600;">${data.total_changes} individual change${data.total_changes !== 1 ? 's' : ''} — click to expand</summary>`;
+            listHtml += '<div class="diff-change-list" style="margin-top:8px;">';
+            for (const ch of data.changes) {
+                const aCls = (ch.provider_a || 'unknown').toLowerCase();
+                const bCls = (ch.provider_b || 'unknown').toLowerCase();
+                listHtml += `<div class="prov-change-item">
+                    <span class="prov-change-name" title="${esc(ch.institution_name)}">${esc(ch.institution_name)}</span>
+                    <span class="prov-change-badge ${aCls}">${esc(ch.provider_a || 'N/A')}</span>
+                    <span class="prov-change-arrow">→</span>
+                    <span class="prov-change-badge ${bCls}">${esc(ch.provider_b || 'N/A')}</span>
+                </div>`;
+            }
+            listHtml += '</div></details>';
+
+            const dtA = new Date(data.session_a.started_at).toLocaleDateString();
+            const dtB = new Date(data.session_b.started_at).toLocaleDateString();
+
+            results.innerHTML = `
+                <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;"><strong>${data.total_changes}</strong> provider change${data.total_changes !== 1 ? 's' : ''} between ${dtA} and ${dtB}</div>
+                ${cardsHtml}
+                ${flowHtml}
+                ${listHtml}
+            `;
+
+            // Render FI additions/removals in the companion section
+            renderFiCompare(data);
+        }
+
+        function renderFiCompare(data) {
+            const section = document.getElementById('fi-compare-section');
+            const results = document.getElementById('fi-compare-results');
+            const added = data.added || [];
+            const removed = data.removed || [];
+
+            if (added.length === 0 && removed.length === 0) {
+                section.style.display = '';
+                results.innerHTML = '<div class="diff-empty">No institutions were added or removed between these sessions.</div>';
+                return;
+            }
+
+            section.style.display = '';
+            const net = added.length - removed.length;
+            const netCls = net > 0 ? 'fcs-added' : net < 0 ? 'fcs-removed' : '';
+
+            function fiList(items) {
+                if (items.length === 0) return '<div class="diff-empty" style="padding:12px 0;">None</div>';
+                return '<div class="fi-compare-list">' + items.map(fi => {
+                    const cls = (fi.provider || 'unknown').toLowerCase();
+                    return `<div class="fi-compare-item">
+                        <span class="fc-name" title="${esc(fi.institution_name)}">${esc(fi.institution_name)}</span>
+                        <span class="fc-prov prov-change-badge ${cls}">${esc(fi.provider || 'Unknown')}</span>
+                    </div>`;
+                }).join('') + '</div>';
+            }
+
+            results.innerHTML = `
+                <div class="fi-compare-summary">
+                    <span class="fcs-added">+${added.length} added</span>
+                    <span class="fcs-removed">-${removed.length} removed</span>
+                    <span class="fcs-net ${netCls}">Net: ${net > 0 ? '+' : ''}${net}</span>
+                </div>
+                <div class="fi-compare-cols">
+                    <div class="fi-compare-col">
+                        <h4 class="added">Added (${added.length})</h4>
+                        ${fiList(added)}
+                    </div>
+                    <div class="fi-compare-col">
+                        <h4 class="removed">Removed (${removed.length})</h4>
+                        ${fiList(removed)}
+                    </div>
+                </div>
+            `;
+        }
+
         function getDisplayConnections() {
             return filteredConnections !== null ? filteredConnections : currentConnections;
         }
@@ -3297,16 +3116,17 @@
                 const escapedName = esc(c.institution_name).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
                 return `
                 <tr class="expandable" onclick="toggleDetail('${rid}', this)">
-                    <td class="inst-name"><div class="inst-name-wrap"><img class="fi-logo" src="${BASE}/api/logo/${encodeURIComponent(c.institution_name)}" onerror="this.outerHTML='<span class=\\'fi-logo-placeholder\\'>${esc(c.institution_name).charAt(0).toUpperCase()}</span>'" loading="lazy">${esc(c.institution_name)}</div></td>
+                    <td class="rank">${c.rank}</td>
+                    <td class="inst-name"><div class="inst-name-wrap"><img class="fi-logo" src="${BASE}/api/logo/${encodeURIComponent(c.institution_name)}" onerror="this.style.display='none'" loading="lazy">${esc(c.institution_name)}</div></td>
                     <td>${providerBadge(c.data_provider)}</td>
-                    <td class="metric-cell">${metricCell(c.success_pct)}</td>
-                    <td class="metric-cell">${metricCell(c.longevity_pct)}</td>
-                    <td class="metric-cell">${metricCell(c.update_pct)}</td>
+                    <td>${metricCell(c.success_pct)}</td>
+                    <td>${metricCell(c.longevity_pct)}</td>
+                    <td>${metricCell(c.update_pct)}</td>
                     <td>${statusBadge(c.connection_status)}</td>
                     <td class="info-cell"><button class="info-btn" title="View history" onclick="event.stopPropagation(); showFiHistory('${escapedName}')">i</button></td>
                 </tr>
                 <tr class="detail-row" id="${rid}" style="display:none;">
-                    <td colspan="7">
+                    <td colspan="8">
                         ${buildDetailPanel(c)}
                     </td>
                 </tr>`;
@@ -3402,65 +3222,15 @@
                 }
 
                 const h = data.history;
-                const latest = h[h.length - 1];
-                const latestProvider = latest.data_provider || 'Unknown';
-                const latestStatus = latest.connection_status || 'OK';
-
-                // Parse latest provider details
-                let providerDetails = [];
-                try {
-                    if (latest.additional_providers) {
-                        const parsed = typeof latest.additional_providers === 'string'
-                            ? JSON.parse(latest.additional_providers) : latest.additional_providers;
-                        if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] !== 'string') {
-                            providerDetails = parsed;
-                        }
-                    }
-                } catch(e) {}
-                if (providerDetails.length === 0) {
-                    providerDetails = [{
-                        name: latestProvider,
-                        success_pct: latest.success_pct, longevity_pct: latest.longevity_pct, update_pct: latest.update_pct
-                    }];
-                }
-
-                // Build provider snapshot cards
-                const provCardsHtml = providerDetails.map((pd, i) => {
-                    const isPrimary = i === 0;
-                    const metrics = [
-                        { label: 'Success', pct: pd.success_pct },
-                        { label: 'Longevity', pct: pd.longevity_pct },
-                        { label: 'Updates', pct: pd.update_pct },
-                    ];
-                    const metricsHtml = metrics.map(m => `
-                        <div class="prov-metric">
-                            <div class="prov-metric-label">${m.label}</div>
-                            <div class="prov-metric-bar">${metricBlocks(m.pct)}</div>
-                            <div class="prov-metric-value" style="color:${pctColor(m.pct)}">
-                                ${m.pct != null ? fmtPct(m.pct) + '%' : '\u2014'}
-                            </div>
-                        </div>
-                    `).join('');
-                    return `
-                        <div class="detail-prov-card">
-                            <div class="prov-card-header">
-                                ${providerBadge(pd.name)}
-                                ${isPrimary ? '<span class="prov-tag primary">Primary</span>' : '<span class="prov-tag">Additional</span>'}
-                            </div>
-                            <div class="prov-metrics-grid">${metricsHtml}</div>
-                        </div>`;
-                }).join('');
+                const latestProvider = h[h.length - 1].data_provider || 'Unknown';
+                const latestStatus = h[h.length - 1].connection_status || 'OK';
 
                 content.innerHTML = `
                     <h2>${esc(institutionName)}</h2>
                     <div class="modal-subtitle">
-                        ${statusBadge(latestStatus)}
-                        &middot; Rank #${latest.rank}
+                        ${providerBadge(latestProvider)} ${statusBadge(latestStatus)}
                         &middot; ${h.length} retrieval${h.length !== 1 ? 's' : ''}
-                        &middot; ${providerDetails.length} provider${providerDetails.length !== 1 ? 's' : ''}
                     </div>
-                    <div class="detail-panel-v2" style="margin-bottom:18px;">${provCardsHtml}</div>
-                    <h3 style="font-size:0.9rem;margin-bottom:8px;color:var(--text-dim);">Metric History (Primary Provider)</h3>
                     <div class="chart-wrap">
                         <canvas id="fi-history-chart"></canvas>
                     </div>
@@ -3487,140 +3257,8 @@
 
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeFiModal(); closeIssuesModal(); closeUnavailableModal(); }
+            if (e.key === 'Escape') closeFiModal();
         });
-
-        let issuesSortField = 'rank';
-        let issuesSortAsc = true;
-
-        function showIssuesModal(sortField, sortAsc) {
-            if (sortField !== undefined) { issuesSortField = sortField; issuesSortAsc = sortAsc; }
-            const overlay = document.getElementById('issues-modal-overlay');
-            const content = document.getElementById('issues-modal-content');
-            const issues = currentConnections.filter(c => c.connection_status === 'Issues reported');
-            let html = '<h2 style="color:#F79E1B;">Institutions with Issues Reported</h2>';
-            html += `<p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;">${issues.length} institution${issues.length !== 1 ? 's' : ''} currently reporting issues</p>`;
-            if (issues.length === 0) {
-                html += '<p style="text-align:center;padding:32px 0;color:var(--text-dim);">No issues reported in this session.</p>';
-            } else {
-                const arrow = issuesSortAsc ? ' \u25B2' : ' \u25BC';
-                const thSortable = (field, label) => {
-                    const active = issuesSortField === field;
-                    return `<th style="cursor:pointer;user-select:none;" onclick="sortIssuesModal('${field}')">${label}${active ? arrow : ''}</th>`;
-                };
-                html += '<table class="issues-modal-table"><thead><tr>';
-                html += thSortable('rank', '#');
-                html += thSortable('institution_name', 'Institution');
-                html += thSortable('data_provider', 'Provider');
-                html += thSortable('success_pct', 'Success');
-                html += thSortable('longevity_pct', 'Longevity');
-                html += thSortable('update_pct', 'Updates');
-                html += '</tr></thead><tbody>';
-                issues.sort((a, b) => {
-                    let va = a[issuesSortField], vb = b[issuesSortField];
-                    if (va == null) va = issuesSortAsc ? Infinity : -Infinity;
-                    if (vb == null) vb = issuesSortAsc ? Infinity : -Infinity;
-                    if (typeof va === 'string') return issuesSortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
-                    return issuesSortAsc ? va - vb : vb - va;
-                }).forEach(c => {
-                    const pct = v => v != null ? v.toFixed(1) + '%' : 'N/A';
-                    html += `<tr>
-                        <td>${c.rank}</td>
-                        <td>${esc(c.institution_name)}</td>
-                        <td>${providerBadge(c.data_provider)}</td>
-                        <td>${pct(c.success_pct)}</td>
-                        <td>${pct(c.longevity_pct)}</td>
-                        <td>${pct(c.update_pct)}</td>
-                    </tr>`;
-                });
-                html += '</tbody></table>';
-            }
-            content.innerHTML = html;
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function sortIssuesModal(field) {
-            if (issuesSortField === field) {
-                issuesSortAsc = !issuesSortAsc;
-            } else {
-                issuesSortField = field;
-                issuesSortAsc = true;
-            }
-            showIssuesModal(issuesSortField, issuesSortAsc);
-        }
-
-        function closeIssuesModal(event) {
-            if (event && event.target !== document.getElementById('issues-modal-overlay')) return;
-            document.getElementById('issues-modal-overlay').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        let unavailSortField = 'rank';
-        let unavailSortAsc = true;
-
-        function showUnavailableModal(sortField, sortAsc) {
-            if (sortField !== undefined) { unavailSortField = sortField; unavailSortAsc = sortAsc; }
-            const overlay = document.getElementById('unavail-modal-overlay');
-            const content = document.getElementById('unavail-modal-content');
-            const unavail = currentConnections.filter(c => c.connection_status === 'Unavailable');
-            let html = '<h2 style="color:#EB001B;">Unavailable Institutions</h2>';
-            html += `<p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;">${unavail.length} institution${unavail.length !== 1 ? 's' : ''} currently unavailable</p>`;
-            if (unavail.length === 0) {
-                html += '<p style="text-align:center;padding:32px 0;color:var(--text-dim);">No unavailable institutions in this session.</p>';
-            } else {
-                const arrow = unavailSortAsc ? ' \u25B2' : ' \u25BC';
-                const thSortable = (field, label) => {
-                    const active = unavailSortField === field;
-                    return `<th style="cursor:pointer;user-select:none;" onclick="sortUnavailableModal('${field}')">${label}${active ? arrow : ''}</th>`;
-                };
-                html += '<table class="issues-modal-table"><thead><tr>';
-                html += thSortable('rank', '#');
-                html += thSortable('institution_name', 'Institution');
-                html += thSortable('data_provider', 'Provider');
-                html += thSortable('success_pct', 'Success');
-                html += thSortable('longevity_pct', 'Longevity');
-                html += thSortable('update_pct', 'Updates');
-                html += '</tr></thead><tbody>';
-                unavail.sort((a, b) => {
-                    let va = a[unavailSortField], vb = b[unavailSortField];
-                    if (va == null) va = unavailSortAsc ? Infinity : -Infinity;
-                    if (vb == null) vb = unavailSortAsc ? Infinity : -Infinity;
-                    if (typeof va === 'string') return unavailSortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
-                    return unavailSortAsc ? va - vb : vb - va;
-                }).forEach(c => {
-                    const pct = v => v != null ? v.toFixed(1) + '%' : 'N/A';
-                    html += `<tr>
-                        <td>${c.rank}</td>
-                        <td>${esc(c.institution_name)}</td>
-                        <td>${providerBadge(c.data_provider)}</td>
-                        <td>${pct(c.success_pct)}</td>
-                        <td>${pct(c.longevity_pct)}</td>
-                        <td>${pct(c.update_pct)}</td>
-                    </tr>`;
-                });
-                html += '</tbody></table>';
-            }
-            content.innerHTML = html;
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function sortUnavailableModal(field) {
-            if (unavailSortField === field) {
-                unavailSortAsc = !unavailSortAsc;
-            } else {
-                unavailSortField = field;
-                unavailSortAsc = true;
-            }
-            showUnavailableModal(unavailSortField, unavailSortAsc);
-        }
-
-        function closeUnavailableModal(event) {
-            if (event && event.target !== document.getElementById('unavail-modal-overlay')) return;
-            document.getElementById('unavail-modal-overlay').classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
         function renderFiHistoryChart(history) {
             const ctx = document.getElementById('fi-history-chart');
@@ -3876,9 +3514,10 @@
         }
 
         function metricCell(pct) {
-            if (pct == null) return '<div class="metric-wrap"><span class="mini-bar"></span><span class="metric-text">\u2014</span></div>';
+            if (pct == null) return '<span class="metric-text">—</span>';
             const cls = pct >= 75 ? 'high' : pct >= 50 ? 'medium' : 'low';
-            return `<div class="metric-wrap"><span class="mini-bar"><span class="mini-bar-fill ${cls}" style="width:${pct}%"></span></span><span class="metric-text">${fmtPct(pct)}%</span></div>`;
+            return `<span class="mini-bar"><span class="mini-bar-fill ${cls}" style="width:${pct}%"></span></span>
+                    <span class="metric-text">${fmtPct(pct)}%</span>`;
         }
 
         function esc(s) {
@@ -4111,6 +3750,7 @@
                 maybeShowHistory();
                 if (historyLoaded) loadHistory();
                 loadPerfChart();
+                loadScoreChanges();
                 // Fade out progress panel after a few seconds
                 setTimeout(() => {
                     document.getElementById('progress-panel').classList.remove('active');
@@ -4321,7 +3961,7 @@
 
             const provColors = {
                 'Plaid':    { line: '#5dade2', bg: 'rgba(93,173,226,0.1)' },
-                'Finicity': { line: '#2d8659', bg: 'rgba(45,134,89,0.15)' },
+                'Finicity': { line: '#00c48c', bg: 'rgba(0,196,140,0.1)' },
                 'MX':       { line: '#F79E1B', bg: 'rgba(247,158,27,0.1)' },
             };
             const provOrder = ['Plaid', 'Finicity', 'MX'];
@@ -4462,7 +4102,7 @@
 
             const provColors = {
                 'Plaid':    { line: '#5dade2', bg: 'rgba(93,173,226,0.35)' },
-                'Finicity': { line: '#2d8659', bg: 'rgba(45,134,89,0.4)' },
+                'Finicity': { line: '#00c48c', bg: 'rgba(0,196,140,0.35)' },
                 'MX':       { line: '#F79E1B', bg: 'rgba(247,158,27,0.35)' },
             };
             const provOrder = ['Plaid', 'Finicity', 'MX'];
@@ -4565,6 +4205,258 @@
             });
         }
 
+        // --- Score Changes Chart ---
+        let scChart = null;
+        let scData = null;
+
+        async function loadScoreChanges(decile) {
+            try {
+                if (decile === undefined || decile === null) decile = '';
+                const url = decile !== '' ? BASE + '/api/score-changes?decile=' + decile : BASE + '/api/score-changes';
+                const res = await fetch(url);
+                const data = await res.json();
+                if (!data || data.length === 0) {
+                    document.getElementById('score-changes-section').style.display = 'none';
+                    return;
+                }
+                scData = data;
+                document.getElementById('score-changes-section').style.display = '';
+
+                // Aggregate by date (day) — pick the latest comparison per day
+                const byDay = {};
+                data.forEach((d, idx) => {
+                    const day = d.date.slice(0, 10);
+                    byDay[day] = idx;  // last entry for each day wins
+                });
+                const dayIndices = Object.values(byDay).sort((a, b) => a - b);
+                const displayData = dayIndices.map(i => data[i]);
+
+                // Populate date selector
+                const sel = document.getElementById('sc-date-select');
+                sel.innerHTML = displayData.map((d, i) => {
+                    const dt = new Date(d.date);
+                    const label = dt.toLocaleDateString(undefined, {month:'short', day:'numeric'});
+                    return `<option value="${dayIndices[i]}">${label} (sess ${d.session_id})</option>`;
+                }).join('');
+                // Select the latest
+                sel.value = dayIndices[dayIndices.length - 1];
+
+                renderScChart(displayData);
+                renderScDetail(dayIndices[dayIndices.length - 1]);
+            } catch (e) {
+                console.error('Failed to load score changes:', e);
+            }
+        }
+
+        function renderScChart(displayData) {
+            const ctx = document.getElementById('sc-chart').getContext('2d');
+
+            // Detect sample-size transition in score changes data
+            const scTransitionIdx = (() => {
+                for (let i = 1; i < displayData.length; i++) {
+                    const prev = displayData[i - 1].common_fis || 0;
+                    const curr = displayData[i].common_fis || 0;
+                    if (prev > 0 && curr > prev * 2.5) return i;
+                }
+                return -1;
+            })();
+
+            const labels = displayData.map(d => d.date);
+
+            const datasets = [
+                {
+                    label: 'Unchanged',
+                    data: displayData.map(d => d.unchanged),
+                    backgroundColor: 'rgba(139,143,163,0.25)',
+                    borderColor: 'rgba(139,143,163,0.4)',
+                    borderWidth: 1,
+                    order: 3,
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Improved',
+                    data: displayData.map(d => d.improved),
+                    backgroundColor: 'rgba(0,184,148,0.7)',
+                    borderColor: '#00b894',
+                    borderWidth: 1,
+                    order: 2,
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Declined',
+                    data: displayData.map(d => d.declined),
+                    backgroundColor: 'rgba(231,76,60,0.7)',
+                    borderColor: '#e74c3c',
+                    borderWidth: 1,
+                    order: 1,
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Avg |Change|',
+                    data: displayData.map(d => d.avg_abs_change),
+                    type: 'line',
+                    borderColor: '#fdcb6e',
+                    backgroundColor: 'rgba(253,203,110,0.15)',
+                    pointBackgroundColor: '#fdcb6e',
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    borderWidth: 2.5,
+                    tension: 0.3,
+                    fill: false,
+                    order: 0,
+                    yAxisID: 'y1',
+                },
+            ];
+
+            if (scChart) scChart.destroy();
+
+            scChart = new Chart(ctx, {
+                type: 'bar',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        sampleSizeAnnotation: { transitionIndex: scTransitionIdx },
+                        legend: {
+                            labels: {
+                                color: '#8b8fa3',
+                                usePointStyle: true,
+                                font: { size: 12, weight: '600' },
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e2130',
+                            titleColor: '#e1e4eb',
+                            bodyColor: '#8b8fa3',
+                            borderColor: '#2e3241',
+                            borderWidth: 1,
+                            padding: 12,
+                            callbacks: {
+                                title: function(items) {
+                                    if (!items.length) return '';
+                                    const dt = new Date(items[0].label);
+                                    return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                                },
+                                afterBody: function(items) {
+                                    const idx = items[0].dataIndex;
+                                    const d = displayData[idx];
+                                    if (!d) return '';
+                                    const lines = [
+                                        '',
+                                        `Common FIs: ${d.common_fis}`,
+                                        `Buckets:  0-5%: ${d.buckets['0-5']}  5-10%: ${d.buckets['5-10']}  10-25%: ${d.buckets['10-25']}  25%+: ${d.buckets['25+']}`
+                                    ];
+                                    return lines.join('\n');
+                                }
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            stacked: true,
+                            time: {
+                                tooltipFormat: 'PP',
+                                displayFormats: {
+                                    day: 'MMM d',
+                                    week: 'MMM d',
+                                    month: 'MMM yyyy',
+                                },
+                            },
+                            grid: { color: 'rgba(46,50,65,0.5)' },
+                            ticks: { color: '#8b8fa3', maxTicksLimit: 12 },
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { color: 'rgba(46,50,65,0.5)' },
+                            ticks: { color: '#8b8fa3' },
+                            title: {
+                                display: true,
+                                text: 'Number of FIs',
+                                color: '#8b8fa3',
+                            },
+                        },
+                        y1: {
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                color: '#fdcb6e',
+                                callback: v => v.toFixed(1) + '%',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Avg |Change|',
+                                color: '#fdcb6e',
+                            },
+                            min: 0,
+                        },
+                    },
+                },
+            });
+        }
+
+        function renderScDetail(idx) {
+            const d = scData[idx];
+            if (!d) return;
+
+            const el = document.getElementById('sc-detail');
+            const pctChanged = d.common_fis ? ((d.changed / d.common_fis) * 100).toFixed(1) : '0.0';
+
+            let html = `
+                <div class="sc-summary-grid">
+                    <div class="sc-summary-card">
+                        <div class="sc-val accent">${d.common_fis.toLocaleString()}</div>
+                        <div class="sc-label">Common FIs</div>
+                    </div>
+                    <div class="sc-summary-card">
+                        <div class="sc-val accent">${d.changed}</div>
+                        <div class="sc-label">Changed (${pctChanged}%)</div>
+                    </div>
+                    <div class="sc-summary-card">
+                        <div class="sc-val green">${d.improved}</div>
+                        <div class="sc-label">Improved</div>
+                    </div>
+                    <div class="sc-summary-card">
+                        <div class="sc-val red">${d.declined}</div>
+                        <div class="sc-label">Declined</div>
+                    </div>
+                    <div class="sc-summary-card">
+                        <div class="sc-val accent">${d.avg_abs_change.toFixed(1)}%</div>
+                        <div class="sc-label">Avg |Change|</div>
+                    </div>
+                </div>
+                <div class="sc-movers">
+                    <div class="sc-movers-col">
+                        <h4>&#x2B06; Biggest Improvements</h4>
+                        ${d.top_improvements.length ? d.top_improvements.map(m => {
+                            const pc = {'Plaid':'#5dade2','Finicity':'#00c48c','MX':'#F79E1B'};
+                            const provCol = pc[m.provider] || '#8b8fa3';
+                            const provTag = m.provider ? '<span style="color:'+provCol+';font-size:0.75rem;font-weight:600;margin-left:4px;">'+esc(m.provider)+'</span>' : '';
+                            const switchTag = m.prev_provider ? '<span style="font-size:0.7rem;color:var(--text-dim);margin-left:4px;">(was <span style="color:'+(pc[m.prev_provider]||'#8b8fa3')+'">'+esc(m.prev_provider)+'</span>)</span>' : '';
+                            return '<div class="sc-mover"><span class="sc-mover-name">'+esc(m.name)+provTag+switchTag+'</span><span class="sc-mover-delta up">+'+m.delta.toFixed(1)+'%</span></div>';
+                        }).join('') : '<div style="color:var(--text-dim);font-size:0.82rem;">No improvements</div>'}
+                    </div>
+                    <div class="sc-movers-col">
+                        <h4>&#x2B07; Biggest Declines</h4>
+                        ${d.top_declines.length ? d.top_declines.map(m => {
+                            const pc = {'Plaid':'#5dade2','Finicity':'#00c48c','MX':'#F79E1B'};
+                            const provCol = pc[m.provider] || '#8b8fa3';
+                            const provTag = m.provider ? '<span style="color:'+provCol+';font-size:0.75rem;font-weight:600;margin-left:4px;">'+esc(m.provider)+'</span>' : '';
+                            const switchTag = m.prev_provider ? '<span style="font-size:0.7rem;color:var(--text-dim);margin-left:4px;">(was <span style="color:'+(pc[m.prev_provider]||'#8b8fa3')+'">'+esc(m.prev_provider)+'</span>)</span>' : '';
+                            return '<div class="sc-mover"><span class="sc-mover-name">'+esc(m.name)+provTag+switchTag+'</span><span class="sc-mover-delta down">'+m.delta.toFixed(1)+'%</span></div>';
+                        }).join('') : '<div style="color:var(--text-dim);font-size:0.82rem;">No declines</div>'}
+                    </div>
+                </div>
+            `;
+            el.innerHTML = html;
+        }
+
+        loadScoreChanges();
 
         // --- Active Retrieval Detection ---
 
@@ -4577,7 +4469,7 @@
                 if (data.next_scheduled) {
                     const dt = new Date(data.next_scheduled);
                     const badge = document.getElementById('next-retrieval-badge');
-                    badge.textContent = `Next JSON Retrieval: ${dt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', timeZoneName: 'short'})}`;
+                    badge.textContent = `Next JSON Retrieval: ${dt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
                     badge.style.display = '';
                 }
 

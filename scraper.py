@@ -495,20 +495,28 @@ def scrape_connections(app, progress_callback=None, session_id=None):
                                          "update_pct": "update_frequency"}[mf]
                             pd[label_key] = LEVEL_LABELS.get(pval)
 
-                    # Save logo to disk (instance/logos/<hash>.png)
+                    # Save logo to disk (instance/logos/<hash>.png) — skip if already cached
                     logo_data = inst.get("logo")
-                    if logo_data and logo_data.startswith("data:image"):
+                    if logo_data:
                         inst_name = inst.get("name", "Unknown")
                         logo_hash = hashlib.md5(inst_name.encode()).hexdigest()
                         logo_dir = os.path.join(app.instance_path, "logos")
                         os.makedirs(logo_dir, exist_ok=True)
                         logo_path = os.path.join(logo_dir, f"{logo_hash}.png")
-                        try:
-                            _, b64data = logo_data.split(",", 1)
-                            with open(logo_path, "wb") as lf:
-                                lf.write(base64.b64decode(b64data))
-                        except Exception:
-                            pass  # skip logo if decode fails
+                        if not os.path.exists(logo_path):
+                            try:
+                                if logo_data.startswith("data:image"):
+                                    _, b64data = logo_data.split(",", 1)
+                                    with open(logo_path, "wb") as lf:
+                                        lf.write(base64.b64decode(b64data))
+                                elif logo_data.startswith("http"):
+                                    import requests as _req
+                                    resp = _req.get(logo_data, timeout=5)
+                                    if resp.status_code == 200 and len(resp.content) > 100:
+                                        with open(logo_path, "wb") as lf:
+                                            lf.write(resp.content)
+                            except Exception:
+                                pass  # skip logo if download/decode fails
 
                     conn = Connection(
                         scrape_session_id=session_id,

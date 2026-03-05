@@ -389,7 +389,13 @@ def get_latest_stats():
 @app.route("/api/history")
 @login_required
 def get_history():
-    """Return per-provider stats for all completed scrape sessions (newest first)."""
+    """Return per-provider stats for all completed scrape sessions (newest first).
+
+    Optional query param ?decile=0..9 filters to that 10% rank bucket
+    (0 = top 10%, 9 = bottom 10%).  Omit for all institutions.
+    """
+    decile = request.args.get("decile", type=int)
+
     sessions = (
         ScrapeSession.query.filter_by(status="completed")
         .filter(ScrapeSession.total_institutions > 0)
@@ -401,7 +407,20 @@ def get_history():
     results = []
 
     for sess in sessions:
-        connections = Connection.query.filter_by(scrape_session_id=sess.id).all()
+        connections = (
+            Connection.query.filter_by(scrape_session_id=sess.id)
+            .order_by(Connection.rank)
+            .all()
+        )
+
+        # Apply decile filter if requested
+        if decile is not None and 0 <= decile <= 9:
+            n = len(connections)
+            bucket_size = n / 10
+            start = int(decile * bucket_size)
+            end = int((decile + 1) * bucket_size)
+            connections = connections[start:end]
+
         provider_metrics: dict[str, dict] = {}
         provider_counts: dict[str, int] = {}
 
@@ -467,12 +486,11 @@ def get_logo(name):
 def get_score_changes():
     """Compare consecutive completed sessions and return per-day score-change summaries.
 
-    For each pair of consecutive scrapes we find FIs present in both,
-    compute the absolute change in each metric, then bucket the changes
-    into magnitude ranges.  The response includes daily aggregates.
+    Optional query param ?decile=0..9 filters to that 10% rank bucket.
     """
     from collections import defaultdict
-    from sqlalchemy import text
+
+    decile = request.args.get("decile", type=int)
 
     sessions = (
         ScrapeSession.query.filter_by(status="completed")
@@ -497,10 +515,29 @@ def get_score_changes():
 
     # Build lookup: session_id -> { institution_name: Connection }
     session_ids = [s.id for s in sessions]
-    all_conns = Connection.query.filter(Connection.scrape_session_id.in_(session_ids)).all()
-    lookup = defaultdict(dict)
+    all_conns = (
+        Connection.query
+        .filter(Connection.scrape_session_id.in_(session_ids))
+        .order_by(Connection.rank)
+        .all()
+    )
+
+    # Group by session, then apply optional decile filter
+    from collections import defaultdict as _dd
+    _by_session = _dd(list)
     for c in all_conns:
-        lookup[c.scrape_session_id][c.institution_name] = c
+        _by_session[c.scrape_session_id].append(c)
+
+    lookup = defaultdict(dict)
+    for sid, conns in _by_session.items():
+        if decile is not None and 0 <= decile <= 9:
+            n = len(conns)
+            bucket_size = n / 10
+            start = int(decile * bucket_size)
+            end = int((decile + 1) * bucket_size)
+            conns = conns[start:end]
+        for c in conns:
+            lookup[sid][c.institution_name] = c
 
     results = []
     for i in range(1, len(sessions)):
@@ -535,12 +572,20 @@ def get_score_changes():
 
             changed_count += 1
             total_abs_change += abs_d
+            curr_prov = curr_map[name].data_provider
+            prev_prov = prev_map[name].data_provider
+            entry = {
+                "name": name,
+                "delta": delta,
+                "provider": curr_prov,
+                "prev_provider": prev_prov if prev_prov != curr_prov else None,
+            }
             if delta > 0:
                 improved_count += 1
-                biggest_improvements.append({"name": name, "delta": delta})
+                biggest_improvements.append(entry)
             else:
                 declined_count += 1
-                biggest_declines.append({"name": name, "delta": delta})
+                biggest_declines.append(entry)
 
             if abs_d < 5:
                 buckets["0-5"] += 1
@@ -596,6 +641,7 @@ def get_institution_history(name):
                 "date": sess.started_at.isoformat() if sess.started_at else None,
                 "rank": conn.rank,
                 "data_provider": conn.data_provider,
+                "additional_providers": conn.additional_providers,
                 "success_pct": conn.success_pct,
                 "longevity_pct": conn.longevity_pct,
                 "update_pct": conn.update_pct,
@@ -603,6 +649,231 @@ def get_institution_history(name):
             })
 
     return jsonify({"institution_name": name, "history": history})
+
+
+@app.route("/api/sessions/<int:session_id>/provider-changes")
+@login_required
+def get_provider_changes(session_id):
+    """Return FIs whose primary provider changed compared to the previous session."""
+    current = db.session.get(ScrapeSession, session_id)
+    if not current:
+        return jsonify({"error": "Session not found"}), 404
+
+    # Find the previous completed session
+    prev = (
+        ScrapeSession.query
+        .filter(ScrapeSession.status == "completed")
+        .filter(ScrapeSession.total_institutions > 0)
+        .filter(ScrapeSession.started_at < current.started_at)
+        .order_by(ScrapeSession.started_at.desc())
+        .first()
+    )
+    if not prev:
+        return jsonify({"changes": [], "prev_session_id": None})
+
+    cur_conns = {
+        c.institution_name: c.data_provider
+        for c in Connection.query.filter_by(scrape_session_id=session_id).all()
+    }
+    prev_conns = {
+        c.institution_name: c.data_provider
+        for c in Connection.query.filter_by(scrape_session_id=prev.id).all()
+    }
+
+    changes = []
+    for name, cur_prov in cur_conns.items():
+        prev_prov = prev_conns.get(name)
+        if prev_prov and cur_prov and prev_prov != cur_prov:
+            changes.append({
+                "institution_name": name,
+                "prev_provider": prev_prov,
+                "new_provider": cur_prov,
+            })
+
+    changes.sort(key=lambda x: x["institution_name"])
+    return jsonify({
+        "changes": changes,
+        "prev_session_id": prev.id,
+        "prev_date": prev.started_at.isoformat() if prev.started_at else None,
+        "cur_date": current.started_at.isoformat() if current.started_at else None,
+    })
+
+
+@app.route("/api/sessions/range-diff")
+@login_required
+def range_diff():
+    """Return per-step diffs for a range of consecutive sessions (from_id → latest).
+    Includes provider switches, added/removed FIs, and service degradation changes.
+    """
+    from_id = request.args.get("from", type=int)
+    to_id = request.args.get("to", type=int)
+    if not from_id:
+        return jsonify({"error": "Provide ?from=<session_id>"}), 400
+
+    W_S, W_L, W_U = 0.4, 0.3, 0.3
+
+    def _weighted(c):
+        parts, weights = [], []
+        if c.success_pct is not None:
+            parts.append(c.success_pct * W_S); weights.append(W_S)
+        if c.longevity_pct is not None:
+            parts.append(c.longevity_pct * W_L); weights.append(W_L)
+        if c.update_pct is not None:
+            parts.append(c.update_pct * W_U); weights.append(W_U)
+        return round(sum(parts) / sum(weights), 2) if weights else None
+
+    sessions = (
+        ScrapeSession.query.filter_by(status="completed")
+        .filter(ScrapeSession.total_institutions > 0)
+        .filter(ScrapeSession.id >= from_id)
+        .order_by(ScrapeSession.started_at.asc())
+        .all()
+    )
+    if to_id:
+        sessions = [s for s in sessions if s.id <= to_id]
+
+    if len(sessions) < 2:
+        return jsonify([])
+
+    session_ids = [s.id for s in sessions]
+    all_conns = (
+        Connection.query
+        .filter(Connection.scrape_session_id.in_(session_ids))
+        .order_by(Connection.rank)
+        .all()
+    )
+    from collections import defaultdict
+    by_sess = defaultdict(dict)
+    for c in all_conns:
+        by_sess[c.scrape_session_id][c.institution_name] = c
+
+    steps = []
+    for i in range(1, len(sessions)):
+        prev_sess = sessions[i - 1]
+        curr_sess = sessions[i]
+        prev_map = by_sess.get(prev_sess.id, {})
+        curr_map = by_sess.get(curr_sess.id, {})
+
+        prev_names = set(prev_map.keys())
+        curr_names = set(curr_map.keys())
+        common = prev_names & curr_names
+        added = sorted(curr_names - prev_names)
+        removed = sorted(prev_names - curr_names)
+
+        provider_switches = []
+        degraded = []
+        improved = []
+
+        for name in sorted(common):
+            pc = prev_map[name]
+            cc = curr_map[name]
+            pp = pc.data_provider
+            cp = cc.data_provider
+            if pp and cp and pp != cp:
+                provider_switches.append({
+                    "name": name,
+                    "from_provider": pp,
+                    "to_provider": cp,
+                })
+            pw = _weighted(pc)
+            cw = _weighted(cc)
+            if pw is not None and cw is not None:
+                delta = round(cw - pw, 2)
+                if delta <= -5:
+                    degraded.append({"name": name, "delta": delta, "provider": cp})
+                elif delta >= 5:
+                    improved.append({"name": name, "delta": delta, "provider": cp})
+
+            # Connection status changes
+            if pc.connection_status != cc.connection_status:
+                if cc.connection_status in ("Issues reported", "Unavailable"):
+                    degraded.append({
+                        "name": name,
+                        "status_change": f"{pc.connection_status or 'OK'} → {cc.connection_status}",
+                        "provider": cp,
+                    })
+
+        steps.append({
+            "prev_session": prev_sess.to_dict(),
+            "curr_session": curr_sess.to_dict(),
+            "added": [{"name": n, "provider": curr_map[n].data_provider} for n in added],
+            "removed": [{"name": n, "provider": prev_map[n].data_provider} for n in removed],
+            "added_count": len(added),
+            "removed_count": len(removed),
+            "provider_switches": provider_switches,
+            "switch_count": len(provider_switches),
+            "degraded": sorted(degraded, key=lambda x: x.get("delta", 0)),
+            "improved": sorted(improved, key=lambda x: -x.get("delta", 0)),
+        })
+
+    return jsonify(steps)
+
+
+@app.route("/api/sessions/diff")
+@login_required
+def diff_sessions():
+    """Compare two sessions and return provider changes + summary."""
+    session_a = request.args.get("a", type=int)
+    session_b = request.args.get("b", type=int)
+    if not session_a or not session_b:
+        return jsonify({"error": "Provide ?a=<id>&b=<id>"}), 400
+
+    sa = db.session.get(ScrapeSession, session_a)
+    sb = db.session.get(ScrapeSession, session_b)
+    if not sa or not sb:
+        return jsonify({"error": "Session not found"}), 404
+
+    conns_a = {
+        c.institution_name: c.data_provider
+        for c in Connection.query.filter_by(scrape_session_id=session_a).all()
+    }
+    conns_b = {
+        c.institution_name: c.data_provider
+        for c in Connection.query.filter_by(scrape_session_id=session_b).all()
+    }
+
+    changes = []
+    for name in set(conns_a) & set(conns_b):
+        prov_a = conns_a.get(name)
+        prov_b = conns_b.get(name)
+        if prov_a and prov_b and prov_a != prov_b:
+            changes.append({
+                "institution_name": name,
+                "provider_a": prov_a,
+                "provider_b": prov_b,
+            })
+
+    changes.sort(key=lambda x: x["institution_name"])
+
+    # Summarise net gains/losses per provider
+    summary = {}
+    for ch in changes:
+        pa = ch["provider_a"]
+        pb = ch["provider_b"]
+        summary.setdefault(pa, {"gained": 0, "lost": 0})
+        summary.setdefault(pb, {"gained": 0, "lost": 0})
+        summary[pa]["lost"] += 1
+        summary[pb]["gained"] += 1
+
+    # FIs added/removed between sessions
+    added = []
+    removed = []
+    for name in set(conns_b) - set(conns_a):
+        added.append({"institution_name": name, "provider": conns_b[name]})
+    for name in set(conns_a) - set(conns_b):
+        removed.append({"institution_name": name, "provider": conns_a[name]})
+    added.sort(key=lambda x: x["institution_name"])
+    removed.sort(key=lambda x: x["institution_name"])
+
+    return jsonify({
+        "session_a": sa.to_dict(),
+        "session_b": sb.to_dict(),
+        "changes": changes,
+        "summary": summary,
+        "total_changes": len(changes),
+        "added": added,
+        "removed": removed,
+    })
 
 
 if __name__ == "__main__":

@@ -205,23 +205,27 @@ def fetch_json_connections(app, progress_callback=None, session_id=None):
                     key=lambda pd: 0 if pd["name"] == pref_prov else 1
                 )
 
-                # Save logo URL flag (we don't download logos from the API)
-                # If you want to fetch logos later, item.get("logo") has the
-                # base64 data.
+                # Save logo to disk (instance/logos/<hash>.png) — skip if cached
                 logo_data = item.get("logo")
-                if logo_data and isinstance(logo_data, str) and logo_data.startswith("data:image"):
+                if logo_data and isinstance(logo_data, str):
                     import base64, hashlib
                     inst_name = item.get("name", "Unknown")
                     logo_hash = hashlib.md5(inst_name.encode()).hexdigest()
                     logo_dir = os.path.join(app.instance_path, "logos")
                     os.makedirs(logo_dir, exist_ok=True)
                     logo_path = os.path.join(logo_dir, f"{logo_hash}.png")
-                    try:
-                        _, b64data = logo_data.split(",", 1)
-                        with open(logo_path, "wb") as lf:
-                            lf.write(base64.b64decode(b64data))
-                    except Exception:
-                        pass
+                    if not os.path.exists(logo_path):
+                        try:
+                            if logo_data.startswith("data:image"):
+                                _, b64data = logo_data.split(",", 1)
+                            else:
+                                b64data = logo_data
+                            raw = base64.b64decode(b64data)
+                            if len(raw) > 100:
+                                with open(logo_path, "wb") as lf:
+                                    lf.write(raw)
+                        except Exception:
+                            pass
 
                 conn = Connection(
                     scrape_session_id=session_id,
