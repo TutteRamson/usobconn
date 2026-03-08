@@ -16,6 +16,12 @@ from models import Connection, ScrapeSession, db
 from scheduler import start_scheduler
 from json_fetcher import fetch_json_connections
 
+# Feature toggle — set ENABLE_FEEDBACK=1 to activate
+ENABLE_FEEDBACK = os.environ.get("ENABLE_FEEDBACK", "1") == "1"
+if ENABLE_FEEDBACK:
+    from feedback_models import FeedbackItem, FeedbackResponse  # noqa: F401
+    from feedback_routes import feedback_bp
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
@@ -50,6 +56,9 @@ app.wsgi_app = ReverseProxyMiddleware(app.wsgi_app)
 # Password gate — set APP_PASSWORD env var to enable.
 # If unset the app runs without auth (local-only use).
 APP_PASSWORD = os.environ.get("APP_PASSWORD", "")
+
+if ENABLE_FEEDBACK:
+    app.register_blueprint(feedback_bp)
 
 db.init_app(app)
 
@@ -123,9 +132,11 @@ def _launch_scrape(source="manual"):
 
 
 def login_required(f):
-    """Decorator: auth is currently deactivated — always passes through."""
+    """Decorator: redirects to login page when APP_PASSWORD is set and user is not authenticated."""
     @functools.wraps(f)
     def decorated(*args, **kwargs):
+        if APP_PASSWORD and not session.get("authenticated"):
+            return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated
 
@@ -157,7 +168,7 @@ def logout():
 @login_required
 def index():
     """Main page showing scrape history and statistics."""
-    return render_template("index.html")
+    return render_template("index.html", feedback_enabled=ENABLE_FEEDBACK)
 
 
 @app.route("/api/scrape", methods=["POST"])
@@ -350,6 +361,25 @@ def get_session_stats(session_id):
     longevity_vals = [c.longevity_pct for c in connections if c.longevity_pct is not None]
     update_vals = [c.update_pct for c in connections if c.update_pct is not None]
 
+    # Weighted avg success: weight each provider's avg by its FI count
+    weighted_success_num = 0
+    weighted_success_den = 0
+    provider_success_breakdown = []
+    for prov, ps in provider_scores.items():
+        if ps["avg_success"] is not None and ps["institution_count"] > 0:
+            weighted_success_num += ps["avg_success"] * ps["institution_count"]
+            weighted_success_den += ps["institution_count"]
+            provider_success_breakdown.append({
+                "provider": prov,
+                "avg_success": ps["avg_success"],
+                "fi_count": ps["institution_count"],
+            })
+    weighted_avg_success_pct = (
+        round(weighted_success_num / weighted_success_den, 2)
+        if weighted_success_den > 0
+        else None
+    )
+
     return jsonify(
         {
             "session": session.to_dict(),
@@ -357,9 +387,8 @@ def get_session_stats(session_id):
             "provider_distribution": providers,
             "status_distribution": statuses,
             "provider_scores": provider_scores,
-            "avg_success_pct": (
-                round(sum(success_vals) / len(success_vals), 2) if success_vals else None
-            ),
+            "avg_success_pct": weighted_avg_success_pct,
+            "provider_success_breakdown": provider_success_breakdown,
             "avg_longevity_pct": (
                 round(sum(longevity_vals) / len(longevity_vals), 2)
                 if longevity_vals
@@ -874,6 +903,238 @@ def diff_sessions():
         "total_changes": len(changes),
         "added": added,
         "removed": removed,
+    })
+
+
+@app.route("/api/competitive-trends")
+@login_required
+def competitive_trends():
+    """Competitive analysis for a selected aggregator.
+
+    Returns opportunities (FIs where aggregator scores higher than current
+    primary), frequent provider switchers, and trending FIs.
+    """
+    aggregator = request.args.get("aggregator", "Plaid")
+    req_session_id = request.args.get("session_id", type=int)
+    req_compare_id = request.args.get("compare_session_id", type=int)
+
+    sessions = (
+        ScrapeSession.query.filter_by(status="completed")
+        .filter(ScrapeSession.total_institutions >= MIN_SESSION_FIS)
+        .order_by(ScrapeSession.started_at.desc())
+        .limit(20)
+        .all()
+    )
+    if not sessions:
+        return jsonify({"error": "No completed sessions"}), 404
+
+    session_map = {s.id: s for s in sessions}
+
+    # Pick latest (or user-selected) session
+    latest = session_map.get(req_session_id, sessions[0]) if req_session_id else sessions[0]
+
+    # Pick comparison session for trending (second most recent, or user-selected)
+    compare_session = None
+    if req_compare_id and req_compare_id in session_map:
+        compare_session = session_map[req_compare_id]
+    elif len(sessions) >= 2:
+        compare_session = sessions[-1] if sessions[-1].id != latest.id else sessions[-2]
+    latest_conns = (
+        Connection.query.filter_by(scrape_session_id=latest.id)
+        .order_by(Connection.rank)
+        .all()
+    )
+
+    W_S, W_L, W_U = 0.4, 0.3, 0.3
+
+    def _w(s, l, u):
+        parts, weights = [], []
+        if s is not None:
+            parts.append(s * W_S); weights.append(W_S)
+        if l is not None:
+            parts.append(l * W_L); weights.append(W_L)
+        if u is not None:
+            parts.append(u * W_U); weights.append(W_U)
+        return round(sum(parts) / sum(weights), 2) if weights else None
+
+    # --- 1. Per-FI provider comparison from latest session ---
+    opportunities = []
+    fi_provider_data = []
+
+    for c in latest_conns:
+        providers = []
+        try:
+            if c.additional_providers:
+                parsed = json.loads(c.additional_providers) if isinstance(c.additional_providers, str) else c.additional_providers
+                if isinstance(parsed, list) and parsed and isinstance(parsed[0], dict):
+                    providers = parsed
+        except Exception:
+            pass
+
+        if not providers:
+            providers = [{
+                "name": c.data_provider,
+                "success_pct": c.success_pct,
+                "longevity_pct": c.longevity_pct,
+                "update_pct": c.update_pct,
+            }]
+
+        agg_data = None
+        primary_data = providers[0] if providers else None
+        for p in providers:
+            if p.get("name") == aggregator:
+                agg_data = p
+                break
+
+        if not agg_data:
+            continue
+
+        agg_score = _w(agg_data.get("success_pct"), agg_data.get("longevity_pct"), agg_data.get("update_pct"))
+        primary_score = _w(primary_data.get("success_pct"), primary_data.get("longevity_pct"), primary_data.get("update_pct")) if primary_data else None
+        is_primary = c.data_provider == aggregator
+
+        entry = {
+            "institution_name": c.institution_name,
+            "rank": c.rank,
+            "is_primary": is_primary,
+            "primary_provider": c.data_provider,
+            "aggregator_score": agg_score,
+            "primary_score": primary_score,
+            "aggregator_success": agg_data.get("success_pct"),
+            "aggregator_longevity": agg_data.get("longevity_pct"),
+            "aggregator_update": agg_data.get("update_pct"),
+            "primary_success": primary_data.get("success_pct") if primary_data else None,
+            "primary_longevity": primary_data.get("longevity_pct") if primary_data else None,
+            "primary_update": primary_data.get("update_pct") if primary_data else None,
+            "all_providers": [{
+                "name": p.get("name"),
+                "score": _w(p.get("success_pct"), p.get("longevity_pct"), p.get("update_pct")),
+                "success": p.get("success_pct"),
+                "longevity": p.get("longevity_pct"),
+                "update": p.get("update_pct"),
+            } for p in providers],
+        }
+        fi_provider_data.append(entry)
+
+        if not is_primary and agg_score is not None and primary_score is not None:
+            gap = round(agg_score - primary_score, 2)
+            entry["score_gap"] = gap
+            if gap > 0:
+                opportunities.append(entry)
+
+    opportunities.sort(key=lambda x: (-x.get("score_gap", 0), x.get("rank", 9999)))
+
+    # --- 2. Provider switching analysis across sessions ---
+    from collections import defaultdict as _dd
+
+    session_ids = [s.id for s in sessions]
+    all_conns = (
+        Connection.query
+        .filter(Connection.scrape_session_id.in_(session_ids))
+        .order_by(Connection.rank)
+        .all()
+    )
+    by_session: dict[int, dict] = {}
+    for c in all_conns:
+        by_session.setdefault(c.scrape_session_id, {})[c.institution_name] = c
+
+    switchers_list = []
+    fi_names_seen: dict[str, list] = _dd(list)
+    for sess in reversed(sessions):
+        for fi_name, conn in by_session.get(sess.id, {}).items():
+            fi_names_seen[fi_name].append({
+                "date": sess.started_at.isoformat(),
+                "provider": conn.data_provider,
+                "session_id": sess.id,
+            })
+
+    for fi_name, history in fi_names_seen.items():
+        changes = sum(
+            1 for i in range(1, len(history))
+            if history[i]["provider"] != history[i - 1]["provider"]
+        )
+        if changes >= 2:
+            providers_seen = list({h["provider"] for h in history})
+            switchers_list.append({
+                "name": fi_name,
+                "switch_count": changes,
+                "providers_seen": providers_seen,
+                "current_provider": history[-1]["provider"],
+                "history": history,
+            })
+
+    switchers_list.sort(key=lambda x: -x["switch_count"])
+    switchers_list = switchers_list[:50]
+
+    # --- 3. Trending analysis ---
+    trending_up = []
+    trending_down = []
+
+    if compare_session:
+        curr_map = by_session.get(latest.id, {})
+        prev_map = by_session.get(compare_session.id, {})
+
+        for fi_name in set(curr_map) & set(prev_map):
+            cc = curr_map[fi_name]
+            pc = prev_map[fi_name]
+            if cc.data_provider != aggregator:
+                continue
+            curr_w = _w(cc.success_pct, cc.longevity_pct, cc.update_pct)
+            prev_w = _w(pc.success_pct, pc.longevity_pct, pc.update_pct)
+            if curr_w is not None and prev_w is not None:
+                delta = round(curr_w - prev_w, 2)
+                if abs(delta) >= 0.5:
+                    entry = {
+                        "institution_name": fi_name,
+                        "rank": cc.rank,
+                        "current_score": curr_w,
+                        "previous_score": prev_w,
+                        "delta": delta,
+                    }
+                    if delta > 0:
+                        trending_up.append(entry)
+                    else:
+                        trending_down.append(entry)
+
+        trending_up.sort(key=lambda x: -x["delta"])
+        trending_down.sort(key=lambda x: x["delta"])
+
+    # --- 4. Summary ---
+    primary_count = sum(1 for f in fi_provider_data if f["is_primary"])
+    secondary_count = sum(1 for f in fi_provider_data if not f["is_primary"])
+
+    primary_scores = [f["aggregator_score"] for f in fi_provider_data if f["is_primary"] and f["aggregator_score"] is not None]
+    secondary_scores = [f["aggregator_score"] for f in fi_provider_data if not f["is_primary"] and f["aggregator_score"] is not None]
+
+    # Where aggregator is secondary but scores within 5pts of primary
+    close_contenders = [
+        f for f in fi_provider_data
+        if not f["is_primary"]
+        and f["aggregator_score"] is not None
+        and f["primary_score"] is not None
+        and f["aggregator_score"] >= f["primary_score"] - 5
+    ]
+    close_contenders.sort(key=lambda x: x.get("rank", 9999))
+
+    return jsonify({
+        "aggregator": aggregator,
+        "session": latest.to_dict(),
+        "compare_session": compare_session.to_dict() if compare_session else None,
+        "available_sessions": [s.to_dict() for s in sessions],
+        "summary": {
+            "primary_count": primary_count,
+            "secondary_count": secondary_count,
+            "total_fi_with_data": len(fi_provider_data),
+            "avg_primary_score": round(sum(primary_scores) / len(primary_scores), 2) if primary_scores else None,
+            "avg_secondary_score": round(sum(secondary_scores) / len(secondary_scores), 2) if secondary_scores else None,
+            "opportunities_count": len(opportunities),
+            "close_contenders_count": len(close_contenders),
+        },
+        "opportunities": opportunities,
+        "close_contenders": close_contenders,
+        "frequent_switchers": switchers_list,
+        "trending_up": trending_up,
+        "trending_down": trending_down,
     })
 
 

@@ -1655,6 +1655,256 @@
         }
         .btn-export:hover { background: var(--border); }
 
+        /* ── Top Tab Navigation ── */
+        .top-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0;
+        }
+        .top-tab {
+            background: none;
+            border: none;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .top-tab:hover { color: var(--text); }
+        .top-tab.active {
+            color: var(--accent-light);
+            border-bottom-color: var(--accent-light);
+        }
+
+        /* ── Competitive Trends Styles ── */
+        .ct-view { display: none; }
+        .ct-view.active { display: block; }
+
+        .ct-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .ct-header h2 {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin: 0;
+        }
+        .ct-header select {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .ct-session-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 18px;
+            margin-bottom: 18px;
+            font-size: 0.85rem;
+        }
+        .ct-session-bar label {
+            font-weight: 600;
+            color: var(--text-dim);
+        }
+        .ct-session-bar select {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 0.82rem;
+        }
+        .ct-session-bar .ct-session-arrow {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .ct-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .ct-summary-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+        }
+        .ct-summary-val {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-light);
+        }
+        .ct-summary-val.green { color: var(--green); }
+        .ct-summary-val.amber { color: var(--yellow); }
+        .ct-summary-label {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .ct-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .ct-section h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .ct-section .ct-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 14px;
+        }
+
+        .ct-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        .ct-table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dim);
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            user-select: none;
+        }
+        .ct-table th:hover { color: var(--text); }
+        .ct-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        .ct-table tr:last-child td { border-bottom: none; }
+        .ct-table tr:hover td { background: var(--surface2); }
+
+        .ct-gap-bar {
+            display: inline-block;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--green);
+            min-width: 4px;
+            vertical-align: middle;
+        }
+        .ct-gap-bar.negative { background: var(--red); }
+
+        .ct-score {
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+        .ct-score.high { color: var(--green); }
+        .ct-score.medium { color: var(--yellow); }
+        .ct-score.low { color: var(--red); }
+        .ct-score.dim { color: var(--text-dim); }
+
+        .ct-delta {
+            font-weight: 700;
+            font-size: 0.78rem;
+        }
+        .ct-delta.up { color: var(--green); }
+        .ct-delta.down { color: var(--red); }
+
+        .ct-switch-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .ct-metric-breakdown {
+            display: flex;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+        .ct-metric-breakdown span.better { color: var(--green); font-weight: 600; }
+        .ct-metric-breakdown span.worse { color: var(--red); font-weight: 600; }
+        .ct-metric-breakdown span.equal { color: var(--text-dim); }
+
+        .ct-pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+        }
+        .ct-pagination button {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+        .ct-pagination button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        .ct-no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .ct-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .ct-tab {
+            background: none;
+            border: none;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .ct-tab:hover { color: var(--text); }
+        .ct-tab.active {
+            color: var(--accent-light);
+            border-bottom-color: var(--accent-light);
+        }
+
+        .ct-sub-view { display: none; }
+        .ct-sub-view.active { display: block; }
+
     </style>
 </head>
 <body>
@@ -1663,13 +1913,22 @@
             <h1>Monarch Connection Tracker <span>Financial Institution Status Monitor</span></h1>
             <div style="display:flex;align-items:center;gap:10px;">
                 <span id="next-retrieval-badge" style="display:none;font-size:0.78rem;color:var(--text-dim);white-space:nowrap;"></span>
-                <button class="btn btn-export" id="export-btn" onclick="exportSummary()" title="Export summary report" style="display:none;">&#x1F4CB; Export</button>
                 <button class="info-btn" onclick="document.getElementById('info-modal').classList.add('active')" title="How scoring works">i</button>
                 <button class="btn btn-primary" id="retrieve-btn" onclick="startRetrieval()">
                     &#x2913; Retrieve Data
                 </button>
             </div>
         </header>
+
+        <!-- Top Tab Navigation -->
+        <div class="top-tabs">
+            <button class="top-tab active" onclick="switchTopTab('dashboard')">Dashboard</button>
+            <button class="top-tab" onclick="switchTopTab('competitive')">Provider Competitive Trends</button>
+            {% if feedback_enabled %}<button class="top-tab" onclick="switchTopTab('feedback')">Feedback</button>{% endif %}
+        </div>
+
+        <!-- Dashboard View wrapper -->
+        <div id="dashboard-view">
 
         <!-- Info Modal -->
         <div class="modal-overlay" id="info-modal" onclick="if(event.target===this)this.classList.remove('active')">
@@ -1727,6 +1986,9 @@
         <div id="live-stats">
             <div class="stats-grid" id="stats-cards"></div>
             <div class="chart-section" id="charts-section"></div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;" id="dashboard-export-row">
+                <button class="btn btn-export" id="export-btn" onclick="exportSummary()" title="Export summary report" style="display:none;">&#x1F4CB; Export Dashboard</button>
+            </div>
             <div class="pixel-map-section" id="pixel-map-section" style="display:none;">
                 <h3>Provider Map</h3>
                 <p class="map-subtitle">Each block is one institution, colored by its primary data provider — sorted by rank</p>
@@ -1860,7 +2122,91 @@
                 </div>
             </div>
         </div>
+        <!-- End Dashboard View -->
+        </div>
     </div>
+
+    <!-- Competitive Trends View -->
+    <div id="competitive-view" class="ct-view">
+        <div class="container">
+            <div class="ct-header">
+                <h2>Provider Competitive Trends</h2>
+                <label style="font-weight:600;color:var(--text-dim);">Analyze:</label>
+                <select id="ct-aggregator-select" onchange="loadCompetitiveTrends()">
+                    <option value="Plaid">Plaid</option>
+                    <option value="Finicity" selected>Finicity</option>
+                    <option value="MX">MX</option>
+                </select>
+                <button class="btn btn-export" id="ct-export-btn" onclick="exportCompetitiveTrends()" style="display:none;">&#x1F4CB; Export Trends</button>
+            </div>
+
+            <div class="ct-session-bar" id="ct-session-bar" style="display:none;">
+                <label>Opportunities &amp; Contenders:</label>
+                <select id="ct-session-select" onchange="loadCompetitiveTrends()"></select>
+                <span class="ct-session-arrow">&harr;</span>
+                <label>Trending compares against:</label>
+                <select id="ct-compare-select" onchange="loadCompetitiveTrends()"></select>
+            </div>
+
+            <div id="ct-loading" class="ct-no-data">Loading competitive data…</div>
+
+            <div id="ct-content" style="display:none;">
+                <!-- Summary Cards -->
+                <div class="ct-summary-grid" id="ct-summary"></div>
+
+                <!-- Sub-tabs -->
+                <div class="ct-tabs">
+                    <button class="ct-tab active" onclick="switchCtTab('opportunities')">Opportunities</button>
+                    <button class="ct-tab" onclick="switchCtTab('contenders')">Close Contenders</button>
+                    <button class="ct-tab" onclick="switchCtTab('switchers')">Frequent Switchers</button>
+                    <button class="ct-tab" onclick="switchCtTab('trending')">Trending</button>
+                </div>
+
+                <!-- Opportunities -->
+                <div id="ct-opportunities" class="ct-sub-view active">
+                    <div class="ct-section">
+                        <h3>&#x1F3AF; Top Opportunities</h3>
+                        <p class="ct-subtitle">FIs where the selected aggregator scores higher than the current primary provider — ranked by score gap and institution importance</p>
+                        <div id="ct-opp-table"></div>
+                    </div>
+                </div>
+
+                <!-- Close Contenders -->
+                <div id="ct-contenders" class="ct-sub-view">
+                    <div class="ct-section">
+                        <h3>&#x26A1; Close Contenders</h3>
+                        <p class="ct-subtitle">FIs where the selected aggregator is secondary but scores within 5 points of the primary — the easiest wins with small quality improvements</p>
+                        <div id="ct-contenders-table"></div>
+                    </div>
+                </div>
+
+                <!-- Frequent Switchers -->
+                <div id="ct-switchers" class="ct-sub-view">
+                    <div class="ct-section">
+                        <h3>&#x1F504; Frequent Switchers</h3>
+                        <p class="ct-subtitle">FIs that have changed primary provider 2+ times across recent sessions — unstable relationships are easier to win</p>
+                        <div id="ct-switchers-table"></div>
+                    </div>
+                </div>
+
+                <!-- Trending -->
+                <div id="ct-trending" class="ct-sub-view">
+                    <div class="ct-section">
+                        <h3>&#x1F4C8; Trending Up</h3>
+                        <p class="ct-subtitle">FIs where the selected aggregator is primary and quality scores improved vs previous session</p>
+                        <div id="ct-trending-up-table"></div>
+                    </div>
+                    <div class="ct-section">
+                        <h3>&#x1F4C9; Trending Down</h3>
+                        <p class="ct-subtitle">FIs where the selected aggregator is primary and quality scores declined — these need attention to avoid losing them</p>
+                        <div id="ct-trending-down-table"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if feedback_enabled %}{% include 'feedback_tab.html' %}{% endif %}
 
     <!-- FI History Modal -->
     <div class="fi-modal-overlay" id="fi-modal-overlay" onclick="closeFiModal(event)">
@@ -1886,6 +2232,14 @@
         </div>
     </div>
 
+    <!-- Weighted Avg Success Modal -->
+    <div class="fi-modal-overlay" id="weighted-avg-modal-overlay" onclick="closeWeightedAvgModal(event)">
+        <div class="fi-modal" onclick="event.stopPropagation()">
+            <button class="fi-modal-close" onclick="closeWeightedAvgModal()">&times;</button>
+            <div id="weighted-avg-modal-content"></div>
+        </div>
+    </div>
+
     <!-- History Section (fixed to bottom, outside container) -->
     <div class="history-section" id="history-section" style="display:none;">
         <div class="history-toggle" onclick="toggleHistory()">
@@ -1902,6 +2256,7 @@
         const BASE = '{{ request.script_root }}';
 
         let currentConnections = [];
+        let currentStats = null;
         let filteredConnections = null; // null = no filter active
         let sortField = 'rank';
         let sortAsc = true;
@@ -1993,6 +2348,7 @@
                 document.getElementById('export-btn').style.display = '';
 
                 renderStats(statsData);
+                currentStats = statsData;
                 renderCharts(statsData);
                 renderPixelMap();
                 // Sync pixel map session dropdown
@@ -2036,9 +2392,9 @@
                     <div class="stat-value">${stats.status_distribution?.['Unavailable'] || 0}</div>
                     <div class="stat-label-row"><span class="stat-label">Unavailable</span><span class="stat-info-icon">i</span></div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card clickable" onclick="showWeightedAvgModal()">
                     <div class="stat-value">${stats.avg_success_pct != null ? stats.avg_success_pct.toFixed(2) + '%' : 'N/A'}</div>
-                    <div class="stat-label">Avg Success Rate</div>
+                    <div class="stat-label-row"><span class="stat-label">Avg Success Rate</span><span class="stat-info-icon">i</span></div>
                 </div>
             `;
         }
@@ -3117,8 +3473,7 @@
             w.document.write('</head><body>');
             w.document.write('<div class="export-toolbar">');
             w.document.write('<button onclick="savePNG()">&#x1F4F7; Save as PNG</button>');
-            w.document.write('<button onclick="window.print()">&#x1F5A8; Save as PDF</button>');
-            w.document.write('<span>Tip: PNG captures the full report as one image</span>');
+            w.document.write('<span style="font-size:0.95rem;font-weight:600;color:var(--text)">Tip: Use your browser\'s Print &rarr; "Save as PDF" for a PDF version</span>');
             w.document.write('</div>');
             w.document.write('<div id="export-body">');
             w.document.write(body);
@@ -3488,8 +3843,45 @@
 
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeFiModal(); closeIssuesModal(); closeUnavailableModal(); }
+            if (e.key === 'Escape') { closeFiModal(); closeIssuesModal(); closeUnavailableModal(); closeWeightedAvgModal(); }
         });
+
+        function showWeightedAvgModal() {
+            if (!currentStats) return;
+            const breakdown = currentStats.provider_success_breakdown || [];
+            const totalFis = breakdown.reduce((s, p) => s + p.fi_count, 0);
+            const weightedAvg = currentStats.avg_success_pct;
+
+            let html = '<h2 style="color:var(--accent);">Weighted Avg Success Rate</h2>';
+            html += '<p style="color:var(--text-dim);margin-bottom:15px;">The average success rate is weighted by the number of financial institutions each provider covers. Providers with more FIs have proportionally more influence on the overall average.</p>';
+            html += '<table class="ct-table" style="margin-bottom:15px;"><thead><tr>';
+            html += '<th>Provider</th><th>Avg Success</th><th>FI Count</th><th>Weight</th><th>Contribution</th>';
+            html += '</tr></thead><tbody>';
+            breakdown.forEach(p => {
+                const weight = totalFis > 0 ? (p.fi_count / totalFis * 100).toFixed(1) : '0.0';
+                const contribution = totalFis > 0 ? (p.avg_success * p.fi_count / totalFis).toFixed(2) : '0.00';
+                html += '<tr>';
+                html += '<td style="font-weight:600;">' + esc(p.provider) + '</td>';
+                html += '<td>' + p.avg_success.toFixed(2) + '%</td>';
+                html += '<td>' + p.fi_count.toLocaleString() + '</td>';
+                html += '<td>' + weight + '%</td>';
+                html += '<td>' + contribution + '%</td>';
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            html += '<div style="text-align:right;font-size:1.1rem;font-weight:600;color:var(--text);">';
+            html += 'Weighted Average: ' + (weightedAvg != null ? weightedAvg.toFixed(2) + '%' : 'N/A');
+            html += '</div>';
+            html += '<p style="color:var(--text-dim);margin-top:15px;font-size:0.85rem;">Formula: &Sigma;(Provider Avg Success &times; Provider FI Count) &divide; Total FI Count</p>';
+
+            const overlay = document.getElementById('weighted-avg-modal-overlay');
+            document.getElementById('weighted-avg-modal-content').innerHTML = html;
+            overlay.classList.add('active');
+        }
+        function closeWeightedAvgModal(event) {
+            if (event && event.target !== document.getElementById('weighted-avg-modal-overlay')) return;
+            document.getElementById('weighted-avg-modal-overlay').classList.remove('active');
+        }
 
         let issuesSortField = 'rank';
         let issuesSortAsc = true;
@@ -4592,6 +4984,8 @@
         }
 
         function attachToActiveRetrieval(sessionId, startedAt) {
+            // Switch to dashboard tab when retrieval is active
+            switchTopTab('dashboard');
             retrievalInProgress = true;
             const btn = document.getElementById('retrieve-btn');
             btn.disabled = true;
@@ -4676,6 +5070,641 @@
                 addLog('SSE connection lost. Polling for completion...');
                 pollForCompletion(sessionId, handleComplete, btn);
             };
+        }
+
+        // ── Top Tab Navigation ──────────────────────────────────
+        function switchTopTab(tab) {
+            document.querySelectorAll('.top-tab').forEach((btn, i) => {
+                const tabs = ['dashboard', 'competitive', 'feedback'];
+                btn.classList.toggle('active', tabs[i] === tab);
+            });
+            const dashView = document.getElementById('dashboard-view');
+            const compView = document.getElementById('competitive-view');
+            const fbView = document.getElementById('feedback-view');
+            const histSection = document.getElementById('history-section');
+
+            dashView.style.display = tab === 'dashboard' ? '' : 'none';
+            if (histSection) histSection.style.display = tab === 'dashboard' ? '' : 'none';
+            compView.classList.toggle('active', tab === 'competitive');
+            if (fbView) fbView.classList.toggle('active', tab === 'feedback');
+
+            if (tab === 'competitive') loadCompetitiveTrends();
+            if (tab === 'feedback' && typeof loadFeedback === 'function') loadFeedback();
+        }
+
+        // ── Competitive Trends ──────────────────────────────────
+        let ctData = null;
+        let ctDataLoaded = false;
+        let ctSessionsPopulated = false;
+        let ctOppPage = 1, ctContPage = 1;
+        const CT_PAGE_SIZE = 50;
+        let ctOppSort = { field: 'score_gap', asc: false };
+        let ctContSort = { field: 'rank', asc: true };
+
+        function ctFmtDate(iso) {
+            if (!iso) return '?';
+            const d = new Date(iso);
+            return d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        }
+
+        function populateCtSessions(sessions, selectedId, compareId) {
+            const sessSel = document.getElementById('ct-session-select');
+            const compSel = document.getElementById('ct-compare-select');
+            const opts = sessions.map(s => {
+                const d = new Date(s.started_at);
+                const label = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ' (' + (s.total_institutions || 0).toLocaleString() + ' FIs)';
+                return '<option value="' + s.id + '">' + esc(label) + '</option>';
+            }).join('');
+            sessSel.innerHTML = opts;
+            compSel.innerHTML = opts;
+            if (selectedId) sessSel.value = selectedId;
+            if (compareId) compSel.value = compareId;
+            ctSessionsPopulated = true;
+            document.getElementById('ct-session-bar').style.display = '';
+        }
+
+        function switchCtTab(tab) {
+            const tabs = ['opportunities', 'contenders', 'switchers', 'trending'];
+            document.querySelectorAll('.ct-tab').forEach((btn, i) => {
+                btn.classList.toggle('active', tabs[i] === tab);
+            });
+            tabs.forEach(t => {
+                const el = document.getElementById('ct-' + t);
+                if (el) el.classList.toggle('active', t === tab);
+            });
+        }
+
+        async function loadCompetitiveTrends() {
+            const aggregator = document.getElementById('ct-aggregator-select').value;
+            const sessSel = document.getElementById('ct-session-select');
+            const compSel = document.getElementById('ct-compare-select');
+            let url = `${BASE}/api/competitive-trends?aggregator=${encodeURIComponent(aggregator)}`;
+            if (ctSessionsPopulated && sessSel.value) url += `&session_id=${sessSel.value}`;
+            if (ctSessionsPopulated && compSel.value) url += `&compare_session_id=${compSel.value}`;
+
+            document.getElementById('ct-loading').style.display = '';
+            document.getElementById('ct-content').style.display = 'none';
+
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('API error');
+                ctData = await res.json();
+                ctDataLoaded = true;
+
+                // Populate session selectors (preserve user choice if already populated)
+                if (ctData.available_sessions && ctData.available_sessions.length) {
+                    const sessId = ctData.session ? ctData.session.id : null;
+                    const compId = ctData.compare_session ? ctData.compare_session.id : null;
+                    if (!ctSessionsPopulated) {
+                        populateCtSessions(ctData.available_sessions, sessId, compId);
+                    }
+                }
+
+                document.getElementById('ct-loading').style.display = 'none';
+                document.getElementById('ct-content').style.display = '';
+                document.getElementById('ct-export-btn').style.display = '';
+
+                renderCtSummary();
+                ctOppPage = 1;
+                ctContPage = 1;
+                renderCtOpportunities();
+                renderCtContenders();
+                renderCtSwitchers();
+                renderCtTrending();
+            } catch (e) {
+                console.error('Failed to load competitive trends:', e);
+                document.getElementById('ct-loading').innerHTML = '<div class="ct-no-data">Failed to load competitive data. Make sure you have completed scrape sessions.</div>';
+            }
+        }
+
+        function ctScoreCls(v) {
+            if (v == null) return 'dim';
+            if (v >= 75) return 'high';
+            if (v >= 50) return 'medium';
+            return 'low';
+        }
+
+        function ctFmtScore(v) {
+            if (v == null) return '—';
+            return v.toFixed(1) + '%';
+        }
+
+        function ctMetricComparison(aggVal, primVal) {
+            if (aggVal == null || primVal == null) return '<span class="equal">—</span>';
+            const diff = aggVal - primVal;
+            if (Math.abs(diff) < 0.5) return '<span class="equal">' + aggVal.toFixed(0) + '%</span>';
+            if (diff > 0) return '<span class="better">+' + diff.toFixed(0) + '%</span>';
+            return '<span class="worse">' + diff.toFixed(0) + '%</span>';
+        }
+
+        function renderCtSummary() {
+            const s = ctData.summary;
+            const agg = ctData.aggregator;
+            const sessDate = ctData.session ? ctFmtDate(ctData.session.started_at) : '?';
+            const compDate = ctData.compare_session ? ctFmtDate(ctData.compare_session.started_at) : null;
+            let sessionInfo = `<div style="grid-column:1/-1;font-size:0.82rem;color:var(--text-dim);margin-bottom:-4px">`;
+            sessionInfo += `Analyzing session: <strong style="color:var(--text)">${esc(sessDate)}</strong>`;
+            if (compDate) sessionInfo += ` &nbsp;|&nbsp; Trending compared to: <strong style="color:var(--text)">${esc(compDate)}</strong>`;
+            sessionInfo += `</div>`;
+            document.getElementById('ct-summary').innerHTML = sessionInfo + `
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val">${s.primary_count}</div>
+                    <div class="ct-summary-label">Primary FIs for ${esc(agg)}</div>
+                </div>
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val">${s.secondary_count}</div>
+                    <div class="ct-summary-label">Secondary FIs</div>
+                </div>
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val">${s.avg_primary_score != null ? s.avg_primary_score.toFixed(1) + '%' : '—'}</div>
+                    <div class="ct-summary-label">Avg Score (as Primary)</div>
+                </div>
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val">${s.avg_secondary_score != null ? s.avg_secondary_score.toFixed(1) + '%' : '—'}</div>
+                    <div class="ct-summary-label">Avg Score (as Secondary)</div>
+                </div>
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val green">${s.opportunities_count}</div>
+                    <div class="ct-summary-label">Opportunities (Scores Higher)</div>
+                </div>
+                <div class="ct-summary-card">
+                    <div class="ct-summary-val amber">${s.close_contenders_count}</div>
+                    <div class="ct-summary-label">Close Contenders (Within 5pts)</div>
+                </div>
+            `;
+        }
+
+        function renderCtOpportunities() {
+            const opps = ctData.opportunities || [];
+            const container = document.getElementById('ct-opp-table');
+            if (opps.length === 0) {
+                container.innerHTML = '<div class="ct-no-data">No opportunities found — the selected aggregator doesn\'t score higher than any current primary provider.</div>';
+                return;
+            }
+
+            const sorted = [...opps].sort((a, b) => {
+                let va = a[ctOppSort.field], vb = b[ctOppSort.field];
+                if (va == null) va = ctOppSort.asc ? Infinity : -Infinity;
+                if (vb == null) vb = ctOppSort.asc ? Infinity : -Infinity;
+                if (typeof va === 'string') return ctOppSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+                return ctOppSort.asc ? va - vb : vb - va;
+            });
+
+            const total = sorted.length;
+            const totalPages = Math.ceil(total / CT_PAGE_SIZE);
+            const start = (ctOppPage - 1) * CT_PAGE_SIZE;
+            const page = sorted.slice(start, start + CT_PAGE_SIZE);
+            const agg = ctData.aggregator;
+
+            const arrow = (f) => ctOppSort.field === f ? (ctOppSort.asc ? ' \u25B2' : ' \u25BC') : '';
+
+            let html = '<table class="ct-table"><thead><tr>';
+            html += `<th onclick="sortCtOpp('rank')"># ${arrow('rank')}</th>`;
+            html += `<th onclick="sortCtOpp('institution_name')">Institution${arrow('institution_name')}</th>`;
+            html += `<th onclick="sortCtOpp('primary_provider')">Current Primary${arrow('primary_provider')}</th>`;
+            html += `<th onclick="sortCtOpp('primary_score')">Primary Score${arrow('primary_score')}</th>`;
+            html += `<th onclick="sortCtOpp('aggregator_score')">${esc(agg)} Score${arrow('aggregator_score')}</th>`;
+            html += `<th onclick="sortCtOpp('score_gap')">Gap${arrow('score_gap')}</th>`;
+            html += '<th>Metric Breakdown</th>';
+            html += '</tr></thead><tbody>';
+
+            page.forEach(o => {
+                const gapW = Math.min(100, Math.abs(o.score_gap || 0) * 2);
+                html += '<tr>';
+                html += `<td style="color:var(--text-dim);font-weight:600;width:50px">${o.rank}</td>`;
+                html += ctClickableName(o.institution_name);
+                html += `<td>${providerBadge(o.primary_provider)}</td>`;
+                html += `<td><span class="ct-score ${ctScoreCls(o.primary_score)}">${ctFmtScore(o.primary_score)}</span></td>`;
+                html += `<td><span class="ct-score ${ctScoreCls(o.aggregator_score)}">${ctFmtScore(o.aggregator_score)}</span></td>`;
+                html += `<td><span class="ct-gap-bar" style="width:${gapW}px"></span> <span style="font-weight:700;color:var(--green)">+${(o.score_gap || 0).toFixed(1)}</span></td>`;
+                html += '<td><div class="ct-metric-breakdown">';
+                html += `<span>S: ${ctMetricComparison(o.aggregator_success, o.primary_success)}</span>`;
+                html += `<span>L: ${ctMetricComparison(o.aggregator_longevity, o.primary_longevity)}</span>`;
+                html += `<span>U: ${ctMetricComparison(o.aggregator_update, o.primary_update)}</span>`;
+                html += '</div></td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            html += renderCtPagination(total, totalPages, ctOppPage, 'ctOppPage', 'renderCtOpportunities');
+            container.innerHTML = html;
+        }
+
+        function renderCtContenders() {
+            const items = ctData.close_contenders || [];
+            const container = document.getElementById('ct-contenders-table');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="ct-no-data">No close contenders found.</div>';
+                return;
+            }
+
+            const sorted = [...items].sort((a, b) => {
+                let va = a[ctContSort.field], vb = b[ctContSort.field];
+                if (va == null) va = ctContSort.asc ? Infinity : -Infinity;
+                if (vb == null) vb = ctContSort.asc ? Infinity : -Infinity;
+                if (typeof va === 'string') return ctContSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+                return ctContSort.asc ? va - vb : vb - va;
+            });
+
+            const total = sorted.length;
+            const totalPages = Math.ceil(total / CT_PAGE_SIZE);
+            const start = (ctContPage - 1) * CT_PAGE_SIZE;
+            const page = sorted.slice(start, start + CT_PAGE_SIZE);
+            const agg = ctData.aggregator;
+
+            const arrow = (f) => ctContSort.field === f ? (ctContSort.asc ? ' \u25B2' : ' \u25BC') : '';
+
+            let html = '<table class="ct-table"><thead><tr>';
+            html += `<th onclick="sortCtCont('rank')">#${arrow('rank')}</th>`;
+            html += `<th onclick="sortCtCont('institution_name')">Institution${arrow('institution_name')}</th>`;
+            html += `<th onclick="sortCtCont('primary_provider')">Current Primary${arrow('primary_provider')}</th>`;
+            html += `<th onclick="sortCtCont('primary_score')">Primary Score${arrow('primary_score')}</th>`;
+            html += `<th onclick="sortCtCont('aggregator_score')">${esc(agg)} Score${arrow('aggregator_score')}</th>`;
+            html += '<th>What to Improve</th>';
+            html += '</tr></thead><tbody>';
+
+            page.forEach(o => {
+                // Identify which metrics need improvement
+                let improvements = [];
+                if (o.aggregator_success != null && o.primary_success != null && o.aggregator_success < o.primary_success) {
+                    improvements.push('Success (' + (o.primary_success - o.aggregator_success).toFixed(0) + '% behind)');
+                }
+                if (o.aggregator_longevity != null && o.primary_longevity != null && o.aggregator_longevity < o.primary_longevity) {
+                    improvements.push('Longevity (' + (o.primary_longevity - o.aggregator_longevity).toFixed(0) + '% behind)');
+                }
+                if (o.aggregator_update != null && o.primary_update != null && o.aggregator_update < o.primary_update) {
+                    improvements.push('Updates (' + (o.primary_update - o.aggregator_update).toFixed(0) + '% behind)');
+                }
+
+                html += '<tr>';
+                html += `<td style="color:var(--text-dim);font-weight:600;width:50px">${o.rank}</td>`;
+                html += ctClickableName(o.institution_name);
+                html += `<td>${providerBadge(o.primary_provider)}</td>`;
+                html += `<td><span class="ct-score ${ctScoreCls(o.primary_score)}">${ctFmtScore(o.primary_score)}</span></td>`;
+                html += `<td><span class="ct-score ${ctScoreCls(o.aggregator_score)}">${ctFmtScore(o.aggregator_score)}</span></td>`;
+                html += '<td style="font-size:0.75rem;color:var(--text-dim)">';
+                if (improvements.length > 0) {
+                    html += improvements.join(', ');
+                } else {
+                    html += '<span style="color:var(--green)">Already scoring higher — make the case!</span>';
+                }
+                html += '</td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            html += renderCtPagination(total, totalPages, ctContPage, 'ctContPage', 'renderCtContenders');
+            container.innerHTML = html;
+        }
+
+        function renderCtSwitchers() {
+            const items = ctData.frequent_switchers || [];
+            const container = document.getElementById('ct-switchers-table');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="ct-no-data">No FIs found switching providers 2+ times in recent sessions.</div>';
+                return;
+            }
+
+            let html = '<table class="ct-table"><thead><tr>';
+            html += '<th>Institution</th>';
+            html += '<th>Switches</th>';
+            html += '<th>Current Provider</th>';
+            html += '<th>Providers Seen</th>';
+            html += '<th>History</th>';
+            html += '</tr></thead><tbody>';
+
+            items.forEach(s => {
+                html += '<tr>';
+                html += ctClickableName(s.name);
+                html += `<td><span class="ct-switch-badge">${s.switch_count}x</span></td>`;
+                html += `<td>${providerBadge(s.current_provider)}</td>`;
+                html += '<td>' + s.providers_seen.map(p => providerBadge(p)).join(' ') + '</td>';
+                html += '<td style="font-size:0.72rem;color:var(--text-dim)">';
+                // Show last few provider changes
+                const hist = s.history || [];
+                const changes = [];
+                for (let i = 1; i < hist.length; i++) {
+                    if (hist[i].provider !== hist[i-1].provider) {
+                        const d = new Date(hist[i].date);
+                        changes.push(d.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ': ' + hist[i-1].provider + ' \u2192 ' + hist[i].provider);
+                    }
+                }
+                html += changes.slice(-3).join(' · ');
+                html += '</td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function renderCtTrending() {
+            const agg = ctData.aggregator;
+            const compDate = ctData.compare_session ? ctFmtDate(ctData.compare_session.started_at) : 'previous session';
+            const sessDate = ctData.session ? ctFmtDate(ctData.session.started_at) : 'current session';
+            // Trending Up
+            const upItems = ctData.trending_up || [];
+            const upContainer = document.getElementById('ct-trending-up-table');
+            if (upItems.length === 0) {
+                upContainer.innerHTML = '<div class="ct-no-data">No FIs trending up for ' + esc(agg) + ' between selected sessions.</div>';
+            } else {
+                let html = '<p style="font-size:0.8rem;color:var(--text-dim);margin:0 0 10px">Comparing <strong style="color:var(--text)">' + esc(compDate) + '</strong> &rarr; <strong style="color:var(--text)">' + esc(sessDate) + '</strong></p>';
+                html += '<table class="ct-table"><thead><tr>';
+                html += '<th>#</th><th>Institution</th><th>Previous Score</th><th>Current Score</th><th>Change</th>';
+                html += '</tr></thead><tbody>';
+                upItems.forEach(t => {
+                    html += '<tr>';
+                    html += `<td style="color:var(--text-dim);font-weight:600;width:50px">${t.rank}</td>`;
+                    html += ctClickableName(t.institution_name);
+                    html += `<td><span class="ct-score ${ctScoreCls(t.previous_score)}">${ctFmtScore(t.previous_score)}</span></td>`;
+                    html += `<td><span class="ct-score ${ctScoreCls(t.current_score)}">${ctFmtScore(t.current_score)}</span></td>`;
+                    html += `<td><span class="ct-delta up">\u25B2 +${t.delta.toFixed(1)}</span></td>`;
+                    html += '</tr>';
+                });
+                html += '</tbody></table>';
+                upContainer.innerHTML = html;
+            }
+
+            // Trending Down
+            const downItems = ctData.trending_down || [];
+            const downContainer = document.getElementById('ct-trending-down-table');
+            if (downItems.length === 0) {
+                downContainer.innerHTML = '<div class="ct-no-data">No FIs trending down for ' + esc(agg) + ' between selected sessions.</div>';
+            } else {
+                let html = '<table class="ct-table"><thead><tr>';
+                html += '<th>#</th><th>Institution</th><th>Previous Score</th><th>Current Score</th><th>Change</th>';
+                html += '</tr></thead><tbody>';
+                downItems.forEach(t => {
+                    html += '<tr>';
+                    html += `<td style="color:var(--text-dim);font-weight:600;width:50px">${t.rank}</td>`;
+                    html += ctClickableName(t.institution_name);
+                    html += `<td><span class="ct-score ${ctScoreCls(t.previous_score)}">${ctFmtScore(t.previous_score)}</span></td>`;
+                    html += `<td><span class="ct-score ${ctScoreCls(t.current_score)}">${ctFmtScore(t.current_score)}</span></td>`;
+                    html += `<td><span class="ct-delta down">\u25BC ${t.delta.toFixed(1)}</span></td>`;
+                    html += '</tr>';
+                });
+                html += '</tbody></table>';
+                downContainer.innerHTML = html;
+            }
+        }
+
+        function sortCtOpp(field) {
+            if (ctOppSort.field === field) {
+                ctOppSort.asc = !ctOppSort.asc;
+            } else {
+                ctOppSort.field = field;
+                ctOppSort.asc = field === 'rank' || field === 'institution_name';
+            }
+            ctOppPage = 1;
+            renderCtOpportunities();
+        }
+
+        function sortCtCont(field) {
+            if (ctContSort.field === field) {
+                ctContSort.asc = !ctContSort.asc;
+            } else {
+                ctContSort.field = field;
+                ctContSort.asc = field === 'rank' || field === 'institution_name';
+            }
+            ctContPage = 1;
+            renderCtContenders();
+        }
+
+        function ctGoToPage(varName, renderFn, page) {
+            window[varName] = page;
+            window[renderFn]();
+        }
+
+        function ctFindFi(name) {
+            const all = [].concat(ctData.opportunities || [], ctData.close_contenders || []);
+            return all.find(f => f.institution_name === name) || null;
+        }
+
+        function ctClickableName(name) {
+            const safe = esc(name).replace(/'/g, '&#39;');
+            return '<td style="font-weight:600;cursor:pointer;color:var(--accent-light)" onclick="showCtFiDetail(this.dataset.fi)" data-fi="' + safe + '">' + esc(name) + '</td>';
+        }
+
+        function showCtFiDetail(name) {
+            const fi = ctFindFi(name);
+            if (!fi || !fi.all_providers || fi.all_providers.length === 0) {
+                showFiHistory(name);
+                return;
+            }
+
+            const overlay = document.getElementById('fi-modal-overlay');
+            const content = document.getElementById('fi-modal-content');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            const agg = ctData.aggregator;
+            const provCards = fi.all_providers.map(p => {
+                const isPrimary = p.name === fi.primary_provider;
+                const isAgg = p.name === agg;
+                const metrics = [
+                    { label: 'Success', pct: p.success },
+                    { label: 'Longevity', pct: p.longevity },
+                    { label: 'Updates', pct: p.update },
+                ];
+                const metricsHtml = metrics.map(m => `
+                    <div class="prov-metric">
+                        <div class="prov-metric-label">${m.label}</div>
+                        <div class="prov-metric-bar">${metricBlocks(m.pct)}</div>
+                        <div class="prov-metric-value" style="color:${pctColor(m.pct)}">
+                            ${m.pct != null ? fmtPct(m.pct) + '%' : '\u2014'}
+                        </div>
+                    </div>
+                `).join('');
+
+                let tags = '';
+                if (isPrimary) tags += '<span class="prov-tag primary">Primary</span>';
+                if (isAgg && !isPrimary) tags += '<span class="prov-tag" style="background:var(--accent);color:#fff">Analyzing</span>';
+                if (!isPrimary && !isAgg) tags += '<span class="prov-tag">Additional</span>';
+
+                return `
+                    <div class="detail-prov-card" ${isAgg ? 'style="border-color:var(--accent)"' : ''}>
+                        <div class="prov-card-header">
+                            ${providerBadge(p.name)}
+                            ${tags}
+                            <span style="margin-left:auto;font-weight:700;font-size:0.9rem;color:var(--text)">${p.score != null ? p.score.toFixed(1) + '%' : '\u2014'}</span>
+                        </div>
+                        <div class="prov-metrics-grid">${metricsHtml}</div>
+                    </div>`;
+            }).join('');
+
+            let gapNote = '';
+            if (fi.score_gap != null) {
+                gapNote = '<div style="margin-top:12px;padding:10px 14px;background:rgba(0,184,148,0.08);border:1px solid rgba(0,184,148,0.2);border-radius:8px;font-size:0.85rem">';
+                gapNote += '<strong style="color:var(--green)">+' + fi.score_gap.toFixed(1) + ' gap</strong>';
+                gapNote += ' \u2014 ' + esc(agg) + ' scores higher than ' + esc(fi.primary_provider) + ' on this FI';
+                gapNote += '</div>';
+            }
+
+            const safeName = name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            content.innerHTML = '<h2>' + esc(name) + '</h2>'
+                + '<div class="modal-subtitle">'
+                + 'Rank #' + fi.rank
+                + ' &middot; Primary: ' + providerBadge(fi.primary_provider)
+                + ' &middot; ' + fi.all_providers.length + ' provider' + (fi.all_providers.length !== 1 ? 's' : '')
+                + '</div>'
+                + gapNote
+                + '<div class="detail-panel-v2" style="margin-top:14px">' + provCards + '</div>'
+                + '<div style="margin-top:14px;text-align:center">'
+                + '<button class="btn" style="font-size:0.8rem;padding:6px 16px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:8px;cursor:pointer" onclick="closeFiModal();showFiHistory(\'' + safeName + '\')">View Full History &rarr;</button>'
+                + '</div>';
+        }
+
+        function exportCompetitiveTrends() {
+            if (!ctData) return;
+            const agg = ctData.aggregator;
+            const s = ctData.summary;
+            const pc = {'Plaid':'#2874a6','Finicity':'#1e6e3e','MX':'#b87514'};
+            const now = new Date().toLocaleString();
+
+            // Light-theme colors (no CSS vars) so print/PDF works
+            const C = { text:'#1a1a2e', dim:'#555', green:'#0a7d5a', red:'#c0392b', yellow:'#b87514', accent:'#4a3dba', border:'#d0d0d0', surface:'#f5f5f7', bg:'#fff' };
+
+            let body = '<div style="max-width:1100px;margin:0 auto;padding:24px 20px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:'+C.text+'">';
+
+            // Header
+            body += '<div style="text-align:center;margin-bottom:20px">';
+            body += '<h1 style="margin:0 0 4px;font-size:1.4rem;color:'+C.text+'">Provider Competitive Trends \u2014 ' + esc(agg) + '</h1>';
+            body += '<p style="margin:0;color:'+C.dim+';font-size:0.85rem">Exported: ' + esc(now) + '</p>';
+            body += '</div>';
+
+            // Summary cards
+            body += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px">';
+            function sCard(val, label, color) {
+                return '<div style="background:'+C.surface+';border:1px solid '+C.border+';border-radius:10px;padding:14px;text-align:center">'
+                    + '<div style="font-size:1.6rem;font-weight:700;color:'+(color||C.accent)+'">'+val+'</div>'
+                    + '<div style="font-size:0.78rem;color:'+C.dim+';margin-top:2px">'+label+'</div></div>';
+            }
+            body += sCard(s.primary_count, 'Primary FIs');
+            body += sCard(s.secondary_count, 'Secondary FIs');
+            body += sCard(s.avg_primary_score != null ? s.avg_primary_score.toFixed(1)+'%' : '\u2014', 'Avg Score (Primary)');
+            body += sCard(s.avg_secondary_score != null ? s.avg_secondary_score.toFixed(1)+'%' : '\u2014', 'Avg Score (Secondary)');
+            body += sCard(s.opportunities_count, 'Opportunities', C.green);
+            body += sCard(s.close_contenders_count, 'Close Contenders', C.yellow);
+            body += '</div>';
+
+            // Helper: build a list section
+            function listSection(title, emoji, items, renderRow) {
+                if (!items || items.length === 0) return '';
+                let h = '<div style="margin-top:18px;page-break-inside:avoid">';
+                h += '<h3 style="color:'+C.text+';font-size:1rem;margin:0 0 8px;padding-bottom:4px;border-bottom:1px solid '+C.border+'">' + emoji + ' ' + title + ' (' + items.length + ')</h3>';
+                h += '<div style="columns:2;column-gap:24px;font-size:0.8rem;line-height:1.8">';
+                items.forEach((item, idx) => {
+                    h += '<div style="break-inside:avoid;padding:1px 0">' + renderRow(item, idx) + '</div>';
+                });
+                h += '</div></div>';
+                return h;
+            }
+
+            // Opportunities
+            const opps = (ctData.opportunities || []).sort((a,b) => (b.score_gap||0) - (a.score_gap||0));
+            body += listSection('Opportunities \u2014 ' + esc(agg) + ' Scores Higher', '\uD83C\uDFAF', opps, (o, i) => {
+                return '<span style="color:'+C.dim+';width:30px;display:inline-block">' + (i+1) + '.</span> '
+                    + '<strong>' + esc(o.institution_name) + '</strong> '
+                    + '<span style="font-size:0.72rem;margin-left:4px;color:' + (pc[o.primary_provider]||C.dim) + '">(' + esc(o.primary_provider) + ')</span> '
+                    + '<span style="color:'+C.dim+'"> \u2014 Gap: </span>'
+                    + '<span style="color:'+C.green+';font-weight:700">+' + (o.score_gap||0).toFixed(1) + '</span>'
+                    + '<span style="color:'+C.dim+';font-size:0.72rem"> (' + esc(agg) + ' ' + ctFmtScore(o.aggregator_score) + ' vs ' + ctFmtScore(o.primary_score) + ')</span>';
+            });
+
+            // Close Contenders
+            const conts = (ctData.close_contenders || []).sort((a,b) => (a.rank||9999) - (b.rank||9999));
+            body += listSection('Close Contenders \u2014 Within 5 Points', '\u26A1', conts, (o, i) => {
+                let improvements = [];
+                if (o.aggregator_success != null && o.primary_success != null && o.aggregator_success < o.primary_success)
+                    improvements.push('S: -' + (o.primary_success - o.aggregator_success).toFixed(0) + '%');
+                if (o.aggregator_longevity != null && o.primary_longevity != null && o.aggregator_longevity < o.primary_longevity)
+                    improvements.push('L: -' + (o.primary_longevity - o.aggregator_longevity).toFixed(0) + '%');
+                if (o.aggregator_update != null && o.primary_update != null && o.aggregator_update < o.primary_update)
+                    improvements.push('U: -' + (o.primary_update - o.aggregator_update).toFixed(0) + '%');
+                return '<span style="color:'+C.dim+';width:30px;display:inline-block">' + (i+1) + '.</span> '
+                    + '<strong>#' + o.rank + ' ' + esc(o.institution_name) + '</strong> '
+                    + '<span style="font-size:0.72rem;margin-left:4px;color:' + (pc[o.primary_provider]||C.dim) + '">(' + esc(o.primary_provider) + ')</span> '
+                    + '<span style="color:'+C.dim+'"> \u2014 </span>'
+                    + '<span style="color:'+C.dim+';font-size:0.72rem">' + esc(agg) + ' ' + ctFmtScore(o.aggregator_score) + ' vs ' + ctFmtScore(o.primary_score) + '</span>'
+                    + (improvements.length ? '<span style="color:'+C.red+';font-size:0.72rem;margin-left:4px">Improve: ' + improvements.join(', ') + '</span>' : '');
+            });
+
+            // Frequent Switchers
+            const sw = ctData.frequent_switchers || [];
+            body += listSection('Frequent Switchers \u2014 2+ Provider Changes', '\uD83D\uDD04', sw, (s, i) => {
+                return '<span style="color:'+C.dim+';width:30px;display:inline-block">' + (i+1) + '.</span> '
+                    + '<strong>' + esc(s.name) + '</strong> '
+                    + '<span style="font-size:0.72rem;margin-left:4px">(' + s.switch_count + 'x)</span> '
+                    + '<span style="color:'+C.dim+'"> \u2014 Current: </span>'
+                    + '<span style="color:' + (pc[s.current_provider]||C.dim) + ';font-weight:600">' + esc(s.current_provider) + '</span>'
+                    + '<span style="color:'+C.dim+';font-size:0.72rem;margin-left:4px">Seen: ' + s.providers_seen.join(', ') + '</span>';
+            });
+
+            // Trending Up
+            const up = ctData.trending_up || [];
+            body += listSection('Trending Up \u2014 ' + esc(agg) + ' Improving', '\uD83D\uDCC8', up, (t, i) => {
+                return '<span style="color:'+C.dim+';width:30px;display:inline-block">' + (i+1) + '.</span> '
+                    + '<strong>#' + t.rank + ' ' + esc(t.institution_name) + '</strong> '
+                    + '<span style="color:'+C.green+';font-weight:700;margin-left:6px">\u25B2 +' + t.delta.toFixed(1) + '</span>'
+                    + '<span style="color:'+C.dim+';font-size:0.72rem;margin-left:4px">(' + ctFmtScore(t.previous_score) + ' \u2192 ' + ctFmtScore(t.current_score) + ')</span>';
+            });
+
+            // Trending Down
+            const dn = ctData.trending_down || [];
+            body += listSection('Trending Down \u2014 ' + esc(agg) + ' Declining', '\uD83D\uDCC9', dn, (t, i) => {
+                return '<span style="color:'+C.dim+';width:30px;display:inline-block">' + (i+1) + '.</span> '
+                    + '<strong>#' + t.rank + ' ' + esc(t.institution_name) + '</strong> '
+                    + '<span style="color:'+C.red+';font-weight:700;margin-left:6px">\u25BC ' + t.delta.toFixed(1) + '</span>'
+                    + '<span style="color:'+C.dim+';font-size:0.72rem;margin-left:4px">(' + ctFmtScore(t.previous_score) + ' \u2192 ' + ctFmtScore(t.current_score) + ')</span>';
+            });
+
+            body += '</div>';
+
+            // Open export window with light theme
+            const w = window.open('', '_blank');
+            if (!w) { alert('Pop-up blocked. Please allow pop-ups for this site.'); return; }
+            w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Competitive Trends \u2014 ' + esc(agg) + '</title>');
+            w.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>');
+            w.document.write('<style>');
+            w.document.write('body { margin:0; background:'+C.bg+'; color:'+C.text+'; }');
+            w.document.write('@media print { body { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; } .export-toolbar { display:none !important; } }');
+            w.document.write('.export-toolbar { position:sticky;top:0;z-index:100;background:#eee;border-bottom:1px solid #ccc;padding:10px 20px;display:flex;gap:10px;align-items:center; }');
+            w.document.write('.export-toolbar button { background:#fff;color:#333;border:1px solid #ccc;border-radius:8px;padding:8px 16px;font-size:0.85rem;cursor:pointer;font-weight:600; }');
+            w.document.write('.export-toolbar button:hover { background:#ddd; }');
+            w.document.write('.export-toolbar span { color:#777;font-size:0.8rem;margin-left:auto; }');
+            w.document.write('</style>');
+            w.document.write('</head><body>');
+            w.document.write('<div class="export-toolbar">');
+            w.document.write('<button onclick="savePNG()">&#x1F4F7; Save as PNG</button>');
+            w.document.write('<span style="font-size:0.95rem;font-weight:600;color:#333">Tip: Use your browser\'s Print &rarr; "Save as PDF" for a PDF version</span>');
+            w.document.write('</div>');
+            w.document.write('<div id="export-body">');
+            w.document.write(body);
+            w.document.write('</div>');
+            w.document.write('<script>');
+            w.document.write('function savePNG(){');
+            w.document.write('  var tb=document.querySelector(".export-toolbar");tb.style.display="none";');
+            w.document.write('  html2canvas(document.getElementById("export-body"),{backgroundColor:"'+C.bg+'",scale:1,useCORS:true}).then(function(c){');
+            w.document.write('    tb.style.display="";');
+            w.document.write('    var a=document.createElement("a");a.download="competitive-trends-' + esc(agg).toLowerCase() + '.png";a.href=c.toDataURL("image/png");a.click();');
+            w.document.write('  }).catch(function(e){tb.style.display="";alert("PNG export failed: "+e.message);});');
+            w.document.write('}');
+            w.document.write('<\/script>');
+            w.document.write('</body></html>');
+            w.document.close();
+        }
+
+        function renderCtPagination(total, totalPages, currentPg, pageVar, renderFn) {
+            if (totalPages <= 1) return `<div class="ct-pagination"><span>Showing all ${total} items</span></div>`;
+            const start = (currentPg - 1) * CT_PAGE_SIZE + 1;
+            const end = Math.min(currentPg * CT_PAGE_SIZE, total);
+            return `<div class="ct-pagination">
+                <span>Showing ${start}–${end} of ${total}</span>
+                <div>
+                    <button onclick="ctGoToPage('${pageVar}','${renderFn}',${currentPg - 1})" ${currentPg <= 1 ? 'disabled' : ''}>&lsaquo; Prev</button>
+                    <button onclick="ctGoToPage('${pageVar}','${renderFn}',${currentPg + 1})" ${currentPg >= totalPages ? 'disabled' : ''}>Next &rsaquo;</button>
+                </div>
+            </div>`;
         }
     </script>
 </body>

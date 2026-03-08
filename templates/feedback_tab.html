@@ -1,0 +1,328 @@
+{# Feedback Tab – included inside index.html when feedback is enabled #}
+
+<!-- Feedback CSS -->
+<style>
+    .fb-view { display: none; }
+    .fb-view.active { display: block; }
+
+    .fb-header {
+        display: flex; align-items: center; gap: 16px;
+        margin-bottom: 18px; flex-wrap: wrap;
+    }
+    .fb-header h2 { font-size: 1.3rem; color: var(--text); margin: 0; }
+
+    .fb-new-btn {
+        background: var(--accent); color: #fff; border: none; border-radius: 8px;
+        padding: 8px 18px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
+    }
+    .fb-new-btn:hover { background: var(--accent-light); }
+
+    /* Form */
+    .fb-form-overlay {
+        display: none; position: fixed; inset: 0; z-index: 1200;
+        background: rgba(0,0,0,.55); justify-content: center; align-items: center;
+    }
+    .fb-form-overlay.active { display: flex; }
+    .fb-form {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 28px; width: 520px; max-width: 92vw; max-height: 80vh; overflow-y: auto;
+    }
+    .fb-form h3 { margin: 0 0 18px; color: var(--text); font-size: 1.1rem; }
+    .fb-form label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text-dim); font-size: 0.85rem; }
+    .fb-form select, .fb-form input, .fb-form textarea {
+        width: 100%; box-sizing: border-box;
+        background: var(--bg); color: var(--text); border: 1px solid var(--border);
+        border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; margin-bottom: 14px;
+        font-family: inherit;
+    }
+    .fb-form textarea { min-height: 110px; resize: vertical; }
+    .fb-form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+    .fb-form-actions button {
+        padding: 8px 20px; border-radius: 8px; border: none; font-weight: 600;
+        font-size: 0.9rem; cursor: pointer;
+    }
+    .fb-submit { background: var(--accent); color: #fff; }
+    .fb-submit:hover { background: var(--accent-light); }
+    .fb-cancel { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border) !important; }
+    .fb-cancel:hover { background: var(--border); }
+
+    /* Respond modal */
+    .fb-respond-overlay {
+        display: none; position: fixed; inset: 0; z-index: 1300;
+        background: rgba(0,0,0,.55); justify-content: center; align-items: center;
+    }
+    .fb-respond-overlay.active { display: flex; }
+    .fb-respond-form {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+        padding: 28px; width: 460px; max-width: 92vw;
+    }
+    .fb-respond-form h3 { margin: 0 0 14px; color: var(--text); font-size: 1.05rem; }
+    .fb-respond-form textarea {
+        width: 100%; box-sizing: border-box;
+        background: var(--bg); color: var(--text); border: 1px solid var(--border);
+        border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; min-height: 80px;
+        resize: vertical; font-family: inherit;
+    }
+
+    /* List */
+    .fb-list { display: flex; flex-direction: column; gap: 14px; }
+    .fb-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+        padding: 18px 22px;
+    }
+    .fb-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .fb-badge {
+        font-size: 0.72rem; font-weight: 700; padding: 3px 10px;
+        border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .fb-badge.new { background: var(--accent); color: #fff; }
+    .fb-badge.addressed { background: var(--green); color: #fff; }
+    .fb-badge.re-opened { background: var(--yellow); color: #000; }
+    .fb-type-badge {
+        font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+        border-radius: 20px; background: var(--surface2); color: var(--text-dim);
+    }
+    .fb-title { font-size: 1rem; font-weight: 700; color: var(--text); margin: 0; }
+    .fb-desc { color: var(--text-dim); font-size: 0.88rem; margin: 8px 0 10px; white-space: pre-wrap; word-break: break-word; }
+    .fb-meta { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 10px; }
+    .fb-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .fb-action-btn {
+        padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border);
+        background: var(--surface2); color: var(--text); font-size: 0.82rem;
+        font-weight: 600; cursor: pointer;
+    }
+    .fb-action-btn:hover { background: var(--border); }
+    .fb-action-btn.address { border-color: var(--green); color: var(--green); }
+    .fb-action-btn.reopen { border-color: var(--yellow); color: var(--yellow); }
+    .fb-responses { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .fb-response {
+        background: var(--bg); border-radius: 8px; padding: 10px 14px;
+        margin-bottom: 8px; font-size: 0.84rem;
+    }
+    .fb-response-action { font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
+    .fb-response-action.addressed { color: var(--green); }
+    .fb-response-action.re-opened { color: var(--yellow); }
+    .fb-response-text { color: var(--text-dim); margin-top: 4px; white-space: pre-wrap; word-break: break-word; }
+    .fb-response-date { color: var(--text-dim); font-size: 0.72rem; margin-top: 4px; }
+    .fb-empty { text-align: center; padding: 48px 0; color: var(--text-dim); font-size: 0.95rem; }
+    .fb-filter-bar {
+        display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;
+    }
+    .fb-filter-bar label { font-weight: 600; color: var(--text-dim); font-size: 0.85rem; }
+    .fb-filter-bar select {
+        background: var(--surface); color: var(--text); border: 1px solid var(--border);
+        border-radius: 8px; padding: 7px 14px; font-size: 0.88rem; font-weight: 600;
+    }
+</style>
+
+<!-- Feedback View HTML -->
+<div id="feedback-view" class="fb-view">
+    <div class="container">
+        <div class="fb-header">
+            <h2>Feedback</h2>
+            <button class="fb-new-btn" onclick="fbShowForm()">+ New</button>
+        </div>
+
+        <div class="fb-filter-bar">
+            <label>Filter:</label>
+            <select id="fb-filter-status" onchange="fbRenderList()">
+                <option value="all">All Statuses</option>
+                <option value="new">New</option>
+                <option value="addressed">Addressed</option>
+                <option value="re-opened">Re-opened</option>
+            </select>
+            <select id="fb-filter-type" onchange="fbRenderList()">
+                <option value="all">All Types</option>
+                <option value="change_request">Change Requests</option>
+                <option value="bug">Bug Reports</option>
+            </select>
+        </div>
+
+        <div class="fb-list" id="fb-list"></div>
+    </div>
+</div>
+
+<!-- New Feedback Form Modal -->
+<div class="fb-form-overlay" id="fb-form-overlay" onclick="if(event.target===this)fbHideForm()">
+    <div class="fb-form">
+        <h3>Submit Feedback</h3>
+        <label>Type</label>
+        <select id="fb-field-type">
+            <option value="change_request">Change Request</option>
+            <option value="bug">Report a Bug</option>
+        </select>
+        <label>Title</label>
+        <input type="text" id="fb-field-title" placeholder="Short summary" maxlength="255">
+        <label>Description</label>
+        <textarea id="fb-field-desc" placeholder="Describe in detail..."></textarea>
+        <div class="fb-form-actions">
+            <button class="fb-cancel" onclick="fbHideForm()">Cancel</button>
+            <button class="fb-submit" onclick="fbSubmit()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<!-- Respond Modal -->
+<div class="fb-respond-overlay" id="fb-respond-overlay" onclick="if(event.target===this)fbHideRespond()">
+    <div class="fb-respond-form">
+        <h3 id="fb-respond-title">Respond</h3>
+        <textarea id="fb-respond-text" placeholder="Enter your response..."></textarea>
+        <div class="fb-form-actions" style="margin-top:12px;">
+            <button class="fb-cancel" onclick="fbHideRespond()">Cancel</button>
+            <button class="fb-submit" id="fb-respond-submit">Submit</button>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback JavaScript -->
+<script>
+(function() {
+    let fbItems = [];
+    let fbRespondItemId = null;
+    let fbRespondAction = null;
+
+    window.fbShowForm = function() {
+        document.getElementById('fb-field-type').value = 'change_request';
+        document.getElementById('fb-field-title').value = '';
+        document.getElementById('fb-field-desc').value = '';
+        document.getElementById('fb-form-overlay').classList.add('active');
+    };
+    window.fbHideForm = function() {
+        document.getElementById('fb-form-overlay').classList.remove('active');
+    };
+
+    window.fbShowRespond = function(itemId, action) {
+        fbRespondItemId = itemId;
+        fbRespondAction = action;
+        const label = action === 'addressed' ? 'Address this item' : 'Re-open this item';
+        document.getElementById('fb-respond-title').textContent = label;
+        document.getElementById('fb-respond-text').value = '';
+        document.getElementById('fb-respond-overlay').classList.add('active');
+        document.getElementById('fb-respond-submit').onclick = fbSubmitRespond;
+    };
+    window.fbHideRespond = function() {
+        document.getElementById('fb-respond-overlay').classList.remove('active');
+        fbRespondItemId = null;
+        fbRespondAction = null;
+    };
+
+    function fbFmtDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        return d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) +
+               ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    }
+
+    function fbTypeLabel(t) {
+        return t === 'bug' ? 'Bug' : 'Change Request';
+    }
+
+    function fbShortUA(ua) {
+        if (!ua) return '';
+        const m = ua.match(/(Chrome|Firefox|Safari|Edg|OPR)\/([\d.]+)/);
+        const os = ua.match(/\(([^)]+)\)/);
+        let browser = m ? (m[1]==='Edg'?'Edge':m[1]==='OPR'?'Opera':m[1]) + ' ' + m[2].split('.')[0] : 'Unknown';
+        let platform = os ? os[1].split(';')[0].trim() : '';
+        return (platform ? platform + ' \u00b7 ' : '') + browser;
+    }
+
+    function escHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
+    window.fbRenderList = function() {
+        const statusFilter = document.getElementById('fb-filter-status').value;
+        const typeFilter = document.getElementById('fb-filter-type').value;
+        let filtered = fbItems;
+        if (statusFilter !== 'all') filtered = filtered.filter(i => i.status === statusFilter);
+        if (typeFilter !== 'all') filtered = filtered.filter(i => i.type === typeFilter);
+
+        const container = document.getElementById('fb-list');
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="fb-empty">No feedback items found.</div>';
+            return;
+        }
+        container.innerHTML = filtered.map(item => {
+            const statusCls = item.status.replace('_', '-');
+            let actions = '';
+            if (item.status === 'new' || item.status === 're-opened') {
+                actions = `<button class="fb-action-btn address" onclick="fbShowRespond(${item.id},'addressed')">&#x2714; Address</button>`;
+            }
+            if (item.status === 'addressed') {
+                actions = `<button class="fb-action-btn reopen" onclick="fbShowRespond(${item.id},'re-opened')">&#x21bb; Re-open</button>`;
+            }
+
+            let responsesHtml = '';
+            if (item.responses && item.responses.length) {
+                responsesHtml = '<div class="fb-responses">' +
+                    item.responses.map(r => `
+                        <div class="fb-response">
+                            <span class="fb-response-action ${r.action.replace('_','-')}">${escHtml(r.action)}</span>
+                            <div class="fb-response-text">${escHtml(r.response_text)}</div>
+                            <div class="fb-response-date">${fbFmtDate(r.created_at)}</div>
+                        </div>
+                    `).join('') + '</div>';
+            }
+
+            return `<div class="fb-card">
+                <div class="fb-card-header">
+                    <span class="fb-badge ${statusCls}">${escHtml(item.status)}</span>
+                    <span class="fb-type-badge">${escHtml(fbTypeLabel(item.type))}</span>
+                    <h3 class="fb-title">${escHtml(item.title)}</h3>
+                </div>
+                <div class="fb-desc">${escHtml(item.description)}</div>
+                <div class="fb-meta">Created ${fbFmtDate(item.created_at)}${item.user_agent ? ' &middot; <span title="'+escHtml(item.user_agent)+'">'+escHtml(fbShortUA(item.user_agent))+'</span>' : ''}</div>
+                <div class="fb-actions">${actions}</div>
+                ${responsesHtml}
+            </div>`;
+        }).join('');
+    };
+
+    window.loadFeedback = function() {
+        fetch('api/feedback').then(r => r.json()).then(data => {
+            fbItems = data;
+            fbRenderList();
+        }).catch(err => {
+            document.getElementById('fb-list').innerHTML =
+                '<div class="fb-empty" style="color:var(--red)">Failed to load feedback.</div>';
+        });
+    };
+
+    window.fbSubmit = function() {
+        const type = document.getElementById('fb-field-type').value;
+        const title = document.getElementById('fb-field-title').value.trim();
+        const description = document.getElementById('fb-field-desc').value.trim();
+        if (!title) { alert('Title is required'); return; }
+        if (!description) { alert('Description is required'); return; }
+        fetch('api/feedback', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({type, title, description}),
+        }).then(r => {
+            if (!r.ok) return r.json().then(d => { throw new Error(d.error); });
+            return r.json();
+        }).then(() => {
+            fbHideForm();
+            loadFeedback();
+        }).catch(err => alert('Error: ' + err.message));
+    };
+
+    function fbSubmitRespond() {
+        const text = document.getElementById('fb-respond-text').value.trim();
+        if (!text) { alert('Response text is required'); return; }
+        fetch(`api/feedback/${fbRespondItemId}/respond`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({action: fbRespondAction, response_text: text}),
+        }).then(r => {
+            if (!r.ok) return r.json().then(d => { throw new Error(d.error); });
+            return r.json();
+        }).then(() => {
+            fbHideRespond();
+            loadFeedback();
+        }).catch(err => alert('Error: ' + err.message));
+    }
+})();
+</script>
