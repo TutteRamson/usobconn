@@ -488,11 +488,42 @@ def get_history():
                 "count": provider_counts.get(prov, 0),
             }
 
+        total = len(connections) if decile is not None else (sess.total_institutions or len(connections))
         results.append({
             "session_id": sess.id,
             "started_at": sess.started_at.isoformat() if sess.started_at else None,
-            "total_institutions": sess.total_institutions or len(connections),
+            "total_institutions": total,
             "providers": providers,
+        })
+
+    return jsonify(results)
+
+
+@app.route("/api/issues-history")
+@login_required
+def get_issues_history():
+    """Return per-provider issues count for each completed session over time."""
+    sessions = (
+        ScrapeSession.query.filter_by(status="completed")
+        .filter(ScrapeSession.total_institutions >= MIN_SESSION_FIS)
+        .order_by(ScrapeSession.started_at.asc())
+        .all()
+    )
+
+    results = []
+    for sess in sessions:
+        connections = Connection.query.filter_by(scrape_session_id=sess.id).all()
+        provider_issues = {}
+        for c in connections:
+            if c.connection_status == "Issues reported":
+                prov = c.data_provider or "Unknown"
+                provider_issues[prov] = provider_issues.get(prov, 0) + 1
+
+        results.append({
+            "session_id": sess.id,
+            "date": sess.started_at.isoformat() if sess.started_at else None,
+            "total_issues": sum(provider_issues.values()),
+            "providers": provider_issues,
         })
 
     return jsonify(results)
@@ -676,6 +707,7 @@ def get_institution_history(name):
                 "longevity_pct": conn.longevity_pct,
                 "update_pct": conn.update_pct,
                 "connection_status": conn.connection_status,
+                "status_detail": conn.status_detail,
             })
 
     return jsonify({"institution_name": name, "history": history})
@@ -1116,6 +1148,28 @@ def competitive_trends():
     ]
     close_contenders.sort(key=lambda x: x.get("rank", 9999))
 
+    # Where aggregator IS primary but a secondary provider scores higher
+    vulnerabilities = []
+    for f in fi_provider_data:
+        if not f["is_primary"]:
+            continue
+        best_rival = None
+        best_rival_score = None
+        for p in f.get("all_providers", []):
+            if p["name"] == aggregator:
+                continue
+            if p["score"] is not None and (best_rival_score is None or p["score"] > best_rival_score):
+                best_rival = p
+                best_rival_score = p["score"]
+        if best_rival and f["aggregator_score"] is not None and best_rival_score is not None:
+            if best_rival_score > f["aggregator_score"]:
+                gap = round(best_rival_score - f["aggregator_score"], 2)
+                f["threat_provider"] = best_rival["name"]
+                f["threat_score"] = best_rival_score
+                f["vulnerability_gap"] = gap
+                vulnerabilities.append(f)
+    vulnerabilities.sort(key=lambda x: (-x.get("vulnerability_gap", 0), x.get("rank", 9999)))
+
     return jsonify({
         "aggregator": aggregator,
         "session": latest.to_dict(),
@@ -1129,9 +1183,11 @@ def competitive_trends():
             "avg_secondary_score": round(sum(secondary_scores) / len(secondary_scores), 2) if secondary_scores else None,
             "opportunities_count": len(opportunities),
             "close_contenders_count": len(close_contenders),
+            "vulnerabilities_count": len(vulnerabilities),
         },
         "opportunities": opportunities,
         "close_contenders": close_contenders,
+        "vulnerabilities": vulnerabilities,
         "frequent_switchers": switchers_list,
         "trending_up": trending_up,
         "trending_down": trending_down,
