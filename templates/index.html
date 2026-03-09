@@ -1044,6 +1044,33 @@
             color: var(--text-dim);
         }
 
+        /* ── Loading Progress Modal ── */
+        .progress-modal-overlay {
+            display: none; position: fixed; inset: 0; z-index: 600;
+            background: rgba(0,0,0,0.55); backdrop-filter: blur(3px);
+            align-items: center; justify-content: center;
+        }
+        .progress-modal-overlay.active { display: flex; }
+        .progress-modal {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+            padding: 24px 28px; width: 340px; max-width: 90%;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        }
+        .progress-modal h3 { font-size: 1rem; color: var(--text); margin: 0 0 16px; }
+        .progress-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 6px 0; font-size: 0.85rem; color: var(--text-dim);
+        }
+        .progress-item .pi-icon {
+            width: 20px; text-align: center; font-size: 0.9rem;
+        }
+        .progress-item.done { color: var(--text); }
+        .progress-item.done .pi-icon { color: #2ecc71; }
+        .progress-item.active .pi-icon { color: var(--accent-light); }
+        .progress-item.active { color: var(--text); }
+        @keyframes pi-spin { to { transform: rotate(360deg); } }
+        .pi-spinner { display: inline-block; animation: pi-spin 0.8s linear infinite; }
+
         /* Live stats during retrieval */
         #live-stats {
             display: none;
@@ -1787,7 +1814,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 28px 32px;
+            padding: 0;
             max-width: 620px;
             width: 90%;
             max-height: 85vh;
@@ -1798,6 +1825,17 @@
             position: relative;
         }
         .modal::-webkit-scrollbar { display: none; }
+        .modal-sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: var(--surface);
+            padding: 28px 32px 0;
+            border-radius: 14px 14px 0 0;
+        }
+        .modal-body {
+            padding: 18px 32px 28px;
+        }
         .modal-close {
             position: absolute;
             top: 14px;
@@ -2115,7 +2153,7 @@
             <h1>Monarch Connection Tracker <span>Financial Institution Status Monitor</span></h1>
             <div style="display:flex;align-items:center;gap:10px;">
                 <span id="next-retrieval-badge" style="display:none;font-size:0.78rem;color:var(--text-dim);white-space:nowrap;"></span>
-                <button class="info-btn" onclick="document.getElementById('info-modal').classList.add('active')" title="How scoring works">i</button>
+                <button class="info-btn" onclick="document.getElementById('info-modal').classList.add('active');switchInfoTab('overview')" title="How scoring works">i</button>
                 <button class="btn btn-primary" id="retrieve-btn" onclick="startRetrieval()">
                     &#x2913; Retrieve Data
                 </button>
@@ -2296,7 +2334,7 @@
                 </div>
             </div>
             <div class="ia-panel active" id="ia-trend-panel">
-                <div class="ia-chart-wrap">
+                <div class="ia-chart-wrap" style="position:relative;">
                     <canvas id="ia-trend-chart"></canvas>
                 </div>
             </div>
@@ -2323,10 +2361,8 @@
             </div>
 
             <div class="ct-session-bar" id="ct-session-bar" style="display:none;">
-                <label>Opportunities &amp; Contenders:</label>
-                <select id="ct-session-select" onchange="loadCompetitiveTrends()"></select>
-                <span class="ct-session-arrow">&harr;</span>
-                <label>Trending compares against:</label>
+                <span id="ct-latest-label" style="font-weight:600;color:var(--text);"></span>
+                <span style="color:var(--text-dim);margin:0 6px;">compared to</span>
                 <select id="ct-compare-select" onchange="loadCompetitiveTrends()"></select>
             </div>
 
@@ -2408,11 +2444,14 @@
     <!-- Info Modal -->
     <div class="modal-overlay" id="info-modal" onclick="if(event.target===this)this.classList.remove('active')">
         <div class="modal" style="max-width:700px;">
-            <button class="modal-close" onclick="document.getElementById('info-modal').classList.remove('active')">&times;</button>
-            <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:18px;">
-                <button class="ia-tab active" onclick="switchInfoTab('overview')" style="flex:1;">App Overview</button>
-                <button class="ia-tab" onclick="switchInfoTab('scoring')" style="flex:1;">How Scoring Works</button>
+            <div class="modal-sticky-header">
+                <button class="modal-close" onclick="document.getElementById('info-modal').classList.remove('active')">&times;</button>
+                <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:18px;">
+                    <button class="ia-tab active" onclick="switchInfoTab('overview')" style="flex:1;">App Overview</button>
+                    <button class="ia-tab" onclick="switchInfoTab('scoring')" style="flex:1;">How Scoring Works</button>
+                </div>
             </div>
+            <div class="modal-body">
             <div id="info-tab-overview" class="ia-panel active">
                 <h2 style="margin-bottom:12px;">Monarch Connection Tracker</h2>
                 <p>This app monitors data provider quality across ~11,000 financial institutions using <a href="https://www.monarch.com/connection-status" style="color:var(--accent-light)">Monarch's ISS API</a>. It retrieves, stores, and visualizes connection health for Plaid, Finicity, and MX.</p>
@@ -2490,6 +2529,7 @@
 
                 <p class="note">Data is retrieved from Monarch's ISS API. Scores may vary between runs as Monarch updates their ratings. The retrieval fetches all ~11,000 institutions via the paginated API.</p>
             </div>
+            </div><!-- modal-body -->
         </div>
     </div>
 
@@ -2525,6 +2565,14 @@
         </div>
     </div>
 
+    <!-- Loading Progress Modal -->
+    <div class="progress-modal-overlay" id="progress-modal">
+        <div class="progress-modal">
+            <h3 id="progress-modal-title">Loading Dashboard</h3>
+            <div id="progress-items"></div>
+        </div>
+    </div>
+
     <!-- History Section (fixed to bottom, outside container) -->
     <div class="history-section" id="history-section" style="display:none;">
         <div class="history-toggle" onclick="toggleHistory()">
@@ -2556,6 +2604,27 @@
         function hidePageLoader() {
             const loader = document.getElementById('page-loader');
             if (loader) loader.style.display = 'none';
+        }
+
+        /* ── Loading Progress Modal ── */
+        function showProgress(title, steps) {
+            const modal = document.getElementById('progress-modal');
+            document.getElementById('progress-modal-title').textContent = title;
+            const container = document.getElementById('progress-items');
+            container.innerHTML = steps.map((s, i) => `<div class="progress-item" id="pi-${i}"><span class="pi-icon">&bull;</span><span>${s}</span></div>`).join('');
+            modal.classList.add('active');
+        }
+        function updateProgress(idx) {
+            const items = document.querySelectorAll('.progress-item');
+            items.forEach((el, i) => {
+                const icon = el.querySelector('.pi-icon');
+                if (i < idx) { el.className = 'progress-item done'; icon.innerHTML = '&#x2713;'; }
+                else if (i === idx) { el.className = 'progress-item active'; icon.innerHTML = '<span class="pi-spinner">&#x25E0;</span>'; }
+                else { el.className = 'progress-item'; icon.innerHTML = '&bull;'; }
+            });
+        }
+        function hideProgress() {
+            document.getElementById('progress-modal').classList.remove('active');
         }
 
         async function loadSessions() {
@@ -2611,7 +2680,12 @@
 
         async function loadSession(sessionId) {
             currentSessionId = sessionId;
+            const steps = ['Fetching connections & stats', 'Rendering stats & charts', 'Building provider map', 'Rendering data table', 'Analyzing issues'];
+            showProgress('Loading Dashboard', steps);
+            const tick = () => new Promise(r => requestAnimationFrame(r));
             try {
+                updateProgress(0);
+                await tick();
                 const [connRes, statsRes] = await Promise.all([
                     fetch(`${BASE}/api/sessions/${sessionId}/connections`),
                     fetch(`${BASE}/api/sessions/${sessionId}/stats`)
@@ -2632,22 +2706,35 @@
                 document.getElementById('live-stats').classList.add('active');
                 document.getElementById('export-btn').style.display = '';
 
+                updateProgress(1);
+                await tick();
                 renderStats(statsData);
                 currentStats = statsData;
                 renderCharts(statsData);
+
+                updateProgress(2);
+                await tick();
                 renderPixelMap();
                 // Sync pixel map session dropdown
                 const pmapToSel = document.getElementById('pmap-to-select');
                 if (pmapToSel) pmapToSel.value = sessionId;
                 renderDecileChart();
+
+                updateProgress(3);
+                await tick();
                 renderTable();
+
+                updateProgress(4);
+                await tick();
                 renderIssuesAnalysis();
 
                 const dt = new Date(connData.session.started_at);
                 document.getElementById('table-title').textContent =
                     `Connection Status — Retrieved ${dt.toLocaleDateString()} ${dt.toLocaleTimeString()}`;
+                hideProgress();
             } catch (e) {
                 console.error('Failed to load session:', e);
+                hideProgress();
             }
         }
 
@@ -4276,11 +4363,27 @@
         }
 
         async function renderIaTrendChart() {
+            const wrap = document.getElementById('ia-trend-chart').parentElement;
+            wrap.insertAdjacentHTML('afterbegin', '<div class="ia-chart-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--surface);z-index:1;"><span class="pi-spinner" style="font-size:1.5rem;color:var(--text-dim);">&#x25E0;</span>&nbsp; Loading issues history&hellip;</div>');
             try {
-                const resp = await fetch('/api/issues-history');
-                if (!resp.ok) return;
-                const data = await resp.json();
-                if (!data.length) return;
+                const resp = await fetch(BASE + '/api/history');
+                if (!resp.ok) {
+                    wrap.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.9rem;text-align:center;padding:20px">Failed to load issues history (${resp.status})</div>`;
+                    return;
+                }
+                const history = await resp.json();
+                // Transform /api/history data into trend chart format (oldest first)
+                const data = history.reverse().map(s => ({
+                    date: s.started_at,
+                    total_issues: s.total_issues || 0,
+                    providers: Object.fromEntries(
+                        Object.entries(s.providers).map(([p, v]) => [p, v.issues_count || 0])
+                    )
+                }));
+                if (!data.length) { wrap.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.9rem;">No issues history data yet</div>'; return; }
+
+                const loadingEl = wrap.querySelector('.ia-chart-loading');
+                if (loadingEl) loadingEl.remove();
 
                 // Collect all providers across all sessions
                 const provSet = new Set();
@@ -4294,7 +4397,10 @@
                 };
                 const fallback = { bg: 'rgba(139,143,163,0.15)', border: '#8b8fa3' };
 
-                const labels = data.map(s => s.date);
+                const labels = data.map(s => {
+                    const d = new Date(s.date);
+                    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                });
 
                 const datasets = provList.map(prov => {
                     const c = provColors[prov] || fallback;
@@ -4349,8 +4455,6 @@
                         },
                         scales: {
                             x: {
-                                type: 'time',
-                                time: { unit: 'day', tooltipFormat: 'MMM d, yyyy HH:mm' },
                                 ticks: { color: '#8b8fa3', font: { size: 11 } },
                                 grid: { color: 'rgba(46,50,65,0.5)' },
                             },
@@ -4365,6 +4469,8 @@
                 });
             } catch (e) {
                 console.error('Issues trend chart error:', e);
+                const loadingEl = wrap.querySelector('.ia-chart-loading');
+                if (loadingEl) loadingEl.remove();
             }
         }
 
@@ -5763,16 +5869,20 @@
         }
 
         function populateCtSessions(sessions, selectedId, compareId) {
-            const sessSel = document.getElementById('ct-session-select');
             const compSel = document.getElementById('ct-compare-select');
-            const opts = sessions.map(s => {
+            // Latest session label
+            const latest = sessions.find(s => s.id === selectedId) || sessions[0];
+            if (latest) {
+                const d = new Date(latest.started_at);
+                document.getElementById('ct-latest-label').textContent = 'Latest scrape ' + d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            }
+            // Compare dropdown: all sessions except the latest
+            const compareOpts = sessions.filter(s => s.id !== (latest ? latest.id : null)).map(s => {
                 const d = new Date(s.started_at);
                 const label = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ' (' + (s.total_institutions || 0).toLocaleString() + ' FIs)';
                 return '<option value="' + s.id + '">' + esc(label) + '</option>';
             }).join('');
-            sessSel.innerHTML = opts;
-            compSel.innerHTML = opts;
-            if (selectedId) sessSel.value = selectedId;
+            compSel.innerHTML = compareOpts;
             if (compareId) compSel.value = compareId;
             ctSessionsPopulated = true;
             document.getElementById('ct-session-bar').style.display = '';
@@ -5791,16 +5901,20 @@
 
         async function loadCompetitiveTrends() {
             const aggregator = document.getElementById('ct-aggregator-select').value;
-            const sessSel = document.getElementById('ct-session-select');
             const compSel = document.getElementById('ct-compare-select');
             let url = `${BASE}/api/competitive-trends?aggregator=${encodeURIComponent(aggregator)}`;
-            if (ctSessionsPopulated && sessSel.value) url += `&session_id=${sessSel.value}`;
             if (ctSessionsPopulated && compSel.value) url += `&compare_session_id=${compSel.value}`;
+
+            const ctSteps = ['Fetching competitive data', 'Analyzing opportunities & contenders', 'Computing trends & vulnerabilities'];
+            showProgress('Loading Competitive Trends', ctSteps);
 
             document.getElementById('ct-loading').style.display = '';
             document.getElementById('ct-content').style.display = 'none';
 
+            const tick = () => new Promise(r => requestAnimationFrame(r));
             try {
+                updateProgress(0);
+                await tick();
                 const res = await fetch(url);
                 if (!res.ok) throw new Error('API error');
                 ctData = await res.json();
@@ -5819,17 +5933,24 @@
                 document.getElementById('ct-content').style.display = '';
                 document.getElementById('ct-export-btn').style.display = '';
 
+                updateProgress(1);
+                await tick();
                 renderCtSummary();
                 ctOppPage = 1;
                 ctContPage = 1;
                 renderCtOpportunities();
                 renderCtContenders();
+
+                updateProgress(2);
+                await tick();
                 renderCtSwitchers();
                 renderCtTrending();
                 renderCtVulnerabilities();
+                hideProgress();
             } catch (e) {
                 console.error('Failed to load competitive trends:', e);
                 document.getElementById('ct-loading').innerHTML = '<div class="ct-no-data">Failed to load competitive data. Make sure you have completed scrape sessions.</div>';
+                hideProgress();
             }
         }
 
