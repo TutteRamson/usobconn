@@ -62,6 +62,11 @@ class Connection(db.Model):
         db.String(50), nullable=True
     )  # "OK", "Issues reported", "Unavailable"
 
+    # classification based on Mastercard Open Finance attributes
+    institution_type = db.Column(
+        db.String(20), nullable=False, default="UnMatched"
+    )  # OAuth | Legacy | UnMatched
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -76,4 +81,5 @@ class Connection(db.Model):
             "update_frequency": self.update_frequency,
             "update_pct": self.update_pct,
             "connection_status": self.connection_status,
+            "institution_type": self.institution_type,
         }
